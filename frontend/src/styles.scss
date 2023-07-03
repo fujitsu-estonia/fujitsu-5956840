@@ -1,0 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import 'bootstrap/dist/css/bootstrap-grid.min.css';
+@import 'bootstrap/dist/css/bootstrap-utilities.min.css';
+@import './sass/veera-components/veera-components.scss';
+@import './sass/base/veera-icons.scss';
+@import './sass/base/typography.scss';
+@import './sass/variables/variables.scss';
+
+
+html,
+body {
+  height: 100%;
+  min-width: $mobile-xs;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: var(--color-primary);
+}
+
+a:hover {
+  color: var(--color-secondary);
+  font-weight: 500;
+}
+
+.mat-drawer-container {
+  background-color: var(--color-greys-light) !important;
+}

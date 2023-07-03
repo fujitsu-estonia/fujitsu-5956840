@@ -1,0 +1,40 @@
+/* Brand estonia icons customization */
+.veera-icon svg polyline,
+.veera-icon svg line,
+.veera-icon svg path {
+	stroke: var(--color-primary);
+}
+
+.veera-icon.mat-accent svg polyline,
+.veera-icon.mat-accent svg line,
+.veera-icon.mat-accent svg path {
+	stroke: var(--color-accent);
+}
+
+.veera-icon.mat-primary svg polyline,
+.veera-icon.mat-primary svg line,
+.veera-icon.mat-primary svg path {
+	stroke: var(--color-primary);
+}
+
+.veera-icon.white svg polyline,
+.veera-icon.white svg line,
+.veera-icon.white svg path,
+.veera-icon.mat-white svg polyline,
+.veera-icon.mat-white svg line,
+.veera-icon.mat-white svg path {
+	stroke: white;
+}
+
+.veera-icon.black svg polyline,
+.veera-icon.black svg line,
+.veera-icon.black svg path,
+.veera-icon.mat-black svg polyline,
+.veera-icon.mat-black svg line,
+.veera-icon.mat-black svg path {
+	stroke: black;
+}
+
+.veera-icon.mat-white {
+	color: #FDFDFD;
+}

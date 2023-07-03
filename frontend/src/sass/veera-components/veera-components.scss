@@ -1,0 +1,11 @@
+@use '@angular/material'as mat;
+
+// Buttons
+.mat-mdc-button-base {
+	border-radius: 20px !important;
+}
+
+.veera-input {
+	display: inline-block;
+	@include mat.all-component-densities(-3);
+}

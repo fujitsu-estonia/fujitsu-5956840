@@ -1,0 +1,45 @@
+@import "../sass/variables/variables.scss";
+
+.main-content {
+	min-height: 100dvh;
+}
+
+// drawer sidenav
+.sidenav-content {
+	width: 100dvw;
+	min-width: $mobile-xs;
+	background: var(--color-primary);
+
+	#logo-mobile {
+		width: 150px;
+	}
+
+	.sidenav-header {
+		border-bottom: 2px solid var(--color-white);
+	}
+
+	.sidenav-links {
+		border-bottom: 2px solid var(--color-white);
+
+		.sidenav-link-btn.mat-mdc-button-base {
+			border-radius: 0px !important;
+			height: 48px;
+
+			border-top: 1px solid var(--color-secondary);
+			border-bottom: 1px solid var(--color-secondary);
+
+			p {
+				font-size: 20px;
+				color: var(--color-white);
+			}
+		}
+
+		.sidenav-link-btn:first-child {
+			border-top: none;
+		}
+
+		.sidenav-link-btn:last-child {
+			border-bottom: none;
+		}
+	}
+}

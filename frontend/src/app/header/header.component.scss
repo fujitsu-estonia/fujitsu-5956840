@@ -1,0 +1,29 @@
+@import '../../sass/variables/variables.scss';
+
+.app-header {
+	color: var(--color-primary);
+	height: 170px;
+	border-bottom: 1px solid var(--color-greys-neutral);
+
+	a {
+		text-decoration: none;
+	}
+
+	box-shadow: 0 4px 15px #00000024;
+}
+
+#logo {
+	cursor: pointer;
+	width: 250px;
+}
+
+@media only screen and (max-width: $tablet) {
+
+	.app-header {
+		height: 80px;
+	}
+
+	#logo {
+		width: 150px;
+	}
+}
