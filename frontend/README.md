@@ -11,7 +11,7 @@ Install Angular CLI
 npm install -g @angular/cli@
 ng version // ran in 03.07.23
 ```
-
+```
 Package                         Version
 ---------------------------------------------------------
 @angular-devkit/architect       0.1601.3
@@ -21,6 +21,7 @@ Package                         Version
 @schematics/angular             16.1.3
 rxjs                            7.8.1
 typescript                      5.1.6
+```
 
 ## Development server
 
