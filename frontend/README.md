@@ -10,6 +10,7 @@ Install Angular CLI
 ```
 npm install -g @angular/cli@
 ng version // ran in 03.07.23
+```
 
 Package                         Version
 ---------------------------------------------------------
