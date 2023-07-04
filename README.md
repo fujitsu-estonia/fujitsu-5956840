@@ -1,1 +1,5 @@
-# fujitsu-5956840
+# Hotel application
+
+## Distributing
+
+- Build api application

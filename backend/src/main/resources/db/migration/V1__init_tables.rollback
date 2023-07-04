@@ -1,0 +1,2 @@
+drop table if exists ROOMS;
+drop sequence if exists rooms_id_seq;
