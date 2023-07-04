@@ -1,7 +1,10 @@
 @import "../sass/variables/variables.scss";
 
+$navbar-height-desktop: 170px;
+$navbar-height-mobile: 80px;
+
 .main-content {
-	min-height: 100dvh;
+	min-height: calc(100dvh - $navbar-height-desktop);
 }
 
 // drawer sidenav
@@ -41,5 +44,11 @@
 		.sidenav-link-btn:last-child {
 			border-bottom: none;
 		}
+	}
+}
+
+@media only screen and (max-width: $tablet) {
+	.main-content {
+		min-height: calc(100dvh - $navbar-height-mobile);
 	}
 }

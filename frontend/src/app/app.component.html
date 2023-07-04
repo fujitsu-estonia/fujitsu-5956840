@@ -35,10 +35,12 @@
 	</mat-sidenav>
 
 	<!-- App content -->
-	<mat-sidenav-content class="main-content">
+	<mat-sidenav-content>
 		<app-header (sidenavToggle)="openSidenav()"></app-header>
 
-		<router-outlet></router-outlet>
+		<div class="main-content">
+			<router-outlet></router-outlet>
+		</div>
 
 		<app-footer></app-footer>
 	</mat-sidenav-content>

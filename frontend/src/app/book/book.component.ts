@@ -16,7 +16,6 @@ export enum BookView {
   done = 'done'
 }
 
-
 @Component({
   selector: 'app-book',
   templateUrl: './book.component.html',
@@ -25,7 +24,7 @@ export enum BookView {
 export class BookComponent {
 
   formGroup!: FormGroup
-  view: BookView = BookView.book
+  view: BookView = BookView.search
   BookView: typeof BookView = BookView
 
   roomResults!: Room[]
@@ -39,6 +38,8 @@ export class BookComponent {
     startDate: new Date((new Date().getTime() - 1000 * 60 * 60 * 24 * 2)),
     endDate: new Date()
   }
+
+  bookingId: string = "123456789"
 
   //render booleans
   hasBeenSearchedOnce: boolean = false
@@ -64,6 +65,11 @@ export class BookComponent {
 
   setViewToSearch() {
     this.view = BookView.search
+  }
+
+  setViewToDone() {
+
+    this.view = BookView.done
   }
 
   setBookingDateRange(dateRange: DateRange) {

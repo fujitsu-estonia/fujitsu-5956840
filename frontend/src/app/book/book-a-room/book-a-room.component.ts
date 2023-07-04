@@ -10,8 +10,11 @@ import { Booking } from 'src/shared/interfaces/Booking';
 export class BookARoomComponent {
   @Input() booking!: Booking;
   @Output() backToSearchPressed = new EventEmitter<void>()
+  @Output() bookingDone = new EventEmitter<void>()
 
   formGroup!: FormGroup
+
+  sendingBooking: boolean = false
 
   constructor() {
     this.formGroup = new FormGroup({
@@ -23,7 +26,12 @@ export class BookARoomComponent {
   }
 
   goBackToSearch() {
+    this.formGroup.markAsUntouched()
     this.backToSearchPressed.emit()
+  }
+
+  goToDoneView() {
+    this.bookingDone.emit()
   }
 
   calculateDiffInDays(startDate: any, endDate: any) {
@@ -42,4 +50,21 @@ export class BookARoomComponent {
   validateBooking(booking: Booking) {
     return booking.startDate && booking.endDate && booking.room
   }
+
+  bookRoom(booking: Booking) {
+    this.formGroup.markAllAsTouched()
+
+    if (this.formGroup.valid) {
+      if (!this.validateBooking(booking)) return
+      //TODO: send booking to backend
+      this.sendingBooking = true
+
+      setTimeout(() => {
+        this.sendingBooking = false
+        this.goToDoneView()
+      }, 1000)
+    }
+  }
+
+
 }

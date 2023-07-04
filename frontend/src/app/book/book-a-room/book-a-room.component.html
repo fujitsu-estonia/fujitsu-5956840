@@ -80,7 +80,8 @@
 			Tagasi valikusse
 		</button>
 
-		<button class="m-3 m-md-5" mat-flat-button color="primary">
+		<button class="m-3 m-md-5" mat-flat-button color="primary" [disabled]="sendingBooking"
+			(click)="bookRoom(booking)">
 			Kinnita broneering
 			<mat-icon iconPositionEnd>check_circle_outline</mat-icon>
 		</button>
