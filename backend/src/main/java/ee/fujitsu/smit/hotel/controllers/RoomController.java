@@ -43,10 +43,10 @@ public class RoomController {
   // TODO kui palju tuleb siia otsingu parametreid?
   @GetMapping()
   @Operation(description = "Create order operation")
-  public Page<RoomDetailsDto> findRoomByParameters(final SearchRoomDto searchProduct,
+  public Page<RoomDetailsDto> findRoomByParameters(final SearchRoomDto searchRoomDto,
       final Pageable pageable) {
-    log.info("findRoomByParameters {}", searchProduct);
-    return roomService.findRoomByParameters(searchProduct, pageable);
+    log.info("findRoomByParameters {}", searchRoomDto);
+    return roomService.findRoomByParameters(searchRoomDto, pageable);
   }
 
 /*

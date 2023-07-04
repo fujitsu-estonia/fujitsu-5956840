@@ -32,7 +32,7 @@ public class ModelMapperConfig {
     modelMapper.getConfiguration()
         .setPropertyCondition(context -> !(context.getSource() instanceof PersistentCollection));
     addRoomToRoomDetailsDtoMapping(modelMapper);
-    addProductToOrderProduct(modelMapper);
+    addCreateUpdateRoomRequestDtoToRoom(modelMapper);
     return modelMapper;
   }
 
@@ -41,7 +41,7 @@ public class ModelMapperConfig {
     modelMapper.typeMap(Room.class, RoomDetailsDto.class);
   }
 
-  private void addProductToOrderProduct(final ModelMapper modelMapper) {
+  private void addCreateUpdateRoomRequestDtoToRoom(final ModelMapper modelMapper) {
     logMapping(CreateUpdateRoomRequestDto.class, Room.class);
     modelMapper.typeMap(CreateUpdateRoomRequestDto.class, Room.class).addMappings(
         mapper -> {

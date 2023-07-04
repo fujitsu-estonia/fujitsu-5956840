@@ -33,7 +33,7 @@ public class RoomService {
     );
   }
 
-  public Page<RoomDetailsDto> findRoomByParameters(final SearchRoomDto searchProduct,
+  public Page<RoomDetailsDto> findRoomByParameters(final SearchRoomDto searchRoomDto,
       final Pageable pageable) {
     // TODO peame arutleme mis loogika siia peab minna ja kui palju parameteid filtreeritakse
     // var room = roomRepository.findById(id).orElseThrow(NotFoundException::new);
