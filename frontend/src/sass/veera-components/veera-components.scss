@@ -1,11 +1,31 @@
 @use '@angular/material'as mat;
+@import '../variables/variables.scss';
 
 // Buttons
 .mat-mdc-button-base {
 	border-radius: 20px !important;
 }
 
+.mat-mdc-unelevated-button {
+	min-height: 40px !important;
+}
+
+.mat-mdc-outlined-button {
+	border: 2px solid #5D6071 !important;
+}
+
+// input
 .veera-input {
 	display: inline-block;
 	@include mat.all-component-densities(-3);
+}
+
+// mat-error customization
+.mat-mdc-form-field-error-wrapper {
+	padding: 0 !important;
+}
+
+.mat-mdc-form-field-error {
+	position: relative;
+	top: -8px;
 }

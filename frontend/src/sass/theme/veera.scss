@@ -115,12 +115,15 @@ $hotel-booking: mat-light-theme((color:(primary: $hotel-booking-primary, accent:
 	--color-greys-dark: #E1E2E5;
 	--color-greys-light: #F9F9F9;
 	--color-greys-neutral: #DBDFE2;
+	--color-greys-border: #D2D3D8;
 	--color-greys-background: #F0F0F2;
 
 	--color-white: #FDFDFD;
 
 	// notifications
 	--color-error: #{mat-color($hotel-booking-error)};
+	--color-error-background: #F0B8B8;
+
 	--color-warning: #FFB511;
 	--color-informative: #0062F5;
 	--color-success: #308653;

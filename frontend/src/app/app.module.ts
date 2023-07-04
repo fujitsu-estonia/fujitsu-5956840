@@ -12,6 +12,10 @@ import { FooterComponent } from './footer/footer.component';
 import { BookComponent } from './book/book.component';
 import { BookingsComponent } from './bookings/bookings.component';
 import { HttpClientModule } from '@angular/common/http';
+import { VeeraErrorComponent } from './shared-components/veera-error/veera-error.component';
+import { RoomComponent } from './book/room/room.component';
+import { RoomSearchComponent } from './book/room-search/room-search.component';
+import { BookARoomComponent } from './book/book-a-room/book-a-room.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,11 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     FooterComponent,
     BookComponent,
-    BookingsComponent
+    BookingsComponent,
+    VeeraErrorComponent,
+    RoomComponent,
+    RoomSearchComponent,
+    BookARoomComponent
   ],
   imports: [
     BrowserModule,
