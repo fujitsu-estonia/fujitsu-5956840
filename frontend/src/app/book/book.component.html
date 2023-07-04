@@ -22,6 +22,11 @@
 	</div>
 
 	<div [class.d-none]="view !== BookView.book">
-		<app-book-a-room (backToSearchPressed)="setViewToSearch()" [booking]="booking"></app-book-a-room>
+		<app-book-a-room [booking]="booking" (backToSearchPressed)="setViewToSearch()"
+			(bookingDone)="setViewToDone()"></app-book-a-room>
+	</div>
+
+	<div [class.d-none]="view !== BookView.done">
+		<app-booking-done></app-booking-done>
 	</div>
 </ng-container>

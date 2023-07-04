@@ -3,8 +3,9 @@
 .card {
 	border: 1px solid var(--color-greys-border);
 	border-radius: 4px;
-	margin: 36px 48px;
+	margin: 36px auto;
 	background-color: var(--color-greys-background);
+	max-width: 1200px;
 }
 
 .booking {
@@ -36,10 +37,6 @@
 }
 
 @media only screen and (max-width: $mobile) {
-	.card {
-		margin: 36px 0px;
-	}
-
 	.buttons {
 		button {
 			width: 100%;

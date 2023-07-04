@@ -16,6 +16,8 @@ import { VeeraErrorComponent } from './shared-components/veera-error/veera-error
 import { RoomComponent } from './book/room/room.component';
 import { RoomSearchComponent } from './book/room-search/room-search.component';
 import { BookARoomComponent } from './book/book-a-room/book-a-room.component';
+import { BookingDoneComponent } from './book/booking-done/booking-done.component';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { BookARoomComponent } from './book/book-a-room/book-a-room.component';
     VeeraErrorComponent,
     RoomComponent,
     RoomSearchComponent,
-    BookARoomComponent
+    BookARoomComponent,
+    BookingDoneComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,9 @@ import { BookARoomComponent } from './book/book-a-room/book-a-room.component';
   exports: [
     AngularMaterialModule
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'et-EE' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
