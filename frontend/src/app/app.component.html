@@ -1,0 +1,45 @@
+<mat-sidenav-container>
+	<!-- Mobile sidenav content -->
+	<mat-sidenav class="sidenav-content" [opened]="sidenavOpen" [autoFocus]="false" (closed)="setOpenFalse()">
+		<div class="sidenav-header position-relative">
+			<div class="d-inline-block">
+				<button mat-icon-button color="secondary" (click)="setOpenFalse()">
+					<mat-icon class="veera-icon" color="white">close</mat-icon>
+				</button>
+			</div>
+
+			<div class="d-flex w-100 justify-content-center">
+				<img id="logo-mobile" src="../../assets/imgs/logo.jpg" alt="Hotel logo">
+			</div>
+		</div>
+
+		<div class="sidenav-links d-flex flex-wrap align-items-center">
+			<div class="w-100">
+				<button class="sidenav-link-btn w-100 justify-content-start ps-3" mat-button color="white"
+					routerLink="/" (click)="setOpenFalse()">
+					<mat-icon class="veera-icon" color="white">home</mat-icon>
+					<p>Koduleht</p>
+				</button>
+				<button class="sidenav-link-btn w-100 justify-content-start ps-3" mat-button color="white"
+					routerLink="/book" (click)="setOpenFalse()">
+					<mat-icon class="veera-icon" color="white">arrow_forward</mat-icon>
+					<p>Broneeri</p>
+				</button>
+				<button class="sidenav-link-btn w-100 justify-content-start ps-3" mat-button color="white"
+					routerLink="/bookings" (click)="setOpenFalse()">
+					<mat-icon class="veera-icon" color="white">book</mat-icon>
+					<p class="my-0">Broneeringud</p>
+				</button>
+			</div>
+		</div>
+	</mat-sidenav>
+
+	<!-- App content -->
+	<mat-sidenav-content class="main-content">
+		<app-header (sidenavToggle)="openSidenav()"></app-header>
+
+		<router-outlet></router-outlet>
+
+		<app-footer></app-footer>
+	</mat-sidenav-content>
+</mat-sidenav-container>

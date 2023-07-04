@@ -1,0 +1,73 @@
+@import '../../../sass/variables/variables.scss';
+
+.room-row {
+	max-width: 1000px;
+	width: 100%;
+	margin: auto;
+	padding: 0 18px;
+}
+
+.room {
+	display: flex;
+	flex-direction: row;
+
+	margin: 36px 0;
+	border: 1px solid var(--color-greys-border);
+	border-radius: 4px;
+	overflow: hidden;
+
+	height: 220px;
+
+	.room-img>img {
+		width: 250px;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.room-info {
+		width: 320px;
+	}
+
+	.room-book {
+		padding-right: 36px;
+	}
+}
+
+@media only screen and (max-width: $desktop) {
+	.room {
+		height: auto;
+
+		.room-img>img {
+			width: 200px;
+		}
+
+		.room-info {
+			width: 100%;
+		}
+	}
+}
+
+@media only screen and (max-width: $mobile) {
+	.room {
+		flex-wrap: wrap;
+
+		.room-img {
+			width: 100%;
+		}
+
+		.room-img>img {
+			width: 100%;
+			height: 250px;
+			object-fit: cover;
+		}
+
+		.room-content {
+			flex-wrap: wrap;
+		}
+
+		.room-book {
+			margin: auto;
+			padding-bottom: 16px;
+		}
+	}
+}

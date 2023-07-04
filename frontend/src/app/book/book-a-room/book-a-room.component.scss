@@ -1,0 +1,48 @@
+@import '../../../sass/variables/variables.scss';
+
+.card {
+	border: 1px solid var(--color-greys-border);
+	border-radius: 4px;
+	margin: 36px 48px;
+	background-color: var(--color-greys-background);
+}
+
+.booking {
+	.booking-summary {
+		.order-info {
+			.label {
+				font-weight: 500;
+				width: 130px;
+			}
+
+			.price {
+				font-weight: 600;
+			}
+		}
+	}
+
+	.booking-contact {
+		.veera-input {
+			display: block;
+		}
+	}
+}
+
+.veera-input {
+	.label {
+		width: 100px;
+		text-align: end;
+	}
+}
+
+@media only screen and (max-width: $mobile) {
+	.card {
+		margin: 36px 0px;
+	}
+
+	.buttons {
+		button {
+			width: 100%;
+		}
+	}
+}

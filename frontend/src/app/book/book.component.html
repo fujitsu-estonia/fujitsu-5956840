@@ -1,0 +1,27 @@
+<ng-container>
+	<div [class.d-none]="view !== BookView.search">
+		<app-room-search [formGroup]="formGroup" (dateRangeChanged)="setBookingDateRange($event)"
+			(searchForRoomsExecuted)="searchForRooms($event)"></app-room-search>
+		<!-- RESULTS -->
+
+		<div class="results" *ngIf="hasBeenSearchedOnce">
+
+			<div *ngIf="loading; else results">
+				<div class="d-flex w-100 justify-content-center my-5">
+					<mat-spinner></mat-spinner>
+				</div>
+			</div>
+
+			<ng-template #results>
+				<app-room (bookRoomPressed)="bookRoom($event)" [room]="roomResults[0]"></app-room>
+				<app-room [room]="roomResults[1]"></app-room>
+				<app-room [room]="roomResults[2]"></app-room>
+			</ng-template>
+
+		</div>
+	</div>
+
+	<div [class.d-none]="view !== BookView.book">
+		<app-book-a-room (backToSearchPressed)="setViewToSearch()" [booking]="booking"></app-book-a-room>
+	</div>
+</ng-container>

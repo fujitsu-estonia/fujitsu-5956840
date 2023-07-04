@@ -1,0 +1,19 @@
+@import "../../../sass/variables/variables.scss";
+
+.book {
+	background-color: var(--color-greys-background);
+}
+
+.date-range {
+	width: 350px;
+}
+
+@media only screen and (max-width: $tablet) {
+	.filters>div {
+		width: 100%;
+	}
+
+	.search {
+		justify-content: end !important;
+	}
+}

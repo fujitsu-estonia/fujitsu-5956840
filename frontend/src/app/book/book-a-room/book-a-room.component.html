@@ -1,0 +1,90 @@
+<div class="card">
+	<div class="booking d-flex justify-content-evenly flex-wrap">
+		<div class="booking-summary">
+			<h4 class="my-0 mt-4">Tellimuse kokkuvõte</h4>
+			<mat-divider class="my-3"></mat-divider>
+			<table class="order-info">
+				<tr>
+					<td class="label">Periood:</td>
+					<td>{{booking.startDate | date: 'dd.MM.yyyy' }} - {{booking.endDate | date: 'dd.MM.yyyy'}}</td>
+				</tr>
+				<tr>
+					<td class="label">Tuba:</td>
+					<td>{{booking.room?.type}}</td>
+				</tr>
+				<tr>
+					<td class="label">Hind kokku:</td>
+					<td class="price">{{calculatePrice(booking)}} €</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="booking-contact">
+			<h4 class="my-0 mt-4">Hotelli külastaja andmed</h4>
+			<mat-divider class="my-3"></mat-divider>
+			<form [formGroup]="formGroup">
+				<div class="veera-input">
+					<div class="label-wrapper d-flex">
+						<p class="label my-0 mt-2 pt-1 pe-2">Eesnimi *</p>
+						<mat-form-field appearance="outline">
+							<input matInput formControlName="firstName">
+							<mat-error *ngIf="formGroup.get('firstName')?.invalid">
+								<app-veera-error [message]="'Eesnimi on puudu!'"></app-veera-error>
+							</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+
+				<div class="veera-input">
+					<div class="label-wrapper d-flex">
+						<p class="label my-0 mt-2 pt-1 pe-2">Perenimi *</p>
+						<mat-form-field appearance="outline">
+							<input matInput formControlName="lastName">
+							<mat-error *ngIf="formGroup.get('lastName')?.invalid">
+								<app-veera-error [message]="'Perenimi on puudu!'"></app-veera-error>
+							</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+
+				<div class="veera-input">
+					<div class="label-wrapper d-flex">
+						<p class="label my-0 mt-2 pt-1 pe-2">Isikukood *</p>
+						<mat-form-field appearance="outline">
+							<input matInput formControlName="idCode">
+							<mat-error *ngIf="formGroup.get('idCode')?.invalid">
+								<app-veera-error [message]="'Isikukood on puudu!'"></app-veera-error>
+							</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+
+				<div class="veera-input">
+					<div class="label-wrapper d-flex">
+						<p class="label my-0 mt-2 pt-1 pe-2">E-mail *</p>
+						<mat-form-field appearance="outline">
+							<input matInput formControlName="email">
+							<mat-error *ngIf="formGroup.get('email')?.invalid">
+								<app-veera-error [message]="'E-mail ei ole korrektne!'"></app-veera-error>
+							</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="buttons d-flex w-100 justify-content-between flex-wrap flex-wrap-reverse">
+		<button class="m-3 m-md-5" mat-stroked-button color="primary" (click)="goBackToSearch()">
+			<mat-icon>keyboard_arrow_left</mat-icon>
+			Tagasi valikusse
+		</button>
+
+		<button class="m-3 m-md-5" mat-flat-button color="primary">
+			Kinnita broneering
+			<mat-icon iconPositionEnd>check_circle_outline</mat-icon>
+		</button>
+	</div>
+
+
+</div>
