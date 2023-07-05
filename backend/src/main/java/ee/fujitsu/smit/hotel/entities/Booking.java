@@ -13,6 +13,8 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "ROOMS")
@@ -23,15 +25,16 @@ import java.time.Instant;
 public class Booking implements Serializable {
 
   @Id
-  @Column(name = "id", nullable = false)
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  @GeneratedValue(strategy = GenerationType.UUID)
+  private UUID id; // 2bde2f0c-f97e-4beb-92ab-7477dc7952f5;
 
-  //TODO kas peavad integer olema
- // @Column(name = "ROOM_NUMBER")
-  private Instant startDate;
+  @GeneratedValue(strategy = GenerationType.SEQUENCE) // TODO: the seq name and initialization separately
+  private Long bookingNumber;
 
-  //TODO kas peavad integer olema
-  //@Column(name = "BEDS")
-  private Instant endDate;
+  @Column(name = "START_DATE")
+  private LocalDateTime startDate;
+
+  @Column(name = "END_DATE")
+  private LocalDateTime endDate;
+
 }

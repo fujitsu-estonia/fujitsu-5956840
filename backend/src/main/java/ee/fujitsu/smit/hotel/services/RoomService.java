@@ -49,7 +49,7 @@ public class RoomService {
 
   @Transactional
   public Long editRoom(final CreateUpdateRoomRequestDto request) {
-    Room passedRoom = mapper.map(request, Room.class);
+    Room passedRoom = mapper.mapToEntity(request);
     Room saved = roomRepository.findById(passedRoom.getId()).orElseThrow(NotFoundException::new);
     //TODO edit room service
 

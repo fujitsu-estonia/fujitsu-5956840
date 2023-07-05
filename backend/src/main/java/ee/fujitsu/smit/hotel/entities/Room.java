@@ -26,11 +26,9 @@ public class Room implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  //TODO kas peavad integer olema
   @Column(name = "ROOM_NUMBER")
-  private Integer roomNumber;
+  private String roomNumber;
 
-  //TODO kas peavad integer olema
   @Column(name = "BEDS")
   private Integer beds;
 
