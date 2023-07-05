@@ -6,10 +6,9 @@ import ee.fujitsu.smit.hotel.models.CreateUpdateRoomRequestDto;
 import ee.fujitsu.smit.hotel.models.RoomDetailsDto;
 import ee.fujitsu.smit.hotel.models.SearchRoomDto;
 import ee.fujitsu.smit.hotel.repositories.RoomRepository;
+import ee.fujitsu.smit.hotel.tools.mappers.RoomMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -23,15 +22,14 @@ import java.util.List;
 @AllArgsConstructor
 public class RoomService {
 
-  private final ModelMapper mapper;
+  private final RoomMapper mapper;
   private final RoomRepository roomRepository;
 
   public List<RoomDetailsDto> getAllRooms() {
-    final List<Room> allRooms = roomRepository.findAll();
-    return mapper.map(
-        allRooms, new TypeToken<List<RoomDetailsDto>>() {
-        }.getType()
-    );
+    return roomRepository.findAll()
+        .stream()
+        .map(mapper::mapToDto)
+        .toList();
   }
 
   public Page<RoomDetailsDto> findRoomByParameters(final SearchRoomDto searchRoomDto,
@@ -44,7 +42,7 @@ public class RoomService {
 
   @Transactional
   public Long createRoom(final CreateUpdateRoomRequestDto request) {
-    Room passedRoom = mapper.map(request, Room.class);
+    Room passedRoom = mapper.mapToEntity(request);
     Room createdNewRoom = roomRepository.saveAndFlush(passedRoom);
     return createdNewRoom.getId();
   }
