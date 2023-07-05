@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-booking-done',
@@ -8,6 +8,11 @@ import { Component, Input } from '@angular/core';
 export class BookingDoneComponent {
 
   @Input() bookingId!: string
+  @Output() goToStartPressed = new EventEmitter<void>()
 
   host: string = window.location.host
+
+  goToStart() {
+    window.location.reload()
+  }
 }
