@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.time.Instant;
 
 @Entity
 @Table(name = "ROOMS")
@@ -19,7 +20,7 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Room implements Serializable {
+public class Booking implements Serializable {
 
   @Id
   @Column(name = "id", nullable = false)
@@ -27,13 +28,10 @@ public class Room implements Serializable {
   private Long id;
 
   //TODO kas peavad integer olema
-  @Column(name = "ROOM_NUMBER")
-  private Integer roomNumber;
+ // @Column(name = "ROOM_NUMBER")
+  private Instant startDate;
 
   //TODO kas peavad integer olema
-  @Column(name = "BEDS")
-  private Integer beds;
-
-  @Column(name = "DESCRIPTION")
-  private String description;
+  //@Column(name = "BEDS")
+  private Instant endDate;
 }

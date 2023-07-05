@@ -34,12 +34,13 @@ public class RoomController {
 
   @GetMapping("/all")
   @Operation(description = "Get all rooms endpoint")
+  // TODO add swagger documentation
   public List<RoomDetailsDto> getAllRooms() {
     log.info("getAllRooms parameter");
     return roomService.getAllRooms();
   }
 
-  //TODO do you really need request parameter
+  // TODO do you really need request parameter
   // TODO kui palju tuleb siia otsingu parametreid?
   @GetMapping()
   @Operation(description = "Create order operation")

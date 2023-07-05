@@ -1,6 +1,7 @@
 package ee.fujitsu.smit.hotel.services;
 
 import ee.fujitsu.smit.hotel.entities.Room;
+import ee.fujitsu.smit.hotel.exceptions.NotFoundException;
 import ee.fujitsu.smit.hotel.models.CreateUpdateRoomRequestDto;
 import ee.fujitsu.smit.hotel.models.RoomDetailsDto;
 import ee.fujitsu.smit.hotel.models.SearchRoomDto;
@@ -46,5 +47,14 @@ public class RoomService {
     Room passedRoom = mapper.map(request, Room.class);
     Room createdNewRoom = roomRepository.saveAndFlush(passedRoom);
     return createdNewRoom.getId();
+  }
+
+  @Transactional
+  public Long editRoom(final CreateUpdateRoomRequestDto request) {
+    Room passedRoom = mapper.map(request, Room.class);
+    Room saved = roomRepository.findById(passedRoom.getId()).orElseThrow(NotFoundException::new);
+    //TODO edit room service
+
+    return saved.getId();
   }
 }
