@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BookARoomComponent } from './book-a-room.component';
+import { AngularMaterialModule } from 'src/shared/modules/angular-material.module';
 
 describe('BookARoomComponent', () => {
   let component: BookARoomComponent;
@@ -8,6 +9,7 @@ describe('BookARoomComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [AngularMaterialModule],
       declarations: [BookARoomComponent]
     });
     fixture = TestBed.createComponent(BookARoomComponent);

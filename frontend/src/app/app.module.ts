@@ -46,7 +46,21 @@ import { BookingSearchComponent } from './bookings/booking-search/booking-search
     HttpClientModule,
   ],
   exports: [
-    AngularMaterialModule
+    AngularMaterialModule,
+    AppComponent,
+    NotFoundComponent,
+    HomepageComponent,
+    HeaderComponent,
+    FooterComponent,
+    BookComponent,
+    BookingsComponent,
+    VeeraErrorComponent,
+    RoomComponent,
+    RoomSearchComponent,
+    BookARoomComponent,
+    BookingDoneComponent,
+    BookingListComponent,
+    BookingSearchComponent
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'et-EE' }

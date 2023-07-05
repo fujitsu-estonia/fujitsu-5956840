@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NotFoundComponent } from './not-found.component';
+import { MatIconModule } from '@angular/material/icon';
 
 describe('NotFoundComponent', () => {
   let component: NotFoundComponent;
@@ -8,6 +9,7 @@ describe('NotFoundComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [MatIconModule],
       declarations: [NotFoundComponent]
     });
     fixture = TestBed.createComponent(NotFoundComponent);

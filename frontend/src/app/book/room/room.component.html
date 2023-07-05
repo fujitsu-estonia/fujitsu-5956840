@@ -1,4 +1,4 @@
-<div class="room-row d-flex justify-content-center">
+<div class="room-row d-flex justify-content-center" *ngIf="room">
 	<div class="room">
 		<div class="room-img">
 			<img [src]="RoomTypeToImgMap[room.beds]" alt="Picture of the room">

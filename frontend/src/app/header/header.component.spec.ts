@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
+import { AngularMaterialModule } from 'src/shared/modules/angular-material.module';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -8,6 +9,7 @@ describe('HeaderComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [AngularMaterialModule],
       declarations: [HeaderComponent]
     });
     fixture = TestBed.createComponent(HeaderComponent);
