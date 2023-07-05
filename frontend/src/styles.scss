@@ -33,5 +33,10 @@ a:hover {
 }
 
 .mat-drawer-container {
-  background-color: var(--color-greys-light) !important;
+  background-color: white !important;
+  min-height: 100dvh;
+}
+
+.dashed {
+  border-right-style: dashed !important;
 }
