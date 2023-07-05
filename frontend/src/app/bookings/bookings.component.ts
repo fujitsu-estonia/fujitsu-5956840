@@ -55,4 +55,13 @@ export class BookingsComponent extends BaseComponent {
       this.bookings = [mockBooking]
     }, 1000)
   }
+
+  searchAllBookings() {
+    this.loading = true
+    console.log("search for all bookings")
+    setTimeout(() => {
+      this.loading = false
+      this.bookings = [mockBooking]
+    }, 1000)
+  }
 }

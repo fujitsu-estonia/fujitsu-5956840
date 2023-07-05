@@ -1,3 +1,4 @@
 <app-booking-search *ngIf="!adminMode" (searchExecuted)="searchBooking($event)"
 	[bookingId]="bookingId"></app-booking-search>
-<app-booking-list [adminMode]="adminMode" [bookings]="bookings" [loadingBookings]="loading"></app-booking-list>
+<app-booking-list [adminMode]="adminMode" [bookings]="bookings" [loadingBookings]="loading"
+	(searchAdminBookings)="searchAllBookings()"></app-booking-list>

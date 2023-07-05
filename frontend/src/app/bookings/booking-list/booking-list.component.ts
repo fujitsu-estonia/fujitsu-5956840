@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RoomTypeToImgMap } from 'src/app/book/room/RoomTypeToImgMap';
 import { Booking } from 'src/shared/interfaces/Booking';
 import { calculatePrice } from 'src/shared/util-functions/calculatePrice';
@@ -13,6 +13,8 @@ export class BookingListComponent {
   @Input() adminMode!: boolean
   @Input() loadingBookings!: boolean
 
+  @Output() searchAdminBookings = new EventEmitter<void>()
+
   calculatePrice = calculatePrice
   RoomTypeToImgMap: any = RoomTypeToImgMap
 
@@ -20,6 +22,7 @@ export class BookingListComponent {
     if (this.adminMode) {
       //search all bookings
       console.log("searching all bookings")
+      setTimeout(() => this.searchAdminBookings.emit(), 0)
     }
   }
 }
