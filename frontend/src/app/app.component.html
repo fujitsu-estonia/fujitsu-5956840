@@ -2,14 +2,14 @@
 	<!-- Mobile sidenav content -->
 	<mat-sidenav class="sidenav-content" [opened]="sidenavOpen" [autoFocus]="false" (closed)="setOpenFalse()">
 		<div class="sidenav-header position-relative">
-			<div class="d-inline-block">
+
+			<div class="d-inline-block position-absolute p-3">
 				<button mat-icon-button color="secondary" (click)="setOpenFalse()">
 					<mat-icon class="veera-icon" color="white">close</mat-icon>
 				</button>
 			</div>
-
-			<div class="d-flex w-100 justify-content-center">
-				<img id="logo-mobile" src="../../assets/imgs/logo.jpg" alt="Hotel logo">
+			<div class="d-flex justify-content-center py-4">
+				<img id="logo-mobile" src="../../assets/imgs/logo_white.png" alt="Hotel logo">
 			</div>
 		</div>
 

@@ -1,36 +1,46 @@
 <!-- DESKTOP -->
-<div class="app-header d-none d-md-flex align-items-center justify-content-between p-5">
-	<div class="d-inline-block">
-		<img routerLink="/" id="logo" src="../../assets/imgs/logo.jpg" alt="Hotel logo">
-	</div>
-
-	<div class="router d-flex">
-		<div class="px-3">
-			<a routerLink="/book">Broneeri</a>
+<div class="app-header d-none d-md-block">
+	<div class="app-header-content d-flex align-items-center justify-content-between p-5">
+		<div class="d-inline-block">
+			<img routerLink="/" id="logo" src="../../assets/imgs/logo_color.png" alt="Hotel logo">
 		</div>
 
-		<div class="px-3">
-			<a routerLink="/bookings">Broneeringud</a>
-		</div>
+		<div class="router d-flex">
+			<div class="px-3">
+				<a class="d-flex align-items-center" routerLink="/book">
+					Broneeri
+					<mat-icon class="veera-icon ms-1" color="primary">keyboard_arrow_right</mat-icon>
+				</a>
 
+			</div>
+
+			<div class="px-3">
+				<a class="d-flex align-items-center" routerLink="/bookings">
+					Broneeringud
+					<mat-icon class="veera-icon ms-1" color="primary">book</mat-icon>
+				</a>
+
+			</div>
+
+		</div>
 	</div>
 </div>
 
 
 <!-- MOBILE -->
-<div class="app-header d-md-none d-flex align-items-center justify-content-between p-3">
+<div class="app-header d-md-none d-block">
+	<div class="app-header-content d-flex align-items-center justify-content-between p-3">
+		<div class="px-4">
+		</div>
 
-	<button mat-icon-button (click)="toggleSidenav()">
-		<mat-icon svgIcon="veera_burger" color="primary"></mat-icon>
-	</button>
+		<div class="d-inline-block">
+			<img routerLink="/" id="logo" src="../../assets/imgs/logo_color.png" alt="Hotel logo">
+		</div>
 
-	<div class="d-inline-block">
-		<img routerLink="/" id="logo" src="../../assets/imgs/logo.jpg" alt="Hotel logo">
-	</div>
-
-	<div>
-		<button mat-icon-button color="primary">
-			<mat-icon svgIcon="veera_login" color="white"></mat-icon>
-		</button>
+		<div>
+			<button mat-icon-button (click)="toggleSidenav()">
+				<mat-icon svgIcon="veera_burger" color="primary"></mat-icon>
+			</button>
+		</div>
 	</div>
 </div>
