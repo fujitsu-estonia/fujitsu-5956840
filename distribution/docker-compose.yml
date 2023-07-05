@@ -1,10 +1,18 @@
 version: "3.9"
 services:
   ui:
+    container_name: hotel_ui
     build:
-      dockerfile: Dockerfile-ui
+      context: ..
+      dockerfile: distribution/Dockerfile-ui
     ports:
       - "3000:80"
+    depends_on:
+      - api
   api:
+    container_name: hotel_api
     build:
-      dockerfile: Dockerfile
+      context: ..
+      dockerfile: distribution/Dockerfile
+    ports:
+      - "8090:8090"
