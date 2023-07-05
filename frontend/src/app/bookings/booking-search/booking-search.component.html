@@ -1,0 +1,37 @@
+<div class="booking-search d-flex flex-wrap justify-content-center align-items-center">
+	<h2 class="w-100 text-center">Leia oma broneering:</h2>
+	<form [formGroup]="formGroup">
+		<!-- Desktop input -->
+		<div class="veera-input d-none d-sm-block">
+			<div class="label-wrapper d-flex">
+				<p class="label my-0 mt-2 pt-1 pe-2">Broneeringu ID*</p>
+				<mat-form-field appearance="outline">
+					<input matInput formControlName="search">
+					<mat-error *ngIf="formGroup.get('search')?.invalid">
+						<app-veera-error [message]="'Broneeringu ID täitmata!'"></app-veera-error>
+					</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+
+		<!-- Mobile input -->
+		<div class="veera-input d-block d-sm-none">
+			<div class="label-wrapper d-flex">
+				<mat-form-field appearance="outline">
+					<mat-label>Broneeringu ID</mat-label>
+					<input matInput formControlName="search">
+					<mat-error *ngIf="formGroup.get('search')?.invalid">
+						<app-veera-error [message]="'Broneeringu ID täitmata!'"></app-veera-error>
+					</mat-error>
+				</mat-form-field>
+			</div>
+		</div>
+	</form>
+
+	<div class="search-btn ps-3 pb-3">
+		<button mat-flat-button color="primary" (click)="search()">
+			Otsi
+			<mat-icon iconPositionEnd>search</mat-icon>
+		</button>
+	</div>
+</div>

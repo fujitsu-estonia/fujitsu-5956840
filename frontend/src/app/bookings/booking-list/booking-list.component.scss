@@ -1,0 +1,67 @@
+@import '../../../sass/variables/variables.scss';
+
+.booking-list {
+	h2 {
+		max-width: 1200px;
+	}
+
+	.booking-card {
+		border: 1px solid var(--color-greys-border);
+		border-radius: 4px;
+		margin: 36px auto;
+		background-color: var(--color-greys-background);
+		max-width: 1200px;
+		overflow: hidden;
+
+		.booking-room-image img {
+			width: 250px;
+			height: 100%;
+			object-fit: cover;
+		}
+
+	}
+}
+
+.label {
+	padding: 4px 12px 4px 0
+}
+
+
+@media only screen and (max-width: $desktop-xl) {
+	.booking-list {
+		.booking-card {
+			.booking-room-image {
+				width: 100%;
+			}
+
+			.booking-room-image img {
+				width: 100%;
+				height: 250px;
+			}
+
+			.cancel {
+				display: flex;
+				justify-content: end;
+				width: 100%;
+			}
+		}
+	}
+
+}
+
+@media only screen and (max-width: $tablet) {
+	.booking-list {
+		.booking-card {
+			.booking-content {
+				.booking-info {
+					width: 100%;
+				}
+
+				.booking-guest {
+					width: 100%;
+				}
+			}
+
+		}
+	}
+}

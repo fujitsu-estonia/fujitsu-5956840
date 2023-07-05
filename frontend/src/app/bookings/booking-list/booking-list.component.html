@@ -1,0 +1,74 @@
+<div *ngIf="loadingBookings; else results" class="d-flex justify-content-center mt-5">
+	<mat-spinner></mat-spinner>
+</div>
+
+<ng-template #results>
+	<div class="booking-list px-4" *ngIf="bookings.length > 0">
+		<h2 *ngIf="!adminMode" class="m-auto mt-4">Minu broneeringud:</h2>
+		<div class="booking-card d-flex flex-wrap justify-content-between" *ngFor="let booking of bookings">
+			<div class=" booking-room-image">
+				<img [src]="RoomTypeToImgMap[booking.room?.beds!]" alt="Picture of the room">
+			</div>
+
+			<div class="booking-content d-flex flex-wrap justify-content-between mx-auto">
+				<div class="booking-info px-3">
+					<h3>{{booking.startDate | date: 'dd.MM.yyyy' }} - {{booking.endDate | date: 'dd.MM.yyyy'}}</h3>
+
+					<table aria-label="booking info">
+						<tr>
+							<th scope="col"></th>
+							<th scope="col"></th>
+						</tr>
+						<tr>
+							<td class="label">Broneeringu ID:</td>
+							<td>{{booking.id}}</td>
+						</tr>
+						<tr>
+							<td class="label">Tuba:</td>
+							<td>{{booking.room?.type}}</td>
+						</tr>
+						<tr>
+							<td class="label">Hind kokku:</td>
+							<td class="price">{{calculatePrice(booking)}} €</td>
+						</tr>
+					</table>
+				</div>
+
+				<mat-divider class="my-4 mx-3 mx-lg-5 d-md-block d-none" [vertical]="true"></mat-divider>
+				<mat-divider class="d-md-none d-block"></mat-divider>
+
+				<div class="guest-info px-3">
+					<h3>Külastaja andmed</h3>
+					<table aria-label="guest info">
+						<tr>
+							<th scope="col"></th>
+							<th scope="col"></th>
+						</tr>
+						<tr>
+							<td class="label">Külalise nimi:</td>
+							<td>{{booking.firstName}} {{booking.lastName}}</td>
+						</tr>
+						<tr>
+							<td class="label">e-mail:</td>
+							<td>{{booking.email}}</td>
+						</tr>
+						<tr>
+							<td class="label">Isikukood:</td>
+							<td>{{booking.idCode}}</td>
+						</tr>
+					</table>
+				</div>
+
+			</div>
+
+			<mat-divider class="my-4 d-xl-block d-none" [vertical]="true"></mat-divider>
+
+			<div class="cancel m-3 mt-4 ms-auto">
+				<button mat-flat-button color="warn">
+					Tühista broneering
+					<mat-icon iconPositionEnd>delete</mat-icon>
+				</button>
+			</div>
+		</div>
+	</div>
+</ng-template>

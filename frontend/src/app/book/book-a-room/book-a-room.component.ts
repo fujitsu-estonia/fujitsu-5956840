@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Booking } from 'src/shared/interfaces/Booking';
+import { calculatePrice } from 'src/shared/util-functions/calculatePrice';
 
 @Component({
   selector: 'app-book-a-room',
@@ -15,6 +16,8 @@ export class BookARoomComponent {
   formGroup!: FormGroup
 
   sendingBooking: boolean = false
+
+  calculatePrice = calculatePrice
 
   constructor() {
     this.formGroup = new FormGroup({
@@ -32,19 +35,6 @@ export class BookARoomComponent {
 
   goToDoneView() {
     this.bookingDone.emit()
-  }
-
-  calculateDiffInDays(startDate: any, endDate: any) {
-    const diffInMs = Math.abs(endDate.getTime() - startDate.getTime());
-    return Math.round(diffInMs / (1000 * 60 * 60 * 24));
-  }
-
-  calculatePrice(booking: Booking) {
-    if (!this.validateBooking(booking)) return
-
-    const days = this.calculateDiffInDays(booking.startDate, booking.endDate)
-    const price = days * (booking.room?.price as any)
-    return price
   }
 
   validateBooking(booking: Booking) {

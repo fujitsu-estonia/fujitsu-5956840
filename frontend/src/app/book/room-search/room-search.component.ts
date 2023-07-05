@@ -18,8 +18,8 @@ export class RoomSearchComponent {
   @Output() searchForRoomsExecuted = new EventEmitter<RoomSearchParams>()
 
   roomTypes: any = [
-    { name: 'Ühte (1)', value: 1 },
-    { name: 'Kahte (2)', value: 2 },
+    { name: 'Ühe (1)', value: 1 },
+    { name: 'Kahe (2)', value: 2 },
     { name: 'Kolme (3)', value: 3 },
   ]
 

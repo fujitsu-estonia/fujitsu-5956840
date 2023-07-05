@@ -3,7 +3,11 @@
 		<div class="booking-summary">
 			<h4 class="my-0 mt-4">Tellimuse kokkuvõte</h4>
 			<mat-divider class="my-3"></mat-divider>
-			<table class="order-info">
+			<table class="order-info" aria-label="order info">
+				<tr>
+					<th scope="col"></th>
+					<th scope="col"></th>
+				</tr>
 				<tr>
 					<td class="label">Periood:</td>
 					<td>{{booking.startDate | date: 'dd.MM.yyyy' }} - {{booking.endDate | date: 'dd.MM.yyyy'}}</td>
@@ -74,7 +78,7 @@
 		</div>
 	</div>
 
-	<div class="buttons d-flex w-100 justify-content-between flex-wrap flex-wrap-reverse">
+	<div class="buttons d-flex w-100 justify-content-between flex-wrap flex-wrap-reverse mt-md-0 mt-3">
 		<button class="m-3 m-md-5" mat-stroked-button color="primary" (click)="goBackToSearch()">
 			<mat-icon>keyboard_arrow_left</mat-icon>
 			Tagasi valikusse

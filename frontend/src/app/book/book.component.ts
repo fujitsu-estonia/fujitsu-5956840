@@ -61,6 +61,7 @@ export class BookComponent {
     }
 
     this.view = BookView.book
+    window.scrollTo(0, 0)
   }
 
   setViewToSearch() {

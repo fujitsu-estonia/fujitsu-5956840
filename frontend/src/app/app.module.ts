@@ -18,6 +18,8 @@ import { RoomSearchComponent } from './book/room-search/room-search.component';
 import { BookARoomComponent } from './book/book-a-room/book-a-room.component';
 import { BookingDoneComponent } from './book/booking-done/booking-done.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { BookingListComponent } from './bookings/booking-list/booking-list.component';
+import { BookingSearchComponent } from './bookings/booking-search/booking-search.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     RoomComponent,
     RoomSearchComponent,
     BookARoomComponent,
-    BookingDoneComponent
+    BookingDoneComponent,
+    BookingListComponent,
+    BookingSearchComponent
   ],
   imports: [
     BrowserModule,
