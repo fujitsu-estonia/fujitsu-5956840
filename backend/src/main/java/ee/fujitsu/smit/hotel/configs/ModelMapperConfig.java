@@ -10,17 +10,12 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * Mapper class configuration Created on November 17 , 2022, 13:00 p.m
- *
- * @author GarciaMartiA
- */
 @Slf4j
 @Configuration
 public class ModelMapperConfig {
 
   /**
-   * Class to configure custom maps Created on November 17 , 2022, 13:00 p.m
+   * Model mapper configuration
    *
    * @return ModelMapper
    */
