@@ -4,8 +4,10 @@
 	color: var(--color-primary);
 	height: 170px;
 	border-bottom: 1px solid var(--color-greys-neutral);
+	position: relative;
 
 	a {
+		font-size: 20px;
 		text-decoration: none;
 	}
 
@@ -20,7 +22,7 @@
 @media only screen and (max-width: $tablet) {
 
 	.app-header {
-		height: 80px;
+		height: auto;
 	}
 
 	#logo {
