@@ -5,12 +5,24 @@
 	width: 350px;
 }
 
+.search {
+	margin-bottom: 23px !important;
+}
+
 @media only screen and (max-width: $tablet) {
-	.filters>div {
+	.filters div {
 		width: 100%;
+
+		.veera-input .mat-mdc-form-field {
+			width: 100%
+		}
 	}
 
 	.search {
-		justify-content: end !important;
+		justify-content: center !important;
+
+		button {
+			width: 100%;
+		}
 	}
 }

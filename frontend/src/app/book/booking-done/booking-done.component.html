@@ -1,22 +1,22 @@
 <div class="d-flex justify-content-center flex-wrap">
-	<div class="success p-3 mt-5">
+	<div class="success p-3 mt-5 m-3">
 		<div class="d-flex align-items-center">
 			<mat-icon class="h-100 me-1">check_circle_outline</mat-icon>
-			<h4 class="my-3">Broneering õnnestus!</h4>
+			<h4 class="my-0">Broneering õnnestus!</h4>
 		</div>
 
 		<div>
 			<p>Broneeringut on võimalik vaadata ning vajadusel tühistada siin aadressil: </p>
 			<a href="/bookings/ID" target="_blank">
-				<h5 class="d-inline-block my-0 mb-4">{{host}}/bookings/ID</h5>
+				<h5 class="d-inline-block my-0">{{host}}/bookings/ID</h5>
 			</a>
 		</div>
 	</div>
 
-	<div class="w-100 d-flex justify-content-center my-4">
+	<div class="w-100 d-flex justify-content-center my-3">
 		<button mat-flat-button color="primary" (click)="goToStart()">
-			Tagasi algusesse
-			<mat-icon iconPositionEnd>home</mat-icon>
+			Uus broneering
+			<mat-icon iconPositionEnd>add_circle_outline</mat-icon>
 		</button>
 	</div>
 </div>

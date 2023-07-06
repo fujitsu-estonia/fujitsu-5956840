@@ -22,7 +22,13 @@
 }
 
 .label {
-	padding: 4px 12px 4px 0
+	padding: 4px 12px 4px 0;
+	font-weight: 500;
+	width: 130px;
+}
+
+.price {
+	font-weight: 600;
 }
 
 
@@ -43,6 +49,10 @@
 				justify-content: flex-end;
 				width: 100%;
 			}
+
+			.booking-content {
+				width: 100%;
+			}
 		}
 	}
 
@@ -61,6 +71,16 @@
 				}
 			}
 
+		}
+	}
+}
+
+@media only screen and (max-width: $mobile) {
+	.cancel {
+		width: 100%;
+
+		button {
+			width: 100%;
 		}
 	}
 }

@@ -29,3 +29,7 @@
 	position: relative;
 	top: -8px;
 }
+
+.mat-mdc-form-field-error-wrapper {
+	z-index: 3 !important;
+}

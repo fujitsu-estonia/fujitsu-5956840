@@ -1,7 +1,7 @@
-<div class="card" *ngIf="booking">
-	<div class="booking d-flex justify-content-evenly flex-wrap">
+<div class="card mx-3 mx-lg-auto" *ngIf="booking">
+	<div class="booking d-flex justify-content-between flex-wrap mx-3 mx-md-5">
 		<div class="booking-summary">
-			<h4 class="my-0 mt-4">Tellimuse kokkuvõte</h4>
+			<h4 class="my-0 my-3 color-primary">Tellimuse kokkuvõte</h4>
 			<mat-divider class="my-3"></mat-divider>
 			<table class="order-info" aria-label="order info">
 				<tr>
@@ -18,13 +18,15 @@
 				</tr>
 				<tr>
 					<td class="label">Hind kokku:</td>
-					<td class="price">{{calculatePrice(booking)}} €</td>
+					<td class="price color-primary">{{calculatePrice(booking)}} €</td>
 				</tr>
 			</table>
+
+			<img class="room-preview" [src]="RoomTypeToImgMap[1]" alt="Picture of the room">
 		</div>
 
 		<div class="booking-contact">
-			<h4 class="my-0 mt-4">Hotelli külastaja andmed</h4>
+			<h4 class="my-0 my-3 color-primary">Hotelli külastaja andmed</h4>
 			<mat-divider class="my-3"></mat-divider>
 			<form [formGroup]="formGroup">
 				<div class="veera-input">
@@ -56,8 +58,13 @@
 						<p class="label my-0 mt-2 pt-1 pe-2">Isikukood *</p>
 						<mat-form-field appearance="outline">
 							<input matInput formControlName="idCode">
-							<mat-error *ngIf="formGroup.get('idCode')?.invalid">
+
+							<mat-error *ngIf="formGroup.get('idCode')?.hasError('required')">
 								<app-veera-error [message]="'Isikukood on puudu!'"></app-veera-error>
+							</mat-error>
+
+							<mat-error *ngIf="formGroup.get('idCode')?.hasError('validIdCode')">
+								<app-veera-error [message]="'Isikukood ei ole korrektne!'"></app-veera-error>
 							</mat-error>
 						</mat-form-field>
 					</div>
@@ -68,7 +75,10 @@
 						<p class="label my-0 mt-2 pt-1 pe-2">E-mail *</p>
 						<mat-form-field appearance="outline">
 							<input matInput formControlName="email">
-							<mat-error *ngIf="formGroup.get('email')?.invalid">
+							<mat-error *ngIf="formGroup.get('email')?.hasError('required')">
+								<app-veera-error [message]="'E-mail on puudu!'"></app-veera-error>
+							</mat-error>
+							<mat-error *ngIf="formGroup.get('email')?.hasError('email')">
 								<app-veera-error [message]="'E-mail ei ole korrektne!'"></app-veera-error>
 							</mat-error>
 						</mat-form-field>
@@ -78,13 +88,15 @@
 		</div>
 	</div>
 
+	<mat-divider class="mx-3 mx-md-5 my-3"></mat-divider>
+
 	<div class="buttons d-flex w-100 justify-content-between flex-wrap flex-wrap-reverse mt-md-0 mt-3">
-		<button class="m-3 m-md-5" mat-stroked-button color="primary" (click)="goBackToSearch()">
+		<button class="mx-3 mx-md-5 mb-3" mat-stroked-button color="primary" (click)="goBackToSearch()">
 			<mat-icon>keyboard_arrow_left</mat-icon>
 			Tagasi valikusse
 		</button>
 
-		<button class="m-3 m-md-5" mat-flat-button color="primary" [disabled]="sendingBooking"
+		<button class="mx-3 mx-md-5 mb-3" mat-flat-button color="primary" [disabled]="sendingBooking"
 			(click)="bookRoom(booking)">
 			Kinnita broneering
 			<mat-icon iconPositionEnd>check_circle_outline</mat-icon>

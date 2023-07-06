@@ -4,7 +4,7 @@
 	border: 1px solid var(--color-greys-border);
 	border-radius: 4px;
 	margin: 36px auto;
-	max-width: 1200px;
+	max-width: 900px;
 }
 
 .booking {
@@ -35,7 +35,31 @@
 	}
 }
 
+.room-preview {
+	margin-top: 16px;
+	width: 100%;
+	max-width: 330px;
+	height: 250px;
+	object-fit: cover;
+	border-radius: 4px;
+}
+
+@media only screen and (max-width: $tablet) {
+	.booking {
+		justify-content: center !important;
+
+		div {
+			width: 100%;
+
+			.label-wrapper {
+				justify-content: start;
+			}
+		}
+	}
+}
+
 @media only screen and (max-width: $mobile) {
+
 	.buttons {
 		button {
 			width: 100%;

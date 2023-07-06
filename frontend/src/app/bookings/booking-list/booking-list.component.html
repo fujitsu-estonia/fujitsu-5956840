@@ -11,14 +11,15 @@
 				<img [src]="RoomTypeToImgMap[booking.room?.beds!]" alt="Picture of the room">
 			</div>
 
-			<div class="booking-content d-flex flex-wrap justify-content-between mx-auto">
+			<div class="booking-content d-flex flex-wrap justify-content-between mx-0 mx-xl-auto">
 				<div class="booking-info px-3">
-					<h3>{{booking.startDate | date: 'dd.MM.yyyy' }} - {{booking.endDate | date: 'dd.MM.yyyy'}}</h3>
+					<h3 class="color-primary">{{booking.startDate | date: 'dd.MM.yyyy' }} - {{booking.endDate | date:
+						'dd.MM.yyyy'}}</h3>
 
 					<table aria-label="booking info">
 						<tr>
-							<th scope="col"></th>
-							<th scope="col"></th>
+							<th class="p-0" scope="col"></th>
+							<th class="p-0" scope="col"></th>
 						</tr>
 						<tr>
 							<td class="label">Broneeringu ID:</td>
@@ -30,7 +31,7 @@
 						</tr>
 						<tr>
 							<td class="label">Hind kokku:</td>
-							<td class="price">{{calculatePrice(booking)}} €</td>
+							<td class="price color-primary">{{calculatePrice(booking)}} €</td>
 						</tr>
 					</table>
 				</div>
@@ -39,11 +40,11 @@
 				<mat-divider class="d-md-none d-block"></mat-divider>
 
 				<div class="guest-info px-3">
-					<h3>Külastaja andmed</h3>
+					<h3 class="color-primary">Külastaja andmed</h3>
 					<table aria-label="guest info">
 						<tr>
-							<th scope="col"></th>
-							<th scope="col"></th>
+							<th class="p-0" scope="col"></th>
+							<th class="p-0" scope="col"></th>
 						</tr>
 						<tr>
 							<td class="label">Külalise nimi:</td>
@@ -61,8 +62,6 @@
 				</div>
 
 			</div>
-
-			<mat-divider class="my-4 d-xl-block d-none" [vertical]="true"></mat-divider>
 
 			<div class="cancel m-3 mt-4 ms-auto">
 				<button mat-flat-button color="warn">

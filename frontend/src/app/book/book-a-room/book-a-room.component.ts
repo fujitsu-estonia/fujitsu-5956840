@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Booking } from 'src/shared/interfaces/Booking';
 import { calculatePrice } from 'src/shared/util-functions/calculatePrice';
+import { RoomTypeToImgMap } from '../room/RoomTypeToImgMap';
+import { createIdCodeValidator } from 'src/shared/util-functions/idCodeValidator';
 
 @Component({
   selector: 'app-book-a-room',
@@ -17,13 +19,15 @@ export class BookARoomComponent {
 
   sendingBooking: boolean = false
 
+  RoomTypeToImgMap: any = RoomTypeToImgMap
+
   calculatePrice = calculatePrice
 
   constructor() {
     this.formGroup = new FormGroup({
       firstName: new FormControl("", Validators.required),
       lastName: new FormControl("", Validators.required),
-      idCode: new FormControl("", Validators.required),
+      idCode: new FormControl("", [Validators.required, createIdCodeValidator()]),
       email: new FormControl("", [Validators.required, Validators.email]),
     })
   }

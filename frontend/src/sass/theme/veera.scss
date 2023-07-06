@@ -110,6 +110,9 @@ $hotel-booking: mat-light-theme((color:(primary: $hotel-booking-primary, accent:
 	--color-primary-500: #{mat-color($hotel-booking-primary, 500)};
 	--color-primary-800: #{mat-color($hotel-booking-primary, 800)};
 
+	--color-accent: #FF8000;
+
+
 	--color-secondary: #{mat-color($hotel-booking-secondary)};
 
 	--color-greys-dark: #E1E2E5;
@@ -131,6 +134,10 @@ $hotel-booking: mat-light-theme((color:(primary: $hotel-booking-primary, accent:
 
 .color-primary {
 	color: var(--color-primary) !important;
+}
+
+.color-accent {
+	color: var(--color-accent) !important;
 }
 
 .color-secondary {

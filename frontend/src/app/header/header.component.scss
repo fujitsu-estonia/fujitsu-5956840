@@ -1,5 +1,10 @@
 @import '../../sass/variables/variables.scss';
 
+.app-header-content {
+	max-width: 1200px;
+	width: 100%;
+}
+
 .app-header {
 	color: var(--color-primary);
 	height: 170px;
