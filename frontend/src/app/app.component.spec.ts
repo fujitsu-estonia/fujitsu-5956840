@@ -19,9 +19,17 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'hotel-booking'`, () => {
+  it(`should open/close sidenav`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('hotel-booking');
+    expect(app.sidenavOpen).toBeFalse();
+
+    app.openSidenav();
+    expect(app.sidenavOpen).toBeTrue();
+
+    app.setOpenFalse();
+    expect(app.sidenavOpen).toBeFalse();
   });
+
+
 });

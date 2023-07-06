@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FooterComponent } from './footer.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
@@ -8,6 +10,7 @@ describe('FooterComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [MatIconModule, MatDividerModule],
       declarations: [FooterComponent]
     });
     fixture = TestBed.createComponent(FooterComponent);
