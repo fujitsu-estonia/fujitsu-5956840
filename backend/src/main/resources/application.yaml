@@ -15,6 +15,9 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     defer-datasource-initialization: false
+    hibernate:
+      ddl-auto: create-drop
+    generate-ddl: true
   h2:
     console:
       enabled: true
@@ -22,4 +25,5 @@ spring:
       settings.trace: false
       settings.web-allow-others: false
   flyway:
+    enabled: false
     locations: classpath:db/migration

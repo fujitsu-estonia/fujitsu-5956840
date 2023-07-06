@@ -1,40 +1,61 @@
 package ee.fujitsu.smit.hotel.entities;
 
+import ee.fujitsu.smit.hotel.constants.BookingStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "ROOMS")
+@Table(name = "booking")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Booking implements Serializable {
 
   @Id
+  @NotNull
   @GeneratedValue(strategy = GenerationType.UUID)
-  private UUID id; // 2bde2f0c-f97e-4beb-92ab-7477dc7952f5;
+  private UUID id;
 
-  @GeneratedValue(strategy = GenerationType.SEQUENCE) // TODO: the seq name and initialization separately
-  private Long bookingNumber;
-
-  @Column(name = "START_DATE")
+  @Column(name = "start_date")
   private LocalDateTime startDate;
 
-  @Column(name = "END_DATE")
+  @Column(name = "end_date")
   private LocalDateTime endDate;
+
+  @ManyToOne
+  @JoinColumn(name = "room_type_id", nullable = false)
+  private RoomType roomType;
+
+  @ManyToOne
+  @JoinColumn(name = "assigned_room_id")
+  private Room assignedRoom;
+
+  private BookingStatus status;
+
+  // user data
+  @Column(name = "first_name")
+  private String firstName;
+
+  @Column(name = "last_name")
+  private String lastName;
+
+  @Column(name = "id_code")
+  private String idCode;
+
+  @Email
+  private String email;
 
 }

@@ -9,28 +9,34 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
-import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
-@Table(name = "room")
+import java.io.Serializable;
+
 @Getter
 @Setter
-public class Room implements Serializable {
+@Entity
+@Table(name = "room_type")
+public class RoomType implements Serializable {
 
   @Id
   @NotNull
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(name = "room_number", unique = true)
-  private String roomNumber;
+  private String title;
+
+  private String description;
+
+  @Column(name = "beds_count")
+  private Integer bedsCount;
+
+  @Column(name = "price_per_night")
+  private Double pricePerNight;
 
   @ManyToOne
-  @JoinColumn(name = "room_type_id", nullable = false)
-  private RoomType roomType;
+  @JoinColumn(name = "preview_picture_id")
+  private RoomPicture previewPicture;
 
-  @Column(name = "room_description")
-  private String description;
 }
