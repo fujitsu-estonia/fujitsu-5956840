@@ -20,4 +20,10 @@ describe('HeaderComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should emit sidenavToggle event when toggleSidenav is called', () => {
+    spyOn(component.sidenavToggle, 'emit');
+    component.toggleSidenav();
+    expect(component.sidenavToggle.emit).toHaveBeenCalled();
+  });
 });

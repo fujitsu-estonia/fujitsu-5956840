@@ -16,10 +16,18 @@ describe('BookingSearchComponent', () => {
     });
     fixture = TestBed.createComponent(BookingSearchComponent);
     component = fixture.componentInstance;
+    component.bookingId = '123456789';
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should emit searchExecuted event when search is called', () => {
+    spyOn(component.searchExecuted, 'emit');
+    component.formGroup.setValue({ search: '123456789' });
+    component.search();
+    expect(component.searchExecuted.emit).toHaveBeenCalledWith('123456789');
   });
 });

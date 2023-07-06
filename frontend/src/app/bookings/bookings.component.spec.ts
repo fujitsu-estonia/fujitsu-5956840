@@ -19,6 +19,7 @@ describe('BookingsComponent', () => {
     });
     fixture = TestBed.createComponent(BookingsComponent);
     component = fixture.componentInstance;
+    component.adminMode = true;
     fixture.detectChanges();
   });
 
