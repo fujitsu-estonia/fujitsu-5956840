@@ -4,7 +4,7 @@
 	border: 1px solid var(--color-greys-border);
 	border-radius: 4px;
 	margin: 36px auto;
-	max-width: 900px;
+	max-width: $app-content-width;
 }
 
 .booking {
@@ -30,7 +30,7 @@
 
 .veera-input {
 	.label {
-		width: 100px;
+		width: 120px;
 		text-align: end;
 	}
 }
@@ -38,7 +38,6 @@
 .room-preview {
 	margin-top: 16px;
 	width: 100%;
-	max-width: 330px;
 	height: 250px;
 	object-fit: cover;
 	border-radius: 4px;

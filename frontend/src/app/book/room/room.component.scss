@@ -1,7 +1,7 @@
 @import '../../../sass/variables/variables.scss';
 
 .room-row {
-	max-width: 1000px;
+	max-width: $app-content-width;
 	width: 100%;
 	margin: auto;
 	padding: 0 18px;
@@ -17,6 +17,7 @@
 	overflow: hidden;
 
 	height: 220px;
+	width: $app-content-width;
 
 	.room-img>img {
 		width: 250px;
@@ -28,9 +29,6 @@
 		width: 320px;
 	}
 
-	.room-book {
-		padding-right: 36px;
-	}
 }
 
 @media only screen and (max-width: $desktop) {
@@ -63,11 +61,19 @@
 
 		.room-content {
 			flex-wrap: wrap;
+			width: 100%;
 		}
 
 		.room-book {
 			margin: auto;
-			padding-bottom: 16px;
+		}
+	}
+
+	.room-booking {
+		width: 100%;
+
+		.room-book button {
+			width: 100%;
 		}
 	}
 }

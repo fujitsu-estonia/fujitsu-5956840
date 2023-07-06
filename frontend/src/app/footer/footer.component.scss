@@ -2,10 +2,24 @@
 
 .footer {
 	margin-top: 16px;
+	background-color: #F9F9F9;
+
+	.info {
+		max-width: $app-content-width;
+	}
 }
 
 .socials {
 	background-color: var(--color-greys-background);
+}
+
+
+@media only screen and (max-width: $desktop-xl) {
+	.footer {
+		.info {
+			justify-content: space-evenly !important;
+		}
+	}
 }
 
 @media only screen and (max-width: $tablet) {

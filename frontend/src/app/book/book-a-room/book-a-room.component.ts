@@ -52,9 +52,11 @@ export class BookARoomComponent {
       if (!this.validateBooking(booking)) return
       //TODO: send booking to backend
       this.sendingBooking = true
+      this.formGroup.disable()
 
       setTimeout(() => {
         this.sendingBooking = false
+        this.formGroup.enable()
         this.goToDoneView()
       }, 1000)
     }

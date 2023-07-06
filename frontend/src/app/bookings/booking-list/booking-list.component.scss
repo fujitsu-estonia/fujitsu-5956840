@@ -2,14 +2,13 @@
 
 .booking-list {
 	h2 {
-		max-width: 1200px;
+		max-width: $app-content-width;
 	}
 
 	.booking-card {
 		border: 1px solid var(--color-greys-border);
 		border-radius: 4px;
-		margin: 36px auto;
-		max-width: 1200px;
+		max-width: $app-content-width;
 		overflow: hidden;
 
 		.booking-room-image img {

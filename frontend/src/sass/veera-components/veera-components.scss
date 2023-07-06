@@ -14,6 +14,10 @@
 	border: 2px solid #5D6071 !important;
 }
 
+.mdc-button--outlined {
+	min-height: 40px !important;
+}
+
 // input
 .veera-input {
 	display: inline-block;
@@ -23,13 +27,10 @@
 // mat-error customization
 .mat-mdc-form-field-error-wrapper {
 	padding: 0 !important;
+	z-index: 3 !important;
 }
 
 .mat-mdc-form-field-error {
 	position: relative;
 	top: -8px;
-}
-
-.mat-mdc-form-field-error-wrapper {
-	z-index: 3 !important;
 }

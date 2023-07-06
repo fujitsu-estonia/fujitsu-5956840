@@ -3,6 +3,13 @@
 $navbar-height-desktop: 170px;
 $navbar-height-mobile: 80px;
 
+$footer-height-desktop: 194px;
+$footer-height-mobile: 273px;
+
+.main-content {
+	min-height: calc(100vh - #{$navbar-height-desktop} - #{$footer-height-desktop});
+}
+
 // drawer sidenav
 .sidenav-content {
 	width: 100dvw;
@@ -40,5 +47,11 @@ $navbar-height-mobile: 80px;
 		.sidenav-link-btn:last-child {
 			border-bottom: none;
 		}
+	}
+}
+
+@media only screen and (max-width: $tablet) {
+	.main-content {
+		min-height: calc(100vh - #{$navbar-height-mobile} - #{$footer-height-mobile});
 	}
 }
