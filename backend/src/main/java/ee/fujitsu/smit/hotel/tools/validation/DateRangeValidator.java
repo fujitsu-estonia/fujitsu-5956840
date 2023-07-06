@@ -18,16 +18,14 @@ public class DateRangeValidator implements ConstraintValidator<ValidDateRange, D
 
   @Override
   public boolean isValid(DateRange dateRange, ConstraintValidatorContext context) {
-    if (dateRange.getStartDate().isAfter(dateRange.getEndDate())) {
+    if (dateRange.startDate().isAfter(dateRange.endDate())) {
       context.disableDefaultConstraintViolation();
       context
           .buildConstraintViolationWithTemplate(Constants.ERROR_DATE_RANGE_ENDING_DATE_BEFORE)
           .addConstraintViolation();
       return false;
     }
-    if (Duration.between(dateRange.getStartDate(), dateRange.getEndDate())
-        .minus(minRange)
-        .isNegative()) {
+    if (Duration.between(dateRange.startDate(), dateRange.endDate()).minus(minRange).isNegative()) {
       context.disableDefaultConstraintViolation();
       context
           .buildConstraintViolationWithTemplate(Constants.ERROR_DATE_RANGE_TOO_SHORT)

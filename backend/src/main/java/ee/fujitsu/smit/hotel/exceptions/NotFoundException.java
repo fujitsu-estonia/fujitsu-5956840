@@ -12,4 +12,8 @@ public class NotFoundException extends RuntimeException {
   public NotFoundException() {
     super(NOT_FOUND_CODE);
   }
+
+  public NotFoundException(String details) {
+    super(NOT_FOUND_CODE + "." + details);
+  }
 }

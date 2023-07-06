@@ -1,13 +1,16 @@
 package ee.fujitsu.smit.hotel.models;
 
+import ee.fujitsu.smit.hotel.constants.BookingStatus;
 import ee.fujitsu.smit.hotel.tools.validation.ValidDateRange;
 import ee.fujitsu.smit.hotel.tools.validation.ValidIdCode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
-import java.time.temporal.ChronoUnit;
-import java.util.UUID;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.temporal.ChronoUnit;
+import java.util.UUID;
 
 /** Public api DTO for {@link ee.fujitsu.smit.hotel.entities.Booking} */
 @Setter
@@ -22,14 +25,24 @@ public class BookingDto {
       example = "2bde2f0c-f97e-4beb-92ab-7477dc7952f5")
   private UUID id;
 
-  @Schema(type = "integer", format = "int64", description = "Selected room type id", example = "1")
-  private Long roomTypeId;
-
   @Schema(
       type = "object",
       description = "Booking period start and end dates. Minimal duration is one day")
   @ValidDateRange(minRange = @ValidDateRange.TemporalValue(value = 1, unit = ChronoUnit.DAYS))
   private DateRange bookingPeriod;
+
+  @Schema(type = "integer", format = "int64", description = "Selected room type id", example = "1")
+  @NotNull
+  private Long roomTypeId;
+
+  @Schema(
+      accessMode = Schema.AccessMode.READ_ONLY,
+      type = "integer",
+      description = "Room number that is assigned to given booking")
+  private int assignedRoomNumber;
+
+  @Schema(accessMode = Schema.AccessMode.READ_ONLY, description = "Booking status")
+  private BookingStatus status;
 
   @Schema(type = "string", description = "Person first name", example = "John")
   private String firstName;
