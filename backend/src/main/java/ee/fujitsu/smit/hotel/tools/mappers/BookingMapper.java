@@ -8,7 +8,7 @@ import ee.fujitsu.smit.hotel.models.booking.BookedRoomDetailsDto;
 import ee.fujitsu.smit.hotel.models.booking.BookingDetailsDto;
 import ee.fujitsu.smit.hotel.models.booking.CreateBookingRequestDto;
 import ee.fujitsu.smit.hotel.repositories.RoomTypeRepository;
-import lombok.Getter;
+import ee.fujitsu.smit.hotel.tools.BookingTimeConverter;
 import lombok.Setter;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
@@ -17,16 +17,14 @@ import org.mapstruct.MappingConstants;
 import org.mapstruct.MappingTarget;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public abstract class BookingMapper {
 
-  @Autowired @Getter @Setter private RoomTypeRepository roomTypeRepository;
+  @Autowired @Setter private RoomTypeRepository roomTypeRepository;
+  @Autowired @Setter protected BookingTimeConverter bookingTimeConverter;
 
-  @Mapping(target = "startDate", expression = "java( mapBookingStartTime(dto.getBookingPeriod().startDate()) )")
-  @Mapping(target = "endDate", expression = "java( mapBookingEndTime(dto.getBookingPeriod().endDate()) )")
+  @Mapping(target = "startDate", expression = "java( bookingTimeConverter.mapBookingStartTime(dto.getBookingPeriod().startDate()) )")
+  @Mapping(target = "endDate", expression = "java( bookingTimeConverter.mapBookingEndTime(dto.getBookingPeriod().endDate()) )")
   @Mapping(target = "roomType", expression = "java( findRoomTypeById(dto.getRoomTypeId()) )")
   @Mapping(target = "firstName", source = "personData.firstName")
   @Mapping(target = "lastName", source = "personData.lastName")
@@ -47,20 +45,6 @@ public abstract class BookingMapper {
   @Mapping(target = "roomDetails", expression = "java( createBookedRoomDetails(entity) )")
   @Mapping(target = "personData", expression = "java( createPersonalData(entity) )")
   public abstract BookingDetailsDto mapToDto(Booking entity);
-
-  protected LocalDateTime mapBookingStartTime(LocalDate requestedStartTime) {
-    if (requestedStartTime == null) {
-      return null;
-    }
-    return requestedStartTime.atTime(10, 0, 0);
-  }
-
-  protected LocalDateTime mapBookingEndTime(LocalDate requestedEndTime) {
-    if (requestedEndTime == null) {
-      return null;
-    }
-    return requestedEndTime.atTime(12, 0, 0);
-  }
 
   protected RoomType findRoomTypeById(long id) {
     return roomTypeRepository

@@ -1,8 +1,8 @@
 package ee.fujitsu.smit.hotel.tools.mappers;
 
-import ee.fujitsu.smit.hotel.entities.Room;
-import ee.fujitsu.smit.hotel.models.CreateUpdateRoomRequestDto;
+import ee.fujitsu.smit.hotel.entities.RoomType;
 import ee.fujitsu.smit.hotel.models.RoomDetailsDto;
+import ee.fujitsu.smit.hotel.models.SearchRoomDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
@@ -11,8 +11,8 @@ import org.mapstruct.MappingConstants;
 public interface RoomMapper {
 
   @Mapping(target = "id", ignore = true)
-  Room mapToEntity(CreateUpdateRoomRequestDto createUpdateRequest);
+  RoomType mapToEntity(SearchRoomDto searchRoomDto);
 
-  RoomDetailsDto mapToDto(Room entity);
+  RoomDetailsDto mapToDto(RoomType entity);
 
 }
