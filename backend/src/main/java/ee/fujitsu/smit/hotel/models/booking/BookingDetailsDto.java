@@ -41,6 +41,9 @@ public class BookingDetailsDto {
   @Schema(type = "object", description = "Booked room retails")
   private BookedRoomDetailsDto roomDetails;
 
+  @Schema(type = "number", description = "Booking total price")
+  private Double priceTotal;
+
   @Schema(type = "object", description = "Person data")
   private PersonData personData;
 }
