@@ -58,6 +58,7 @@ public abstract class BookingMapper {
       dto.setTitle(booking.getRoomType().getTitle());
       dto.setDescription(booking.getRoomType().getDescription());
       dto.setBedsCount(booking.getRoomType().getBedsCount());
+      dto.setPricePerNight(booking.getRoomType().getPricePerNight());
       dto.setPreviewPictureUrl(booking.getRoomType().getPreviewPictureUrl());
     }
     if (booking.getAssignedRoom() != null) {

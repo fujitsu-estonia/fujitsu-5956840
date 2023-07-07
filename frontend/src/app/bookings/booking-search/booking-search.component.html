@@ -1,37 +1,41 @@
-<div class="booking-search d-flex flex-wrap justify-content-center align-items-center">
-	<h2 class="w-100 text-center">Leia oma broneering:</h2>
-	<form [formGroup]="formGroup">
-		<!-- Desktop input -->
-		<div class="veera-input d-none d-sm-block">
-			<div class="label-wrapper d-flex">
-				<p class="label my-0 mt-2 pt-1 pe-2">Broneeringu ID*</p>
-				<mat-form-field appearance="outline">
-					<input matInput formControlName="search">
-					<mat-error *ngIf="formGroup.get('search')?.invalid">
-						<app-veera-error [message]="'Broneeringu ID täitmata!'"></app-veera-error>
-					</mat-error>
-				</mat-form-field>
+<div class="booking-search-container">
+	<div class="booking-search px-3 py-5">
+		<h2 class="w-100 text-center my-0 mb-4">Leia oma broneering:</h2>
+		<form class="w-100 d-flex justify-content-center flex-wrap" [formGroup]="formGroup">
+			<!-- Desktop input -->
+			<div class="veera-input d-none d-sm-block">
+				<div class="label-wrapper d-flex">
+					<p class="label my-0 mt-2 pt-1 pe-2">Broneeringu ID*</p>
+					<mat-form-field appearance="outline" class="w-100">
+						<input matInput formControlName="search">
+						<mat-error *ngIf="formGroup.get('search')?.invalid">
+							<app-veera-error [message]="'Broneeringu ID täitmata!'"></app-veera-error>
+						</mat-error>
+					</mat-form-field>
+				</div>
 			</div>
-		</div>
 
-		<!-- Mobile input -->
-		<div class="veera-input d-block d-sm-none">
-			<div class="label-wrapper d-flex">
-				<mat-form-field appearance="outline">
-					<mat-label>Broneeringu ID</mat-label>
-					<input matInput formControlName="search">
-					<mat-error *ngIf="formGroup.get('search')?.invalid">
-						<app-veera-error [message]="'Broneeringu ID täitmata!'"></app-veera-error>
-					</mat-error>
-				</mat-form-field>
+			<!-- Mobile input -->
+			<div class="veera-input d-block d-sm-none w-100">
+				<div class="label-wrapper d-flex">
+					<mat-form-field appearance="outline">
+						<mat-label>Broneeringu ID</mat-label>
+						<input matInput formControlName="search">
+						<mat-error *ngIf="formGroup.get('search')?.invalid">
+							<app-veera-error [message]="'Broneeringu ID täitmata!'"></app-veera-error>
+						</mat-error>
+					</mat-form-field>
+				</div>
 			</div>
-		</div>
-	</form>
 
-	<div class="search-btn ps-3 pb-3">
-		<button class="px-5 fw-bold" mat-flat-button color="primary" (click)="search()">
-			Otsi
-			<mat-icon iconPositionEnd>search</mat-icon>
-		</button>
+			<div class="search-btn ps-sm-3 pb-sm-3 mt-4 mt-sm-0">
+				<button class="px-5 fw-bold" mat-flat-button color="primary" (click)="search()">
+					Otsi
+					<mat-icon iconPositionEnd>search</mat-icon>
+				</button>
+			</div>
+		</form>
+
+
 	</div>
 </div>

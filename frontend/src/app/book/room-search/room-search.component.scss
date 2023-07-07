@@ -1,9 +1,15 @@
 @import "../../../sass/variables/variables.scss";
 
+.book {
+	background-color: var(--color-greys-background);
 
-.date-range {
-	width: 350px;
+	.filters {
+		max-width: $app-content-width;
+		margin: 0 auto;
+	}
 }
+
+
 
 .search {
 	margin-bottom: 23px !important;

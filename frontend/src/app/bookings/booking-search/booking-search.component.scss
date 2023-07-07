@@ -1,13 +1,36 @@
 @import '../../../sass/variables/variables.scss';
 
+.booking-search-container {
+	background: var(--color-greys-background);
+}
+
 .booking-search {
-	height: 200px;
+	max-width: $app-content-width;
+	margin: 0 auto;
+}
+
+.label {
+	width: 175px;
 }
 
 @media only screen and (max-width: $mobile) {
+	form {
+		.veera-input {
+			width: 100%;
+
+			.mat-mdc-form-field {
+				width: 100%;
+			}
+		}
+	}
+
 	.search-btn {
 		width: 100%;
 		display: flex;
 		justify-content: center;
+
+		button {
+			width: 100%;
+		}
 	}
 }

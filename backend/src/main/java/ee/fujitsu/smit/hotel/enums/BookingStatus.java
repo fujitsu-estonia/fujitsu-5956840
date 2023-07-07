@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 
 /** Indicates a lifecycle stages of {@link ee.fujitsu.smit.hotel.entities.Booking} entity */
 public enum BookingStatus {
-  /** booking was requested by the user */
-  REQUESTED,
   /**
    * booking was accepted by the administrator
    *

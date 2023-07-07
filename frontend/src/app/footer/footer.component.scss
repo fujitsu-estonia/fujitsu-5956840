@@ -13,15 +13,6 @@
 	background-color: var(--color-greys-background);
 }
 
-
-@media only screen and (max-width: $desktop-xl) {
-	.footer {
-		.info {
-			justify-content: space-evenly !important;
-		}
-	}
-}
-
 @media only screen and (max-width: $tablet) {
 	.info {
 		justify-content: flex-start !important;

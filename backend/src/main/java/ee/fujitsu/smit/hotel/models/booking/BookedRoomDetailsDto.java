@@ -17,6 +17,9 @@ public class BookedRoomDetailsDto {
   @Schema(type = "string", description = "Beds count")
   private Integer bedsCount;
 
+  @Schema(type = "number", description = "Room type per night")
+  private Double pricePerNight;
+
   @Schema(type = "string", description = "Assigned room number")
   private String roomNumber;
 
