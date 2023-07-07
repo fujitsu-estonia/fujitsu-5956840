@@ -47,7 +47,7 @@ public interface BookingRepository
               + "(SELECT COUNT(*) FROM room WHERE room_type_id = :roomTypeId)"
               + " - "
               + "(SELECT COUNT(*) FROM booking WHERE room_type_id = :roomTypeId "
-              + "AND status > 0 AND status < 3 " // ACCEPTED or STARTED
+              + "AND status < 2 " // ACCEPTED or STARTED
               + "AND start_date <= :endTime AND end_date >= :startTime)")
   long countAvailableRoomsOfTypeForPeriod(
       Long roomTypeId, LocalDateTime startTime, LocalDateTime endTime);

@@ -33,7 +33,7 @@ public class BookingService {
       throw new NoAvailableRoomsException(entity.getRoomType().getTitle());
     }
 
-    entity.setStatus(BookingStatus.REQUESTED);
+    entity.setStatus(BookingStatus.ACCEPTED);
     var saved = bookingRepository.saveAndFlush(entity);
     log.debug("Booking {} saved. Id: {}", bookingDto, saved.getId());
 
