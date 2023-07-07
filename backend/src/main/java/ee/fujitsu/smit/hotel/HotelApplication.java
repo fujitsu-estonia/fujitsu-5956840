@@ -2,8 +2,10 @@ package ee.fujitsu.smit.hotel;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
+@EnableTransactionManagement
 public class HotelApplication {
 
 	public static void main(String[] args) {

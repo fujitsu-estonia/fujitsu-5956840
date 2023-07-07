@@ -8,29 +8,36 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
-import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.io.Serializable;
 
 @Entity
 @Table(name = "room")
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Room implements Serializable {
 
   @Id
-  @NotNull
+  @Column(nullable = false)
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(name = "room_number", unique = true)
+  @Column(name = "room_number")
   private String roomNumber;
 
   @ManyToOne
   @JoinColumn(name = "room_type_id", nullable = false)
   private RoomType roomType;
 
-  @Column(name = "room_description")
-  private String description;
+  /** A note(s) specific to a certain room */
+  @Column(name = "room_notes", length = 2048)
+  private String roomNotes;
 }

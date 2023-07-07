@@ -1,4 +1,4 @@
-package ee.fujitsu.smit.hotel.constants;
+package ee.fujitsu.smit.hotel.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 

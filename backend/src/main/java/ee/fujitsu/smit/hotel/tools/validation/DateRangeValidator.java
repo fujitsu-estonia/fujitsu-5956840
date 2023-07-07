@@ -4,16 +4,15 @@ import ee.fujitsu.smit.hotel.models.DateRange;
 import ee.fujitsu.smit.hotel.tools.Constants;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import java.time.Duration;
 
 public class DateRangeValidator implements ConstraintValidator<ValidDateRange, DateRange> {
 
-  private Duration minRange;
+  private long minDuration;
 
   @Override
   public void initialize(ValidDateRange anno) {
     ConstraintValidator.super.initialize(anno);
-    minRange = Duration.of(anno.minRange().value(), anno.minRange().unit());
+    minDuration = anno.minDays();
   }
 
   @Override
@@ -25,7 +24,7 @@ public class DateRangeValidator implements ConstraintValidator<ValidDateRange, D
           .addConstraintViolation();
       return false;
     }
-    if (Duration.between(dateRange.startDate(), dateRange.endDate()).minus(minRange).isNegative()) {
+    if (dateRange.durationInDays() < minDuration) {
       context.disableDefaultConstraintViolation();
       context
           .buildConstraintViolationWithTemplate(Constants.ERROR_DATE_RANGE_TOO_SHORT)

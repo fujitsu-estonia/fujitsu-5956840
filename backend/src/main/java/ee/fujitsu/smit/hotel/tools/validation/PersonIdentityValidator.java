@@ -1,5 +1,6 @@
 package ee.fujitsu.smit.hotel.tools.validation;
 
+import ee.fujitsu.smit.hotel.models.PersonData;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
@@ -12,29 +13,32 @@ import java.util.function.Predicate;
 /**
  * Constraint Validator for id codes
  */
-public class IdCodeValidator implements ConstraintValidator<ValidIdCode, String> {
+public class PersonIdentityValidator implements ConstraintValidator<ValidIdentity, PersonData> {
 
-  private static final Map<ValidIdCode.ValidationRuleSet, Predicate<String>> VALIDATORS =
+  private static final Map<ValidIdentity.IdCodeValidationRuleSet, Predicate<String>> VALIDATORS =
       Map.of(
-          ValidIdCode.ValidationRuleSet.ESTONIAN_NATIONAL_ID,
+          ValidIdentity.IdCodeValidationRuleSet.ESTONIAN_NATIONAL_ID,
           new EstonianNationalIdValidator(),
-          ValidIdCode.ValidationRuleSet.OTHER,
+          ValidIdentity.IdCodeValidationRuleSet.OTHER,
           s -> false);
 
-  private List<ValidIdCode.ValidationRuleSet> validationRuleSets;
+  private List<ValidIdentity.IdCodeValidationRuleSet> idCodeValidationRuleSets;
 
   @Override
-  public void initialize(ValidIdCode constraintAnnotation) {
+  public void initialize(ValidIdentity constraintAnnotation) {
     ConstraintValidator.super.initialize(constraintAnnotation);
-    validationRuleSets = Arrays.asList(constraintAnnotation.allowedRuleSets());
+    idCodeValidationRuleSets = Arrays.asList(constraintAnnotation.idCodeValidationRuleSets());
   }
 
   @Override
-  public boolean isValid(String code, ConstraintValidatorContext context) {
-    if (validationRuleSets.stream()
+  public boolean isValid(PersonData personData, ConstraintValidatorContext context) {
+    if (personData.isIgnoreIdCode()) {
+      return true;
+    }
+    if (idCodeValidationRuleSets.stream()
         .map(VALIDATORS::get)
         .filter(Objects::nonNull)
-        .anyMatch(validator -> validator.test(code))) {
+        .anyMatch(validator -> validator.test(personData.getIdCode()))) {
       return true;
     }
     String msgTpl = context.getDefaultConstraintMessageTemplate();

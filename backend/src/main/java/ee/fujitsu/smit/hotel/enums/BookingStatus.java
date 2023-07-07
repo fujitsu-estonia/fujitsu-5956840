@@ -1,4 +1,6 @@
-package ee.fujitsu.smit.hotel.constants;
+package ee.fujitsu.smit.hotel.enums;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
 
 /** Indicates a lifecycle stages of {@link ee.fujitsu.smit.hotel.entities.Booking} entity */
 public enum BookingStatus {
@@ -22,5 +24,19 @@ public enum BookingStatus {
   /** user cancels his/her booking */
   CANCELLED_BY_USER,
   /** administrator cancels booking request / started booking */
-  CANCELLED_BY_ADMIN
+  CANCELLED_BY_ADMIN;
+
+  public boolean isCancelled() {
+    return this == CANCELLED_BY_USER || this == CANCELLED_BY_ADMIN;
+  }
+
+  @JsonCreator
+  public static BookingStatus fromString(String str) {
+    for (var val : values()) {
+      if (val.toString().equalsIgnoreCase(str)) {
+        return val;
+      }
+    }
+    return null;
+  }
 }

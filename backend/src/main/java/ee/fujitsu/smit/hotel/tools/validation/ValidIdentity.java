@@ -10,12 +10,12 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/** Validates ID codes based on selected {@link ValidationRuleSet rule sets} */
+/** Validates ID codes based on selected {@link IdCodeValidationRuleSet rule sets} */
 @Documented
-@Constraint(validatedBy = IdCodeValidator.class)
+@Constraint(validatedBy = PersonIdentityValidator.class)
 @Target({ElementType.FIELD, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ValidIdCode {
+public @interface ValidIdentity {
 
   String message() default Constants.ERROR_ID_CODE_INVALID;
 
@@ -26,9 +26,9 @@ public @interface ValidIdCode {
   /**
    * What rule sets a passed value can follow, a.k.a. allowed validation strategies for passed value
    */
-  ValidationRuleSet[] allowedRuleSets() default {ValidationRuleSet.ESTONIAN_NATIONAL_ID};
+  IdCodeValidationRuleSet[] idCodeValidationRuleSets() default {IdCodeValidationRuleSet.ESTONIAN_NATIONAL_ID};
 
-  enum ValidationRuleSet {
+  enum IdCodeValidationRuleSet {
     ESTONIAN_NATIONAL_ID,
     OTHER
   }
