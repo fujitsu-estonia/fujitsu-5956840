@@ -4,8 +4,8 @@
 
 <ng-template #results>
 	<div class="booking-list px-4" *ngIf="bookings && bookings.length > 0">
-		<h2 *ngIf="!adminMode" class="m-auto mt-4">Minu broneeringud:</h2>
-		<h2 *ngIf="adminMode" class="m-auto mt-4">Viimased broneeringud:</h2>
+		<h2 *ngIf="!adminMode" class="m-auto mt-5">Minu broneeringud:</h2>
+		<h2 *ngIf="adminMode" class="m-auto mt-5">Viimased broneeringud:</h2>
 		<div class="booking-card my-3 mx-auto row gx-0" *ngFor="let booking of bookings">
 			<div class="booking-room-image col-3">
 				<img [src]="RoomTypeToImgMap[booking.room?.beds!]" alt="Picture of the room">

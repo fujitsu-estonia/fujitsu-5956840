@@ -24,6 +24,10 @@
 	@include mat.all-component-densities(-3);
 }
 
+.mat-mdc-text-field-wrapper {
+	background: white !important;
+}
+
 // mat-error customization
 .mat-mdc-form-field-error-wrapper {
 	padding: 0 !important;
