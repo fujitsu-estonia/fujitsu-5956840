@@ -22,6 +22,10 @@ export class BookingSearchComponent {
   }
 
   search() {
+    this.formGroup.markAllAsTouched()
+
+    if (this.formGroup.invalid) return
+
     this.searchExecuted.emit(this.formGroup.get('search')?.value)
   }
 

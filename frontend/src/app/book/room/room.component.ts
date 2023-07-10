@@ -2,9 +2,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RoomTypeToImgMap } from './RoomTypeToImgMap';
 
 export interface Room {
-  type: string;
-  beds: number;
-  price: number;
+  title: string;
+  description?: string;
+  bedsCount: number;
+  pricePerNight: number;
+  previewPictureUrl?: string;
+  roomNumber?: any
 }
 
 @Component({

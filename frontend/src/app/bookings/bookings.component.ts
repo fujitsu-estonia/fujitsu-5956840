@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Booking } from 'src/shared/interfaces/Booking';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from 'src/shared/components/BaseComponents';
+import { BookingService } from '../services/booking/booking.service';
 
 const mockBooking = {
   id: 1234,
@@ -13,17 +14,18 @@ const mockBooking = {
     beds: 1,
   },
 
-  //guest info
-  firstName: "Sander",
-  lastName: "Ruusmaa",
-  email: "san.maa@gmail.com",
-  idCode: "50010140866",
+  personData: {
+    firstName: "Sander",
+    lastName: "Ruusmaa",
+    email: "san.maa@gmail.com",
+    idCode: "50010140866",
+  }
+
 }
 
 @Component({
   selector: 'app-bookings',
-  templateUrl: './bookings.component.html',
-  styleUrls: ['./bookings.component.scss']
+  templateUrl: './bookings.component.html'
 })
 export class BookingsComponent extends BaseComponent {
   adminMode: boolean = false
@@ -34,7 +36,13 @@ export class BookingsComponent extends BaseComponent {
   //mock
   bookings: Booking[] = []
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  error: boolean = false
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private bookingService: BookingService,
+  ) {
     super()
 
     if (this.router.url.includes('admin')) this.adminMode = true
@@ -46,22 +54,49 @@ export class BookingsComponent extends BaseComponent {
     }))
   }
 
-
   searchBooking(bookingId: string) {
+    this.bookingId = bookingId
     this.loading = true
+    this.error = false
     console.log("search for booking, ID: ", bookingId)
-    setTimeout(() => {
-      this.loading = false
-      this.bookings = [mockBooking]
-    }, 1000)
+
+    this.bookingService.getBookingById(bookingId).subscribe({
+      next: (booking: Booking) => {
+        this.bookings = [booking]
+
+        console.log("booking: ", booking)
+        this.loading = false
+      },
+
+      error: (error: any) => {
+        this.error = true
+      }
+    })
   }
 
   searchAllBookings() {
     this.loading = true
-    console.log("search for all bookings")
-    setTimeout(() => {
-      this.loading = false
-      this.bookings = [mockBooking]
-    }, 1000)
+    this.error = false
+
+    this.bookingService.getBookings({}).subscribe({
+      next: (bookings: Booking[]) => {
+        this.bookings = bookings
+
+        this.loading = false
+      },
+
+      error: (error: any) => {
+        this.error = true
+      }
+    })
+  }
+
+
+  reloadBooking() {
+    if (this.adminMode) {
+      this.searchAllBookings()
+    } else {
+      this.searchBooking(this.bookingId)
+    }
   }
 }

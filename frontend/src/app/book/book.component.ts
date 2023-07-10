@@ -5,9 +5,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateRange } from './room-search/room-search.component';
 
 const mockRooms: Room[] = [
-  { type: "Ühekohaline klassik tuba", price: 98, beds: 1 },
-  { type: "Kahekohaline klassik tuba", price: 148, beds: 2 },
-  { type: "Kolmekohaline klassik tuba", price: 197, beds: 3 }
+  { title: "Ühekohaline klassik tuba", pricePerNight: 98, bedsCount: 1 },
+  { title: "Kahekohaline klassik tuba", pricePerNight: 148, bedsCount: 2 },
+  { title: "Kolmekohaline klassik tuba", pricePerNight: 197, bedsCount: 3 }
 ]
 
 export enum BookView {
@@ -24,26 +24,26 @@ export enum BookView {
 export class BookComponent {
 
   formGroup!: FormGroup
-  view: BookView = BookView.search
+  view: BookView = BookView.book
   BookView: typeof BookView = BookView
 
   roomResults!: Room[]
 
   booking: Booking = {
-    room: {
-      beds: 1,
-      price: 98,
-      type: "Ühekohaline klassik tuba"
+    roomDetails: {
+      bedsCount: 1,
+      pricePerNight: 98,
+      title: "Ühekohaline klassik tuba"
     },
     startDate: new Date((new Date().getTime() - 1000 * 60 * 60 * 24 * 2)),
     endDate: new Date()
   }
 
-  bookingId: string = "123456789"
-
   //render booleans
   hasBeenSearchedOnce: boolean = false
   loading: boolean = false
+
+  bookingId!: string
 
   constructor() {
     this.formGroup = new FormGroup({
@@ -55,7 +55,7 @@ export class BookComponent {
 
   bookRoom(room: Room) {
     this.booking = {
-      room: room,
+      roomDetails: room,
       startDate: this.booking.startDate,
       endDate: this.booking.endDate
     }
@@ -69,13 +69,12 @@ export class BookComponent {
   }
 
   setViewToDone() {
-
     this.view = BookView.done
   }
 
   setBookingDateRange(dateRange: DateRange) {
     this.booking = {
-      room: this.booking.room,
+      roomDetails: this.booking.roomDetails,
       startDate: dateRange.dateStart,
       endDate: dateRange.dateEnd
     }

@@ -13,20 +13,19 @@
 			</div>
 
 			<ng-template #results>
-				<app-room (bookRoomPressed)="bookRoom($event)" [room]="roomResults[0]"></app-room>
-				<app-room [room]="roomResults[1]"></app-room>
-				<app-room [room]="roomResults[2]"></app-room>
+				<app-room *ngFor="let room of roomResults" (bookRoomPressed)="bookRoom($event)"
+					[room]="room"></app-room>
 			</ng-template>
 
 		</div>
 	</div>
 
 	<div [class.d-none]="view !== BookView.book">
-		<app-book-a-room [booking]="booking" (backToSearchPressed)="setViewToSearch()"
+		<app-book-a-room [booking]="booking" (backToSearchPressed)="setViewToSearch()" [(bookingId)]="bookingId"
 			(bookingDone)="setViewToDone()"></app-book-a-room>
 	</div>
 
 	<div [class.d-none]="view !== BookView.done">
-		<app-booking-done></app-booking-done>
+		<app-booking-done [bookingId]="bookingId"></app-booking-done>
 	</div>
 </ng-container>

@@ -1,15 +1,15 @@
 <div class="room-row d-flex justify-content-center" *ngIf="room">
 	<div class="room">
 		<div class="room-img">
-			<img [src]="RoomTypeToImgMap[room.beds]" alt="Picture of the room">
+			<img [src]="RoomTypeToImgMap[room.bedsCount]" alt="Picture of the room">
 		</div>
 
 		<div class="room-content d-flex justify-content-between w-100">
 			<div class=" room-info m-md-4 m-3">
-				<h3 class="my-0">{{room.type}}</h3>
+				<h3 class="my-0">{{room.title}}</h3>
 				<div class="d-flex align-items-center">
 					<mat-icon class="me-1">hotel</mat-icon>
-					<p class="my-1"> {{room.beds}} {{room.beds === 1 ? 'magamiskoht' : 'magamiskohta'}}</p>
+					<p class="my-1"> {{room.bedsCount}} {{room.bedsCount === 1 ? 'magamiskoht' : 'magamiskohta'}}</p>
 				</div>
 
 				<div class="d-flex align-items-center">
@@ -25,7 +25,7 @@
 
 			<div class="room-booking mx-3 mx-sm-0 mt-3 mt-md-4">
 				<div class="room-price">
-					<h3 class="my-0">{{room.price}}€ / öö</h3>
+					<h3 class="my-0">{{room.pricePerNight}}€ / öö</h3>
 				</div>
 
 				<div class="room-book my-3 me-0 me-sm-3">

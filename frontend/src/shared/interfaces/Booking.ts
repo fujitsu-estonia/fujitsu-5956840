@@ -1,15 +1,17 @@
 import { Room } from "src/app/book/room/room.component";
+import { PersonData } from "./PersonData";
+import { BookingStatus } from "./BookingStatus";
 
 export interface Booking {
 	//booking info
-	id?: number;
-	startDate?: Date;
-	endDate?: Date;
-	room?: Room;
+	id?: string;
+
+	startDate?: Date | string;
+	endDate?: Date | string;
+	roomDetails?: Room;
 
 	//guest info
-	firstName?: string;
-	lastName?: string;
-	email?: string;
-	idCode?: string;
+	personData?: PersonData;
+
+	status?: BookingStatus;
 }

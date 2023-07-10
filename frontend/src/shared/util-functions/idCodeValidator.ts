@@ -1,6 +1,5 @@
 import { AbstractControl, ValidationErrors } from "@angular/forms";
-
-const idCodeRegex = /^[1-6]\d{2}(0[1-9]|1[0-2])(0[1-9]|[1-2]\d|3[0-1])\d{4}$/
+import Isikukood from "./Isikukood";
 
 export function createIdCodeValidator() {
 	return (control: AbstractControl): ValidationErrors | null => {
@@ -11,9 +10,14 @@ export function createIdCodeValidator() {
 			return null;
 		}
 
-		const isValidIdCode = idCodeRegex.test(value);
+		const isValidIdCode = testId(value)
 
 		return !isValidIdCode ? { validIdCode: true } : null;
 	}
+}
+
+function testId(kood: string) {
+	const id = new Isikukood(kood)
+	return id.validate()
 }
 
