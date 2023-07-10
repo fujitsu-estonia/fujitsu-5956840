@@ -20,6 +20,7 @@ import { BookingDoneComponent } from './book/booking-done/booking-done.component
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { BookingListComponent } from './bookings/booking-list/booking-list.component';
 import { BookingSearchComponent } from './bookings/booking-search/booking-search.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { BookingSearchComponent } from './bookings/booking-search/booking-search
     BookingSearchComponent
   ],
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'et-EE' }
+    { provide: MAT_DATE_LOCALE, useValue: 'et-EE' },
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

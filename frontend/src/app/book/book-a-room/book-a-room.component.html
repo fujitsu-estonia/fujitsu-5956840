@@ -1,4 +1,5 @@
 <div class="py-4">
+	<h4 class="text-center color-error" *ngIf="error">Broneeringu saatmine ebaõnnestus.</h4>
 	<div class="card mx-3 mx-lg-auto" *ngIf="booking">
 		<div class="booking row gx-0 p-md-4 p-3">
 			<div class="booking-summary col-6 pe-0 pe-md-4">
@@ -15,7 +16,7 @@
 					</tr>
 					<tr>
 						<td class="label">Tuba:</td>
-						<td>{{booking.room?.type}}</td>
+						<td>{{booking.roomDetails?.title}}</td>
 					</tr>
 					<tr>
 						<td class="label">Hind kokku:</td>
@@ -56,7 +57,23 @@
 
 					<div class="veera-input">
 						<div class="label-wrapper d-flex">
-							<p class="label my-0 mt-2 pt-1 pe-2">Isikukood *</p>
+							<p class="label my-0 mt-2 pt-1 pe-2">E-mail *</p>
+							<mat-form-field class="w-100" appearance="outline">
+								<input matInput formControlName="email">
+								<mat-error *ngIf="formGroup.get('email')?.hasError('required')">
+									<app-veera-error [message]="'E-mail on puudu!'"></app-veera-error>
+								</mat-error>
+								<mat-error *ngIf="formGroup.get('email')?.hasError('email')">
+									<app-veera-error [message]="'E-mail ei ole korrektne!'"></app-veera-error>
+								</mat-error>
+							</mat-form-field>
+						</div>
+					</div>
+
+					<div class="veera-input">
+						<div class="label-wrapper d-flex">
+							<p class="label my-0 mt-2 pt-1 pe-2"
+								[class.disabled]="formGroup.get('ignoreIdCode')?.value">Isikukood *</p>
 							<mat-form-field class="w-100" appearance="outline">
 								<input matInput formControlName="idCode">
 
@@ -71,20 +88,13 @@
 						</div>
 					</div>
 
-					<div class="veera-input">
-						<div class="label-wrapper d-flex">
-							<p class="label my-0 mt-2 pt-1 pe-2">E-mail *</p>
-							<mat-form-field class="w-100" appearance="outline">
-								<input matInput formControlName="email">
-								<mat-error *ngIf="formGroup.get('email')?.hasError('required')">
-									<app-veera-error [message]="'E-mail on puudu!'"></app-veera-error>
-								</mat-error>
-								<mat-error *ngIf="formGroup.get('email')?.hasError('email')">
-									<app-veera-error [message]="'E-mail ei ole korrektne!'"></app-veera-error>
-								</mat-error>
-							</mat-form-field>
-						</div>
+					<div class="foreigner checkbox pt-4">
+						<mat-checkbox class="veera-input-padding" color="primary" formControlName="ignoreIdCode"
+							(change)="checkIfIdStillRequired()">
+							{{'I am a foreigner / Olen välismaalane'}}
+						</mat-checkbox>
 					</div>
+
 				</form>
 			</div>
 		</div>

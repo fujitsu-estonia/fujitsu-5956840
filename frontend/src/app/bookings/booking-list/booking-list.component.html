@@ -8,7 +8,7 @@
 		<h2 *ngIf="adminMode" class="m-auto mt-5">Viimased broneeringud:</h2>
 		<div class="booking-card my-3 mx-auto row gx-0" *ngFor="let booking of bookings">
 			<div class="booking-room-image col-3">
-				<img [src]="RoomTypeToImgMap[booking.room?.beds!]" alt="Picture of the room">
+				<img [src]="RoomTypeToImgMap[booking.roomDetails?.bedsCount!]" alt="Picture of the room">
 			</div>
 
 
@@ -27,7 +27,7 @@
 					</tr>
 					<tr>
 						<td class="label">Tuba:</td>
-						<td>{{booking.room?.type}}</td>
+						<td>{{booking.roomDetails?.title}}</td>
 					</tr>
 					<tr>
 						<td class="label">Hind kokku:</td>
@@ -45,21 +45,32 @@
 					</tr>
 					<tr>
 						<td class="label">Külalise nimi:</td>
-						<td>{{booking.firstName}} {{booking.lastName}}</td>
+						<td>{{booking.personData?.firstName}} {{booking.personData?.lastName}}</td>
 					</tr>
 					<tr>
 						<td class="label">e-mail:</td>
-						<td>{{booking.email}}</td>
+						<td>{{booking.personData?.email}}</td>
 					</tr>
 					<tr>
 						<td class="label">Isikukood:</td>
-						<td>{{booking.idCode}}</td>
+						<td>{{booking.personData?.idCode === null ? 'foreigner/välismaalane' :
+							booking.personData?.idCode}}
+						</td>
 					</tr>
 				</table>
-				<button class="w-100 mt-3" mat-flat-button color="warn">
+
+				<button
+					*ngIf="booking.status !== BookingStatus.CANCELLED_BY_ADMIN && booking.status !== BookingStatus.CANCELLED_BY_USER; else cancelled"
+					class="w-100 mt-3" mat-flat-button color="warn" (click)="cancelBooking(booking)">
 					Tühista broneering
 					<mat-icon iconPositionEnd>delete</mat-icon>
 				</button>
+
+				<ng-template #cancelled>
+					<button class="w-100 mt-3" mat-flat-button color="warn" disabled="true">
+						Broneering tühistatud
+					</button>
+				</ng-template>
 			</div>
 
 		</div>

@@ -1,4 +1,9 @@
 <app-booking-search *ngIf="!adminMode" (searchExecuted)="searchBooking($event)"
 	[bookingId]="bookingId"></app-booking-search>
-<app-booking-list [adminMode]="adminMode" [bookings]="bookings" [loadingBookings]="loading"
-	(searchAdminBookings)="searchAllBookings()"></app-booking-list>
+<app-booking-list *ngIf="!error; else errorMessage" [adminMode]="adminMode" [bookings]="bookings"
+	[loadingBookings]="loading" (searchAdminBookings)="searchAllBookings()"
+	(bookingCanceled)="reloadBooking()"></app-booking-list>
+
+<ng-template #errorMessage>
+	<h4 class="text-center">Ühtegi broneeringut ID-ga "{{bookingId}}" ei leitud.</h4>
+</ng-template>

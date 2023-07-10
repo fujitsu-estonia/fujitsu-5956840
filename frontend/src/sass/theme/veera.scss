@@ -136,6 +136,11 @@ $hotel-booking: mat-light-theme((color:(primary: $hotel-booking-primary, accent:
 	color: var(--color-primary) !important;
 }
 
+.color-error {
+	color: var(--color-error) !important;
+}
+
+
 .color-accent {
 	color: var(--color-accent) !important;
 }

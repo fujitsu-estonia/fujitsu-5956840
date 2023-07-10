@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BookARoomComponent } from './book-a-room.component';
 import { AngularMaterialModule } from 'src/shared/modules/angular-material.module';
 import { Booking } from 'src/shared/interfaces/Booking';
+import { DatePipe } from '@angular/common';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('BookARoomComponent', () => {
   let component: BookARoomComponent;
@@ -10,8 +12,9 @@ describe('BookARoomComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [AngularMaterialModule],
-      declarations: [BookARoomComponent]
+      imports: [AngularMaterialModule, HttpClientTestingModule],
+      declarations: [BookARoomComponent],
+      providers: [DatePipe]
     });
     fixture = TestBed.createComponent(BookARoomComponent);
     component = fixture.componentInstance;
@@ -36,7 +39,7 @@ describe('BookARoomComponent', () => {
 
   it('should return false when validateBooking is called with an incomplete booking', () => {
     const booking: Booking = {
-      room: { beds: 1, price: 100, type: 'Test Room' },
+      roomDetails: { bedsCount: 1, pricePerNight: 100, title: 'Test Room' },
       startDate: new Date(),
       endDate: undefined
     };
@@ -46,7 +49,7 @@ describe('BookARoomComponent', () => {
 
   it('should return true when validateBooking is called with a complete booking', () => {
     const booking: Booking = {
-      room: { beds: 1, price: 100, type: 'Test Room' },
+      roomDetails: { bedsCount: 1, pricePerNight: 100, title: 'Test Room' },
       startDate: new Date(),
       endDate: new Date()
     };
