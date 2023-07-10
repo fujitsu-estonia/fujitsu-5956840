@@ -3,8 +3,8 @@ import { FormGroup } from '@angular/forms';
 import { RoomSearchParams } from 'src/shared/interfaces/RoomSearchParams';
 
 export interface DateRange {
-  dateStart: Date;
-  dateEnd: Date;
+  dateStart: Date | string;
+  dateEnd: Date | string;
 }
 
 @Component({
@@ -17,7 +17,9 @@ export class RoomSearchComponent {
   @Output() dateRangeChanged = new EventEmitter<DateRange>()
   @Output() searchForRoomsExecuted = new EventEmitter<RoomSearchParams>()
 
-  roomTypes: any = [
+  minDate: Date = new Date()
+
+  beds: any = [
     { name: 'Ühe (1)', value: 1 },
     { name: 'Kahe (2)', value: 2 },
     { name: 'Kolme (3)', value: 3 },
@@ -26,11 +28,15 @@ export class RoomSearchComponent {
   search() {
     this.formGroup.markAllAsTouched()
 
+    if (this.formGroup.errors && this.formGroup?.errors['equal']) {
+      this.formGroup.get('dateEnd')?.setErrors({ equal: true })
+    }
+
     if (this.formGroup.valid) {
       const searchFilter: RoomSearchParams = {
         dateStart: this.formGroup.get('dateStart')?.value,
         dateEnd: this.formGroup.get('dateEnd')?.value,
-        roomType: this.formGroup.get('roomType')?.value
+        beds: this.formGroup.get('beds')?.value
       }
 
       this.dateRangeChanged.emit(
@@ -41,8 +47,6 @@ export class RoomSearchComponent {
       )
 
       this.searchForRoomsExecuted.emit(searchFilter)
-
-      //search
     }
   }
 }

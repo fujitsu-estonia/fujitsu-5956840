@@ -1,14 +1,11 @@
 import { Component } from '@angular/core';
 import { Room } from './room/room.component';
 import { Booking } from 'src/shared/interfaces/Booking';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateRange } from './room-search/room-search.component';
-
-const mockRooms: Room[] = [
-  { title: "Ühekohaline klassik tuba", pricePerNight: 98, bedsCount: 1 },
-  { title: "Kahekohaline klassik tuba", pricePerNight: 148, bedsCount: 2 },
-  { title: "Kolmekohaline klassik tuba", pricePerNight: 197, bedsCount: 3 }
-]
+import { RoomSearchParams } from 'src/shared/interfaces/RoomSearchParams';
+import { RoomService } from '../services/room-service/room.service';
+import { DatePipe } from '@angular/common';
 
 export enum BookView {
   search = 'search',
@@ -29,15 +26,7 @@ export class BookComponent {
 
   roomResults!: Room[]
 
-  booking: Booking = {
-    roomDetails: {
-      bedsCount: 1,
-      pricePerNight: 98,
-      title: "Ühekohaline klassik tuba"
-    },
-    startDate: new Date((new Date().getTime() - 1000 * 60 * 60 * 24 * 2)),
-    endDate: new Date()
-  }
+  booking: Booking = {}
 
   //render booleans
   hasBeenSearchedOnce: boolean = false
@@ -45,12 +34,15 @@ export class BookComponent {
 
   bookingId!: string
 
-  constructor() {
+  constructor(
+    private roomService: RoomService,
+    private datePipe: DatePipe,
+  ) {
     this.formGroup = new FormGroup({
       dateStart: new FormControl('', Validators.required),
       dateEnd: new FormControl('', Validators.required),
-      roomType: new FormControl('', Validators.required),
-    })
+      beds: new FormControl('', Validators.required),
+    }, this.rangeValidator())
   }
 
   bookRoom(room: Room) {
@@ -72,6 +64,16 @@ export class BookComponent {
     this.view = BookView.done
   }
 
+  rangeValidator() {
+    return (control: AbstractControl) => {
+      const start = control.get('dateStart')?.value || null
+      const end = control.get('dateEnd')?.value || null
+
+      return start && end && end.getTime() === start.getTime() ?
+        { equal: true } : null
+    }
+  }
+
   setBookingDateRange(dateRange: DateRange) {
     this.booking = {
       roomDetails: this.booking.roomDetails,
@@ -80,15 +82,17 @@ export class BookComponent {
     }
   }
 
-  searchForRooms(obj: any) {
-    console.log("Search for rooms, params: ", obj)
+  searchForRooms(obj: RoomSearchParams) {
+    //format dates
+    obj.dateStart = this.datePipe.transform(obj.dateStart, 'yyyy-MM-dd')!
+    obj.dateEnd = this.datePipe.transform(obj.dateEnd, 'yyyy-MM-dd')!
+
     this.loading = true
     this.hasBeenSearchedOnce = true
 
-    // mock search
-    setTimeout(() => {
+    this.roomService.getRooms(obj).subscribe(rooms => {
       this.loading = false
-      this.roomResults = mockRooms
-    }, 1000)
+      this.roomResults = rooms
+    })
   }
 }

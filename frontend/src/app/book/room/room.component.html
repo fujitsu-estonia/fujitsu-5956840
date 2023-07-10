@@ -1,12 +1,12 @@
 <div class="room-row d-flex justify-content-center" *ngIf="room">
 	<div class="room">
 		<div class="room-img">
-			<img [src]="RoomTypeToImgMap[room.bedsCount]" alt="Picture of the room">
+			<img [src]="room.previewPictureUrl" alt="Picture of the room">
 		</div>
 
 		<div class="room-content d-flex justify-content-between w-100">
 			<div class=" room-info m-md-4 m-3">
-				<h3 class="my-0">{{room.title}}</h3>
+				<h3 class="my-0 pb-3">{{room.title}}</h3>
 				<div class="d-flex align-items-center">
 					<mat-icon class="me-1">hotel</mat-icon>
 					<p class="my-1"> {{room.bedsCount}} {{room.bedsCount === 1 ? 'magamiskoht' : 'magamiskohta'}}</p>

@@ -6,7 +6,7 @@
 				<div class="veera-input w-100">
 					<mat-form-field appearance="outline" class="w-100">
 						<mat-label>Sisesta ajavahemik</mat-label>
-						<mat-date-range-input [rangePicker]="picker">
+						<mat-date-range-input [rangePicker]="picker" [min]="minDate">
 							<input matStartDate placeholder="Algus kuupäev" formControlName="dateStart">
 							<input matEndDate placeholder="Lõpp kuupäev" formControlName="dateEnd">
 						</mat-date-range-input>
@@ -14,8 +14,13 @@
 						<mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
 						<mat-date-range-picker #picker></mat-date-range-picker>
 
-						<mat-error *ngIf="formGroup.get('dateStart')?.invalid || formGroup.get('dateEnd')?.invalid ">
-							<app-veera-error [message]="'Palun sisestage ajavahemik'"></app-veera-error>
+						<mat-error
+							*ngIf="formGroup.get('dateStart')?.getError('required') || formGroup.get('dateEnd')?.getError('required')">
+							<app-veera-error [message]="'Palun sisestage korrektne ajavahemik'"></app-veera-error>
+						</mat-error>
+
+						<mat-error *ngIf="formGroup.get('dateEnd')?.getError('equal')">
+							<app-veera-error [message]="'Vähemalt ühe öö peab ööbima!'"></app-veera-error>
 						</mat-error>
 					</mat-form-field>
 				</div>
@@ -25,13 +30,13 @@
 				<h5 class="my-0 mb-3">Mitmekohalist tuba on vaja?</h5>
 				<div class=" veera-input w-100">
 					<mat-form-field class="w-100" appearance="outline">
-						<mat-select formControlName="roomType">
-							<mat-option *ngFor="let room of roomTypes" [value]="room.value">
-								{{room.name}}
+						<mat-select formControlName="beds">
+							<mat-option *ngFor="let bed of beds" [value]="bed.value">
+								{{bed.name}}
 							</mat-option>
 						</mat-select>
 
-						<mat-error *ngIf="formGroup.get('roomType')?.invalid">
+						<mat-error *ngIf="formGroup.get('beds')?.invalid">
 							<app-veera-error [message]="'Palun valige magamiskohtade arv'"></app-veera-error>
 						</mat-error>
 					</mat-form-field>

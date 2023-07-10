@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Booking } from 'src/shared/interfaces/Booking';
 import { calculatePrice } from 'src/shared/util-functions/calculatePrice';
-import { RoomTypeToImgMap } from '../room/RoomTypeToImgMap';
 import { createIdCodeValidator } from 'src/shared/util-functions/idCodeValidator';
 import { DatePipe } from '@angular/common';
 import { BookingService } from 'src/app/services/booking/booking.service';
@@ -25,8 +24,6 @@ export class BookARoomComponent {
 
   sendingBooking: boolean = false
   error: boolean = false
-
-  RoomTypeToImgMap: any = RoomTypeToImgMap
 
   calculatePrice = calculatePrice
 

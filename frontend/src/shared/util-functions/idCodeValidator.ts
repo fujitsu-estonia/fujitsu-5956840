@@ -1,5 +1,5 @@
 import { AbstractControl, ValidationErrors } from "@angular/forms";
-import Isikukood from "./Isikukood";
+import Isikukood, { Gender } from "./Isikukood";
 
 export function createIdCodeValidator() {
 	return (control: AbstractControl): ValidationErrors | null => {
@@ -18,6 +18,12 @@ export function createIdCodeValidator() {
 
 function testId(kood: string) {
 	const id = new Isikukood(kood)
+	console.log(Isikukood.generate({
+		gender: 'female' as Gender,
+		birthDay: 23,
+		birthMonth: 1,
+		birthYear: 1991,
+	}))
 	return id.validate()
 }
 

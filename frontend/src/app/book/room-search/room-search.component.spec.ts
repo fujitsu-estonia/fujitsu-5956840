@@ -20,7 +20,7 @@ describe('RoomSearchComponent', () => {
     component.formGroup = new FormGroup({
       dateStart: new FormControl('', Validators.required),
       dateEnd: new FormControl('', Validators.required),
-      roomType: new FormControl('', Validators.required),
+      beds: new FormControl('', Validators.required),
     })
     fixture.detectChanges();
   });

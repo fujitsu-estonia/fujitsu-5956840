@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { RoomTypeToImgMap } from './RoomTypeToImgMap';
 
 export interface Room {
   title: string;
@@ -18,8 +17,6 @@ export interface Room {
 export class RoomComponent {
   @Input() room!: Room;
   @Output() bookRoomPressed = new EventEmitter<Room>()
-
-  RoomTypeToImgMap: any = RoomTypeToImgMap
 
   bookRoom(room: Room) {
     this.bookRoomPressed.emit(room)

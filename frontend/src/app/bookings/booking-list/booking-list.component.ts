@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { RoomTypeToImgMap } from 'src/app/book/room/RoomTypeToImgMap';
 import { BookingService } from 'src/app/services/booking/booking.service';
 import { Booking } from 'src/shared/interfaces/Booking';
 import { BookingStatus } from 'src/shared/interfaces/BookingStatus';
@@ -22,7 +21,6 @@ export class BookingListComponent {
   BookingStatus: typeof BookingStatus = BookingStatus
 
   calculatePrice = calculatePrice
-  RoomTypeToImgMap: any = RoomTypeToImgMap
 
   constructor(
     private bookingService: BookingService

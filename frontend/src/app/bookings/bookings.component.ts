@@ -4,25 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from 'src/shared/components/BaseComponents';
 import { BookingService } from '../services/booking/booking.service';
 
-const mockBooking = {
-  id: 1234,
-  startDate: new Date((new Date().getTime() - 1000 * 60 * 60 * 24 * 2)),
-  endDate: new Date(),
-  room: {
-    type: 'Ühekohaline klassik tuba',
-    price: 79,
-    beds: 1,
-  },
-
-  personData: {
-    firstName: "Sander",
-    lastName: "Ruusmaa",
-    email: "san.maa@gmail.com",
-    idCode: "50010140866",
-  }
-
-}
-
 @Component({
   selector: 'app-bookings',
   templateUrl: './bookings.component.html'

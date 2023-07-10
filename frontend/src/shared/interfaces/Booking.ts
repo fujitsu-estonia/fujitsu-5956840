@@ -14,4 +14,5 @@ export interface Booking {
 	personData?: PersonData;
 
 	status?: BookingStatus;
+	previewPictureUrl?: string;
 }
