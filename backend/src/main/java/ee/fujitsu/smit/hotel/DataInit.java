@@ -34,6 +34,7 @@ public class DataInit implements CommandLineRunner {
                 .description("Toas on 1 väike voodi")
                 .bedsCount(1)
                 .pricePerNight(98.00)
+                .previewPictureUrl("../../../assets/imgs/single.png")
                 .build());
     var rt2 =
         roomTypeRepository.save(
@@ -42,6 +43,7 @@ public class DataInit implements CommandLineRunner {
                 .description("Toas on 1 suur 2 kohaline voodi")
                 .bedsCount(2)
                 .pricePerNight(148.00)
+                .previewPictureUrl("../../../assets/imgs/double.png")
                 .build());
     var rt3 =
         roomTypeRepository.save(
@@ -50,6 +52,7 @@ public class DataInit implements CommandLineRunner {
                 .description("Toas on 2 voodit, 1 suur 2 kohaline ja 1 väike 1 kohaline")
                 .bedsCount(3)
                 .pricePerNight(197.00)
+                .previewPictureUrl("../../../assets/imgs/triple.png")
                 .build());
 
     var r11 = roomRepository.save(Room.builder().roomType(rt1).roomNumber("K1001").build());
