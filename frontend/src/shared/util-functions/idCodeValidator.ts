@@ -1,5 +1,5 @@
 import { AbstractControl, ValidationErrors } from "@angular/forms";
-import Isikukood, { Gender } from "./Isikukood";
+import Isikukood from "./Isikukood";
 
 export function createIdCodeValidator() {
 	return (control: AbstractControl): ValidationErrors | null => {
