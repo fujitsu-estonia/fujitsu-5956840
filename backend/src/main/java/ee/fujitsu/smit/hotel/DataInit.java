@@ -33,24 +33,36 @@ public class DataInit implements CommandLineRunner {
         var rt2 = roomTypeRepository.save(RoomType.builder().title("Kahekohaline klassik tuba").description("Toas on 1 suur 2 kohaline voodi").bedsCount(2).pricePerNight(148.00).build());
         var rt3 = roomTypeRepository.save(RoomType.builder().title("Kolmekohaline klassik tuba").description("Toas on 2 voodit, 1 suur 2 kohaline ja 1 väike 1 kohaline").bedsCount(3).pricePerNight(197.00).build());
 
-        var r1 = roomRepository.save(Room.builder().roomType(rt1).roomNumber("K1001").build());
-        roomRepository.save(Room.builder().roomType(rt1).roomNumber("K1002").build());
-        roomRepository.save(Room.builder().roomType(rt1).roomNumber("K1003").build());
-        roomRepository.save(Room.builder().roomType(rt1).roomNumber("K1004").build());
-        roomRepository.save(Room.builder().roomType(rt1).roomNumber("K1005").build());
-        roomRepository.save(Room.builder().roomType(rt2).roomNumber("K2001").build());
-        roomRepository.save(Room.builder().roomType(rt2).roomNumber("K2002").build());
-        roomRepository.save(Room.builder().roomType(rt2).roomNumber("K2003").build());
-        roomRepository.save(Room.builder().roomType(rt2).roomNumber("K2004").build());
-        roomRepository.save(Room.builder().roomType(rt2).roomNumber("K2005").build());
-        roomRepository.save(Room.builder().roomType(rt3).roomNumber("K3001").build());
-        roomRepository.save(Room.builder().roomType(rt3).roomNumber("K3002").build());
-        roomRepository.save(Room.builder().roomType(rt3).roomNumber("K3003").build());
-        roomRepository.save(Room.builder().roomType(rt3).roomNumber("K3004").build());
-        roomRepository.save(Room.builder().roomType(rt3).roomNumber("K3005").build());
+        var r11 = roomRepository.save(Room.builder().roomType(rt1).roomNumber("K1001").build());
+        var r12 = roomRepository.save(Room.builder().roomType(rt1).roomNumber("K1002").build());
+        var r13 = roomRepository.save(Room.builder().roomType(rt1).roomNumber("K1003").build());
+        var r14 = roomRepository.save(Room.builder().roomType(rt1).roomNumber("K1004").build());
+        var r15 = roomRepository.save(Room.builder().roomType(rt1).roomNumber("K1005").build());
+        var r21 = roomRepository.save(Room.builder().roomType(rt2).roomNumber("K2001").build());
+        var r22 = roomRepository.save(Room.builder().roomType(rt2).roomNumber("K2002").build());
+        var r23 = roomRepository.save(Room.builder().roomType(rt2).roomNumber("K2003").build());
+        var r24 = roomRepository.save(Room.builder().roomType(rt2).roomNumber("K2004").build());
+        var r25 = roomRepository.save(Room.builder().roomType(rt2).roomNumber("K2005").build());
+        var r31 = roomRepository.save(Room.builder().roomType(rt3).roomNumber("K3001").build());
+        var r32 = roomRepository.save(Room.builder().roomType(rt3).roomNumber("K3002").build());
+        var r33 = roomRepository.save(Room.builder().roomType(rt3).roomNumber("K3003").build());
+        var r34 = roomRepository.save(Room.builder().roomType(rt3).roomNumber("K3004").build());
+        var r35 = roomRepository.save(Room.builder().roomType(rt3).roomNumber("K3005").build());
 
-        LocalDate startDate = LocalDate.of(2023, 9, 7);
-        LocalDate endDate = LocalDate.of(2023, 9, 9);
-        bookingRepository.save(Booking.builder().startDate(bookingTimeConverter.mapBookingStartTime(startDate)).endDate(bookingTimeConverter.mapBookingEndTime(endDate)).status(BookingStatus.ACCEPTED).roomType(r1.getRoomType()).assignedRoom(r1).priceTotal(r1.getRoomType().getPricePerNight() * ChronoUnit.DAYS.between(startDate, endDate)).firstName("John").lastName("Smith").idCode("50001010017").email("John.Doe@gmail.com").build());
+        createBooking(r11, LocalDate.of(2023, 9, 7), LocalDate.of(2023, 9, 9));
+        createBooking(r12, LocalDate.of(2023, 9, 8), LocalDate.of(2023, 9, 9));
+        createBooking(r13, LocalDate.of(2023, 9, 7), LocalDate.of(2023, 9, 8));
+
+        createBooking(r21, LocalDate.of(2023, 9, 5), LocalDate.of(2023, 9, 10));
+        createBooking(r22, LocalDate.of(2023, 9, 6), LocalDate.of(2023, 9, 9));
+        createBooking(r23, LocalDate.of(2023, 9, 7), LocalDate.of(2023, 9, 8));
+        createBooking(r24, LocalDate.of(2023, 9, 6), LocalDate.of(2023, 9, 8));
+        createBooking(r25, LocalDate.of(2023, 9, 5), LocalDate.of(2023, 9, 6));
+
+        createBooking(r31, LocalDate.of(2023, 10, 5), LocalDate.of(2023, 10, 6));
+    }
+
+    private void createBooking(Room room, LocalDate startDate, LocalDate endDate) {
+        bookingRepository.save(Booking.builder().startDate(bookingTimeConverter.mapBookingStartTime(startDate)).endDate(bookingTimeConverter.mapBookingEndTime(endDate)).status(BookingStatus.ACCEPTED).roomType(room.getRoomType()).assignedRoom(room).priceTotal(room.getRoomType().getPricePerNight() * ChronoUnit.DAYS.between(startDate, endDate)).firstName("John").lastName("Smith").idCode("50001010017").email("John.Doe@gmail.com").build());
     }
 }
