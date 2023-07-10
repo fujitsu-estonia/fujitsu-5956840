@@ -1,6 +1,6 @@
 package ee.fujitsu.smit.hotel.tools.validation;
 
-import ee.fujitsu.smit.hotel.tools.Constants;
+import ee.fujitsu.smit.hotel.tools.constants.Constants;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 

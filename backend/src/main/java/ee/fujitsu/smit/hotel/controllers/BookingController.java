@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.UUID;
 
-import static ee.fujitsu.smit.hotel.tools.SchemaConstants.DEFAULT_UUID;
-import static ee.fujitsu.smit.hotel.tools.WebConstants.X_ORIGINATOR_HEADER;
+import static ee.fujitsu.smit.hotel.tools.constants.SchemaConstants.DEFAULT_UUID;
+import static ee.fujitsu.smit.hotel.tools.constants.WebConstants.X_ORIGINATOR_HEADER;
 
 @RestController
 @CrossOrigin(maxAge = 3600)

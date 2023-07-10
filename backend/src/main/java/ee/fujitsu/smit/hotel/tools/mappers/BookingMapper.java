@@ -8,23 +8,32 @@ import ee.fujitsu.smit.hotel.models.booking.BookedRoomDetailsDto;
 import ee.fujitsu.smit.hotel.models.booking.BookingDetailsDto;
 import ee.fujitsu.smit.hotel.models.booking.CreateBookingRequestDto;
 import ee.fujitsu.smit.hotel.repositories.RoomTypeRepository;
-import ee.fujitsu.smit.hotel.tools.BookingTimeConverter;
+import ee.fujitsu.smit.hotel.tools.BookingDatesConverter;
+import ee.fujitsu.smit.hotel.tools.BookingPriceCalculator;
 import lombok.Setter;
 import org.mapstruct.AfterMapping;
+import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.MappingTarget;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
+@Mapper(
+    componentModel = MappingConstants.ComponentModel.SPRING,
+    builder = @Builder(disableBuilder = true))
 public abstract class BookingMapper {
 
   @Autowired @Setter private RoomTypeRepository roomTypeRepository;
-  @Autowired @Setter protected BookingTimeConverter bookingTimeConverter;
+  @Autowired @Setter protected BookingDatesConverter bookingDatesConverter;
+  @Autowired @Setter private BookingPriceCalculator bookingPriceCalculator;
 
-  @Mapping(target = "startDate", expression = "java( bookingTimeConverter.mapBookingStartTime(dto.getBookingPeriod().startDate()) )")
-  @Mapping(target = "endDate", expression = "java( bookingTimeConverter.mapBookingEndTime(dto.getBookingPeriod().endDate()) )")
+  @Mapping(
+      target = "startDate",
+      expression = "java( bookingDatesConverter.mapBookingStartTime(dto.getBookingPeriod().startDate()) )")
+  @Mapping(
+      target = "endDate",
+      expression = "java( bookingDatesConverter.mapBookingEndTime(dto.getBookingPeriod().endDate()) )")
   @Mapping(target = "roomType", expression = "java( findRoomTypeById(dto.getRoomTypeId()) )")
   @Mapping(target = "firstName", source = "personData.firstName")
   @Mapping(target = "lastName", source = "personData.lastName")
@@ -37,13 +46,15 @@ public abstract class BookingMapper {
   public abstract Booking mapToEntity(CreateBookingRequestDto dto);
 
   @AfterMapping
-  protected void calculatePriceTotal(@MappingTarget Booking entity, CreateBookingRequestDto dto) {
+  protected void calculatePriceTotal(CreateBookingRequestDto dto, @MappingTarget Booking entity) {
     entity.setPriceTotal(
-        entity.getRoomType().getPricePerNight() * dto.getBookingPeriod().durationInDays());
+        bookingPriceCalculator.calculateBookingPrice(entity.getRoomType(), dto.getBookingPeriod()));
   }
 
   @Mapping(target = "roomDetails", expression = "java( createBookedRoomDetails(entity) )")
   @Mapping(target = "personData", expression = "java( createPersonalData(entity) )")
+  @Mapping(target = "startDate", expression = "java( entity.getStartDate().toLocalDate() )")
+  @Mapping(target = "endDate", expression = "java( entity.getEndDate().toLocalDate() )")
   public abstract BookingDetailsDto mapToDto(Booking entity);
 
   protected RoomType findRoomTypeById(long id) {

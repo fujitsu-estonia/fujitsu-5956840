@@ -24,6 +24,10 @@ public enum BookingStatus {
   /** administrator cancels booking request / started booking */
   CANCELLED_BY_ADMIN;
 
+  /**
+   * Checks if status belongs to cancelled statuses ({@link BookingStatus#CANCELLED_BY_USER} or
+   * {@link BookingStatus#CANCELLED_BY_ADMIN})
+   */
   public boolean isCancelled() {
     return this == CANCELLED_BY_USER || this == CANCELLED_BY_ADMIN;
   }

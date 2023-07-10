@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import static ee.fujitsu.smit.hotel.tools.Constants.ERROR_ID_NOT_NULL;
-import static ee.fujitsu.smit.hotel.tools.Constants.ERROR_ID_NULL;
-import static ee.fujitsu.smit.hotel.tools.Constants.ERROR_REQUIRED;
+import static ee.fujitsu.smit.hotel.tools.constants.Constants.ERROR_ID_NOT_NULL;
+import static ee.fujitsu.smit.hotel.tools.constants.Constants.ERROR_ID_NULL;
+import static ee.fujitsu.smit.hotel.tools.constants.Constants.ERROR_REQUIRED;
 
 @Getter
 @Setter

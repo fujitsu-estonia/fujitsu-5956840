@@ -1,4 +1,4 @@
-package ee.fujitsu.smit.hotel.tools;
+package ee.fujitsu.smit.hotel.tools.constants;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

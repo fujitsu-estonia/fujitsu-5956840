@@ -1,7 +1,7 @@
 package ee.fujitsu.smit.hotel.tools.validation;
 
 import ee.fujitsu.smit.hotel.models.DateRange;
-import ee.fujitsu.smit.hotel.tools.Constants;
+import ee.fujitsu.smit.hotel.tools.constants.Constants;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
@@ -17,6 +17,16 @@ public class DateRangeValidator implements ConstraintValidator<ValidDateRange, D
 
   @Override
   public boolean isValid(DateRange dateRange, ConstraintValidatorContext context) {
+    if (dateRange == null) {
+      return true;
+    }
+    if (dateRange.startDate() == null || dateRange.endDate() == null) {
+      return false;
+    }
+    return isValidInternal(dateRange, context);
+  }
+
+  private boolean isValidInternal(DateRange dateRange, ConstraintValidatorContext context) {
     if (dateRange.startDate().isAfter(dateRange.endDate())) {
       context.disableDefaultConstraintViolation();
       context

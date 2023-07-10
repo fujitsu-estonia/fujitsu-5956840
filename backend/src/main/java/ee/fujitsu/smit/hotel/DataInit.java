@@ -7,7 +7,7 @@ import ee.fujitsu.smit.hotel.enums.BookingStatus;
 import ee.fujitsu.smit.hotel.repositories.BookingRepository;
 import ee.fujitsu.smit.hotel.repositories.RoomRepository;
 import ee.fujitsu.smit.hotel.repositories.RoomTypeRepository;
-import ee.fujitsu.smit.hotel.tools.BookingTimeConverter;
+import ee.fujitsu.smit.hotel.tools.BookingDatesConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -22,7 +22,7 @@ import java.time.temporal.ChronoUnit;
 @RequiredArgsConstructor
 public class DataInit implements CommandLineRunner {
 
-    private final BookingTimeConverter bookingTimeConverter;
+    private final BookingDatesConverter bookingDatesConverter;
     private final RoomTypeRepository roomTypeRepository;
     private final RoomRepository roomRepository;
     private final BookingRepository bookingRepository;
@@ -51,6 +51,6 @@ public class DataInit implements CommandLineRunner {
 
         LocalDate startDate = LocalDate.of(2023, 9, 7);
         LocalDate endDate = LocalDate.of(2023, 9, 9);
-        bookingRepository.save(Booking.builder().startDate(bookingTimeConverter.mapBookingStartTime(startDate)).endDate(bookingTimeConverter.mapBookingEndTime(endDate)).status(BookingStatus.ACCEPTED).roomType(r1.getRoomType()).assignedRoom(r1).priceTotal(r1.getRoomType().getPricePerNight() * ChronoUnit.DAYS.between(startDate, endDate)).firstName("John").lastName("Smith").idCode("50001010017").email("John.Doe@gmail.com").build());
+        bookingRepository.save(Booking.builder().startDate(bookingDatesConverter.mapBookingStartTime(startDate)).endDate(bookingDatesConverter.mapBookingEndTime(endDate)).status(BookingStatus.ACCEPTED).roomType(r1.getRoomType()).assignedRoom(r1).priceTotal(r1.getRoomType().getPricePerNight() * ChronoUnit.DAYS.between(startDate, endDate)).firstName("John").lastName("Smith").idCode("50001010017").email("John.Doe@gmail.com").build());
     }
 }

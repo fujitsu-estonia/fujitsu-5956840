@@ -1,71 +1,56 @@
 package ee.fujitsu.smit.hotel.services;
 
 import ee.fujitsu.smit.hotel.enums.BookingStatus;
-import ee.fujitsu.smit.hotel.exceptions.BookingAlreadyCancelledException;
-import ee.fujitsu.smit.hotel.exceptions.BookingNotCancelledException;
-import ee.fujitsu.smit.hotel.exceptions.NoAvailableRoomsException;
-import ee.fujitsu.smit.hotel.exceptions.NotFoundException;
+import ee.fujitsu.smit.hotel.exceptions.booking.BookingAlreadyCancelledException;
+import ee.fujitsu.smit.hotel.exceptions.booking.BookingNotCancelledException;
 import ee.fujitsu.smit.hotel.models.booking.BookingDetailsDto;
 import ee.fujitsu.smit.hotel.models.booking.CreateBookingRequestDto;
 import ee.fujitsu.smit.hotel.models.booking.SearchBookingsDto;
-import ee.fujitsu.smit.hotel.repositories.BookingRepository;
-import ee.fujitsu.smit.hotel.tools.mappers.BookingMapper;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import lombok.NonNull;
 
 import java.util.List;
 import java.util.UUID;
 
-@Service
-@RequiredArgsConstructor
-@Slf4j
-public class BookingService {
+public interface BookingService {
 
-  private final BookingRepository bookingRepository;
-  private final BookingMapper bookingMapper;
+  /**
+   * Create new booking with status {@link BookingStatus#ACCEPTED ACCEPTED}, if there are available
+   * rooms of required type for given booking period
+   *
+   * @param createBookingRequestDto create booking request data
+   * @return created booking id
+   * @throws ee.fujitsu.smit.hotel.exceptions.NoAvailableRoomsException if there is no room
+   *     available for requested booking period
+   */
+  UUID createBooking(CreateBookingRequestDto createBookingRequestDto);
 
-  @Transactional
-  public UUID createBooking(CreateBookingRequestDto bookingDto) {
-    var entity = bookingMapper.mapToEntity(bookingDto);
-    if (bookingRepository.countAvailableRoomsOfTypeForPeriod(entity) < 1) {
-      throw new NoAvailableRoomsException(entity.getRoomType().getTitle());
-    }
+  /**
+   * Set booking status as {@link BookingStatus#isCancelled() cancelled}.
+   *
+   * @param bookingId id of booking to be cancelled
+   * @param cancelAsUser identifies, who cancels the booking (user or admin)
+   * @throws ee.fujitsu.smit.hotel.exceptions.NotFoundException if no booking can be found by given
+   *     {@code bookingId}
+   * @throws BookingAlreadyCancelledException if given booking was
+   *     already cancelled
+   * @throws BookingNotCancelledException if any other (unexpected)
+   *     problem happens on booking cancellation
+   */
+  void cancelBooking(UUID bookingId, boolean cancelAsUser);
 
-    entity.setStatus(BookingStatus.ACCEPTED);
-    var saved = bookingRepository.saveAndFlush(entity);
-    log.debug("Booking {} saved. Id: {}", bookingDto, saved.getId());
+  /**
+   * Get booking by id.
+   *
+   * @param bookingId booking id
+   * @return founds booking or {@code null} if nothing was found
+   */
+  BookingDetailsDto getBooking(UUID bookingId);
 
-    return saved.getId();
-  }
-
-  public void cancelBooking(UUID bookingId, boolean cancelledByUser) {
-    var entity = bookingRepository.findById(bookingId).orElseThrow(NotFoundException::new);
-    if (entity.getStatus().isCancelled()) {
-      throw new BookingAlreadyCancelledException();
-    }
-
-    try {
-      entity.setStatus(
-          cancelledByUser ? BookingStatus.CANCELLED_BY_USER : BookingStatus.CANCELLED_BY_ADMIN);
-      bookingRepository.saveAndFlush(entity);
-    } catch (Exception ex) {
-      log.debug("Couldn't cancel booking", ex);
-      throw new BookingNotCancelledException();
-    }
-  }
-
-  public BookingDetailsDto getBooking(UUID bookingId) {
-    return bookingRepository
-        .findById(bookingId)
-        .map(bookingMapper::mapToDto)
-        .orElseThrow(NotFoundException::new);
-  }
-
-  public List<BookingDetailsDto> findBookings(SearchBookingsDto searchBookings) {
-    return bookingRepository.findByStatusAndTimeBounds(searchBookings).stream()
-        .map(bookingMapper::mapToDto)
-        .toList();
-  }
+  /**
+   * Find bookings that match given {@link SearchBookingsDto searhc parameters}
+   *
+   * @param searchBookings bookings search parameters
+   * @return found bookings list
+   */
+  @NonNull List<BookingDetailsDto> findBookings(@NonNull SearchBookingsDto searchBookings);
 }

@@ -32,7 +32,7 @@ public class PersonIdentityValidator implements ConstraintValidator<ValidIdentit
 
   @Override
   public boolean isValid(PersonData personData, ConstraintValidatorContext context) {
-    if (personData.isIgnoreIdCode()) {
+    if (personData == null || personData.isIgnoreIdCode()) {
       return true;
     }
     if (idCodeValidationRuleSets.stream()
@@ -65,7 +65,7 @@ public class PersonIdentityValidator implements ConstraintValidator<ValidIdentit
      */
     @Override
     public boolean test(String code) {
-      if (code == null || code.length() > 11) {
+      if (code == null || code.length() != 11) {
         return false;
       }
 

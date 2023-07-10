@@ -1,0 +1,8 @@
+booking:
+  defaults:
+    check-in:
+      hour: 12
+      minute: 0
+    check-out:
+      hour: 10
+      minute: 0

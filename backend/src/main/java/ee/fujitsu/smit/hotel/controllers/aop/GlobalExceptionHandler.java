@@ -1,5 +1,6 @@
-package ee.fujitsu.smit.hotel.exceptions;
+package ee.fujitsu.smit.hotel.controllers.aop;
 
+import ee.fujitsu.smit.hotel.exceptions.BadRequestException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static ee.fujitsu.smit.hotel.tools.Constants.GLOBAL_ERRORS_KEY;
+import static ee.fujitsu.smit.hotel.tools.constants.Constants.GLOBAL_ERRORS_KEY;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -25,6 +26,14 @@ public class GlobalExceptionHandler {
         .map(FieldError::getDefaultMessage)
         .toList();
     return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.BAD_REQUEST);
+  }
+
+  @ExceptionHandler(BadRequestException.class)
+  public final ResponseEntity<Map<String, List<String>>> handleBadRequestExceptions(
+      BadRequestException ex) {
+    List<String> errors = Collections.singletonList(ex.getMessage());
+    return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(),
+        HttpStatus.BAD_REQUEST);
   }
 
   @ExceptionHandler(Exception.class)

@@ -17,9 +17,16 @@ import java.util.UUID;
 public interface BookingRepository
     extends JpaRepository<Booking, UUID>, JpaSpecificationExecutor<Booking> {
 
+  /**
+   * Finds bookings by the given search parameters. All search parameters are nullable and if not
+   * provided (null) then parameter is ignored.
+   *
+   * @param searchBookings bookings search parameters
+   * @return found bookings
+   */
   default List<Booking> findByStatusAndTimeBounds(SearchBookingsDto searchBookings) {
     return findAll(
-        BookingSpecification.withStatusIfProvided(searchBookings.getBookingStatus())
+        BookingSpecification.withOneOfStatusesIfProvided(searchBookings.getBookingStatuses())
             .and(
                 BookingSpecification.startsAfterIfProvided(searchBookings.getFromDate())
                     .and(BookingSpecification.endsBeforeIfProvided(searchBookings.getToDate()))));
@@ -36,8 +43,8 @@ public interface BookingRepository
    *
    * @implNote Works with H2 database. Might not be working with some other DBs
    * @param roomTypeId room type id
-   * @param startTime booking period start date
-   * @param endTime booking period end date
+   * @param startDate booking period start date
+   * @param endDate booking period end date
    * @return number of available (not booked) rooms of given type on given period
    */
   @Query(
@@ -48,10 +55,14 @@ public interface BookingRepository
               + " - "
               + "(SELECT COUNT(*) FROM booking WHERE room_type_id = :roomTypeId "
               + "AND status < 2 " // ACCEPTED or STARTED
-              + "AND start_date <= :endTime AND end_date >= :startTime)")
+              + "AND start_date <= :endDate AND end_date >= :startDate)")
   long countAvailableRoomsOfTypeForPeriod(
-      Long roomTypeId, LocalDateTime startTime, LocalDateTime endTime);
+      Long roomTypeId, LocalDateTime startDate, LocalDateTime endDate);
 
+  /**
+   * @param booking Booking probe. Source for room type, and start and end dates
+   * @see BookingRepository#countAvailableRoomsOfTypeForPeriod(Long, LocalDateTime, LocalDateTime)
+   */
   default long countAvailableRoomsOfTypeForPeriod(Booking booking) {
     return countAvailableRoomsOfTypeForPeriod(
         booking.getRoomType().getId(), booking.getStartDate(), booking.getEndDate());
