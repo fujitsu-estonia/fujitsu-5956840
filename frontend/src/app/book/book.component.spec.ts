@@ -8,6 +8,8 @@ import { BookingDoneComponent } from './booking-done/booking-done.component';
 import { VeeraErrorComponent } from '../shared-components/veera-error/veera-error.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Room } from './room/room.component';
+import { DatePipe } from '@angular/common';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('BookComponent', () => {
   let component: BookComponent;
@@ -15,8 +17,9 @@ describe('BookComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [AngularMaterialModule, BrowserAnimationsModule],
-      declarations: [BookComponent, RoomSearchComponent, BookARoomComponent, BookingDoneComponent, VeeraErrorComponent]
+      imports: [AngularMaterialModule, BrowserAnimationsModule, HttpClientTestingModule],
+      declarations: [BookComponent, RoomSearchComponent, BookARoomComponent, BookingDoneComponent, VeeraErrorComponent],
+      providers: [DatePipe]
     });
     fixture = TestBed.createComponent(BookComponent);
     component = fixture.componentInstance;
@@ -42,9 +45,9 @@ describe('BookComponent', () => {
   });
 
   it('should update booking with the selected room', () => {
-    const room: Room = { type: 'Test Room', price: 100, beds: 2 };
+    const room: Room = { title: 'Test Room', pricePerNight: 100, bedsCount: 2 };
     component.bookRoom(room);
-    expect(component.booking.room).toEqual(room);
+    expect(component.booking.roomDetails).toEqual(room);
   });
 
   it('should update booking with the selected date range', () => {

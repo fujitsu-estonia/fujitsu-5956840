@@ -7,6 +7,7 @@ import { BookingListComponent } from './booking-list/booking-list.component';
 import { BookingSearchComponent } from './booking-search/booking-search.component';
 import { VeeraErrorComponent } from '../shared-components/veera-error/veera-error.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('BookingsComponent', () => {
   let component: BookingsComponent;
@@ -14,7 +15,7 @@ describe('BookingsComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [AngularMaterialModule, RouterTestingModule, BrowserAnimationsModule],
+      imports: [AngularMaterialModule, RouterTestingModule, BrowserAnimationsModule, HttpClientTestingModule],
       declarations: [BookingsComponent, BookingListComponent, BookingSearchComponent, VeeraErrorComponent]
     });
     fixture = TestBed.createComponent(BookingsComponent);
