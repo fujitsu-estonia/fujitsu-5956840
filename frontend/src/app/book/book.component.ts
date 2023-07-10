@@ -24,7 +24,7 @@ export enum BookView {
 export class BookComponent {
 
   formGroup!: FormGroup
-  view: BookView = BookView.book
+  view: BookView = BookView.search
   BookView: typeof BookView = BookView
 
   roomResults!: Room[]

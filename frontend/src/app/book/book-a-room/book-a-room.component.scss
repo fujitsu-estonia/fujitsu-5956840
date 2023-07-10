@@ -63,6 +63,11 @@
 			}
 		}
 	}
+
+
+	.veera-input-padding {
+		padding-left: 0;
+	}
 }
 
 @media only screen and (max-width: $mobile) {
@@ -72,4 +77,5 @@
 			width: 100%;
 		}
 	}
+
 }
