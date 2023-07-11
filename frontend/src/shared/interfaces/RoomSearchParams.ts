@@ -1,5 +1,5 @@
 export interface RoomSearchParams {
-	dateStart: Date | string;
-	dateEnd: Date | string;
+	startDate: Date | string;
+	endDate: Date | string;
 	beds: number;
 }

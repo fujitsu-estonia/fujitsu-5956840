@@ -25,18 +25,18 @@ describe('RoomService', () => {
   });
 
   describe('getRooms', () => {
-    it('should send a GET request to the correct API endpoint with the provided searchParams', () => {
+    it('should send a POST request to the correct API endpoint with the provided searchParams', () => {
       const searchParams: RoomSearchParams = {
         beds: 2,
-        dateStart: new Date(),
-        dateEnd: new Date(),
+        startDate: new Date(),
+        endDate: new Date(),
       };
-      const apiUrl = `http://localhost:8080/api/rooms?&beds=${searchParams.beds}&dateStart=${searchParams.dateStart}&dateEnd=${searchParams.dateEnd}`;
+      const apiUrl = `http://localhost:8080/api/rooms?&beds=${searchParams.beds}&dateStart=${searchParams.startDate}&dateEnd=${searchParams.endDate}`;
 
       service.getRooms(searchParams).subscribe();
 
       const req = httpMock.expectOne(apiUrl);
-      expect(req.request.method).toBe('GET');
+      expect(req.request.method).toBe('POST');
     });
   });
 });

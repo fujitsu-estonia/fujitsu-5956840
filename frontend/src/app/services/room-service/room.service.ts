@@ -23,11 +23,11 @@ export class RoomService {
 
   getRooms(searchParams: RoomSearchParams) {
     const bedsParam = searchParams.beds ? `&beds=${searchParams.beds}` : ''
-    const dateStartParam = searchParams.dateStart ? `&dateStart=${searchParams.dateStart}` : ''
-    const dateEndParam = searchParams.dateEnd ? `&dateEnd=${searchParams.dateEnd}` : ''
+    const dateStartParam = searchParams.startDate ? `&dateStart=${searchParams.startDate}` : ''
+    const dateEndParam = searchParams.endDate ? `&dateEnd=${searchParams.endDate}` : ''
     const apiUrl = this.getApi(`api/rooms?${bedsParam}${dateStartParam}${dateEndParam}`)
 
-    return this.http.get(apiUrl).pipe(
+    return this.http.post(apiUrl, {}).pipe(
       catchError(this.handleError())
     )
   }

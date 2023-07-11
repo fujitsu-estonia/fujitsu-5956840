@@ -34,15 +34,15 @@ export class RoomSearchComponent {
 
     if (this.formGroup.valid) {
       const searchFilter: RoomSearchParams = {
-        dateStart: this.formGroup.get('dateStart')?.value,
-        dateEnd: this.formGroup.get('dateEnd')?.value,
+        startDate: this.formGroup.get('dateStart')?.value,
+        endDate: this.formGroup.get('dateEnd')?.value,
         beds: this.formGroup.get('beds')?.value
       }
 
       this.dateRangeChanged.emit(
         {
-          dateStart: searchFilter.dateStart,
-          dateEnd: searchFilter.dateEnd
+          dateStart: searchFilter.startDate,
+          dateEnd: searchFilter.endDate
         }
       )
 

@@ -84,8 +84,8 @@ export class BookComponent {
 
   searchForRooms(obj: RoomSearchParams) {
     //format dates
-    obj.dateStart = this.datePipe.transform(obj.dateStart, 'yyyy-MM-dd')!
-    obj.dateEnd = this.datePipe.transform(obj.dateEnd, 'yyyy-MM-dd')!
+    obj.startDate = this.datePipe.transform(obj.startDate, 'yyyy-MM-dd')!
+    obj.endDate = this.datePipe.transform(obj.endDate, 'yyyy-MM-dd')!
 
     this.loading = true
     this.hasBeenSearchedOnce = true
