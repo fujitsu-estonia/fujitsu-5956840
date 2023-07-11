@@ -55,8 +55,8 @@ public class BookingServiceImpl implements BookingService {
       entity.setStatus(
           cancelAsUser ? BookingStatus.CANCELLED_BY_USER : BookingStatus.CANCELLED_BY_ADMIN);
       bookingRepository.saveAndFlush(entity);
-    } catch (BookingCancellationDeadlineExceeded ignore) {
-      // ignore
+    } catch (BookingCancellationDeadlineExceeded cancellationDeadlineExceededEx) {
+      throw cancellationDeadlineExceededEx;
     } catch (Exception ex) {
       log.debug("Couldn't cancel booking", ex);
       throw new BookingNotCancelledException();
