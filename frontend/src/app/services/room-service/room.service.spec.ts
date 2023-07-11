@@ -31,7 +31,7 @@ describe('RoomService', () => {
         startDate: new Date(),
         endDate: new Date(),
       };
-      const apiUrl = `http://localhost:8080/api/rooms?&beds=${searchParams.beds}&dateStart=${searchParams.startDate}&dateEnd=${searchParams.endDate}`;
+      const apiUrl = `http://localhost:8080/api/rooms?&beds=${searchParams.beds}&startDate=${searchParams.startDate}&endDate=${searchParams.endDate}`;
 
       service.getRooms(searchParams).subscribe();
 

@@ -50,10 +50,10 @@ The report can be inspected by looking at the index.html file in the coverage fo
 Current coverage (after running `npm run test`):
 ```
 =============================== Coverage summary ===============================
-Statements   : 79.75% ( 256/321 )
-Branches     : 58.88% ( 53/90 )
-Functions    : 82.55% ( 71/86 )
-Lines        : 80.73% ( 243/301 )
+Statements   : 80.61% ( 262/325 )
+Branches     : 58.69% ( 54/92 )
+Functions    : 85.05% ( 74/87 )
+Lines        : 81.63% ( 249/305 )
 ```
 
 ## Running end-to-end tests

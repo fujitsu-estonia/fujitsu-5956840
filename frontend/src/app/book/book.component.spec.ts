@@ -45,7 +45,7 @@ describe('BookComponent', () => {
   });
 
   it('should update booking with the selected room', () => {
-    const room: Room = { title: 'Test Room', pricePerNight: 100, bedsCount: 2 };
+    const room: Room = { title: 'Test Room', pricePerNight: 100, bedsCount: 2, freeRooms: 5 };
     component.bookRoom(room);
     expect(component.booking.roomDetails).toEqual(room);
   });

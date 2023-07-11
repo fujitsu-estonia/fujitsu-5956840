@@ -39,13 +39,11 @@ export class BookingsComponent extends BaseComponent {
     this.bookingId = bookingId
     this.loading = true
     this.error = false
-    console.log("search for booking, ID: ", bookingId)
 
     this.bookingService.getBookingById(bookingId).subscribe({
       next: (booking: Booking) => {
         this.bookings = [booking]
 
-        console.log("booking: ", booking)
         this.loading = false
       },
 

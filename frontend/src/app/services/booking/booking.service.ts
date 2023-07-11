@@ -66,9 +66,9 @@ export class BookingService {
 
   handleError() {
     return (error: any): Observable<any> => {
-      console.log(error)
+      console.error(error)
 
-      return throwError(() => error.message)
+      return throwError(() => error)
     }
   }
 }

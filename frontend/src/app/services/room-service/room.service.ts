@@ -23,8 +23,8 @@ export class RoomService {
 
   getRooms(searchParams: RoomSearchParams) {
     const bedsParam = searchParams.beds ? `&beds=${searchParams.beds}` : ''
-    const dateStartParam = searchParams.startDate ? `&dateStart=${searchParams.startDate}` : ''
-    const dateEndParam = searchParams.endDate ? `&dateEnd=${searchParams.endDate}` : ''
+    const dateStartParam = searchParams.startDate ? `&startDate=${searchParams.startDate}` : ''
+    const dateEndParam = searchParams.endDate ? `&endDate=${searchParams.endDate}` : ''
     const apiUrl = this.getApi(`api/rooms?${bedsParam}${dateStartParam}${dateEndParam}`)
 
     return this.http.post(apiUrl, {}).pipe(
@@ -34,7 +34,7 @@ export class RoomService {
 
   handleError() {
     return (error: any): Observable<any> => {
-      console.log(error)
+      console.error(error)
 
       return throwError(() => error.message)
     }

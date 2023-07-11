@@ -31,6 +31,10 @@
 
 }
 
+.room.sold-out {
+	opacity: 0.6;
+}
+
 @media only screen and (max-width: $desktop) {
 	.room {
 		height: auto;

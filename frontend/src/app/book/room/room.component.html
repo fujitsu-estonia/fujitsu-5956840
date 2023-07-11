@@ -1,5 +1,5 @@
 <div class="room-row d-flex justify-content-center" *ngIf="room">
-	<div class="room">
+	<div class="room" [class.sold-out]="room.freeRooms === 0">
 		<div class="room-img">
 			<img [src]="room.previewPictureUrl" alt="Picture of the room">
 		</div>
@@ -29,10 +29,16 @@
 				</div>
 
 				<div class="room-book my-3 me-0 me-sm-3">
-					<button mat-flat-button color="primary" (click)="bookRoom(room)">
+					<button *ngIf="room.freeRooms > 0; else soldOut" mat-flat-button color="primary"
+						(click)="bookRoom(room)">
 						Broneeri
 						<mat-icon iconPositionEnd>keyboard_arrow_right</mat-icon>
 					</button>
+					<ng-template #soldOut>
+						<button mat-flat-button color="primary" disabled="true">
+							Välja müüdud
+						</button>
+					</ng-template>
 				</div>
 			</div>
 		</div>

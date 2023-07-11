@@ -73,7 +73,7 @@ describe('booking-utils', () => {
 			const booking: Booking = {
 				startDate: new Date(),
 				endDate: new Date(),
-				roomDetails: { title: "test", pricePerNight: 100, description: "test", bedsCount: 2 },
+				roomDetails: { title: "test", pricePerNight: 100, description: "test", bedsCount: 2, freeRooms: 5 },
 			};
 
 			expect(validateBooking(booking)).toBeTruthy();
@@ -82,7 +82,7 @@ describe('booking-utils', () => {
 		it('should return false if booking is missing startDate', () => {
 			const booking: Booking = {
 				endDate: new Date(),
-				roomDetails: { title: "test", pricePerNight: 100, description: "test", bedsCount: 2 },
+				roomDetails: { title: "test", pricePerNight: 100, description: "test", bedsCount: 2, freeRooms: 5 },
 			};
 
 			expect(validateBooking(booking)).toBeFalsy();
@@ -91,7 +91,7 @@ describe('booking-utils', () => {
 		it('should return false if booking is missing endDate', () => {
 			const booking: Booking = {
 				startDate: new Date(),
-				roomDetails: { title: "test", pricePerNight: 100, description: "test", bedsCount: 2 },
+				roomDetails: { title: "test", pricePerNight: 100, description: "test", bedsCount: 2, freeRooms: 5 },
 			};
 
 			expect(validateBooking(booking)).toBeFalsy();
@@ -133,7 +133,7 @@ describe('booking-utils', () => {
 			const booking: Booking = {
 				startDate: new Date('2023-01-01'),
 				endDate: new Date('2023-01-05'),
-				roomDetails: { title: "test", pricePerNight: 100, description: "test", bedsCount: 2 },
+				roomDetails: { title: "test", pricePerNight: 100, description: "test", bedsCount: 2, freeRooms: 5 },
 			};
 
 			expect(calculatePrice(booking)).toBe(400);

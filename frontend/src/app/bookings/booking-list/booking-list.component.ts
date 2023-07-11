@@ -20,6 +20,9 @@ export class BookingListComponent {
 
   BookingStatus: typeof BookingStatus = BookingStatus
 
+  error: boolean = false
+  errorMessage: string = ""
+
   calculatePrice = calculatePrice
 
   constructor(
@@ -34,8 +37,17 @@ export class BookingListComponent {
   }
 
   cancelBooking(booking: Booking) {
-    this.bookingService.cancelBooking(String(booking.id)).subscribe(_ => {
-      this.bookingCanceled.emit()
+    this.bookingService.cancelBooking(String(booking.id)).subscribe({
+      next: (_) => {
+        this.bookingCanceled.emit()
+      },
+      error: (_error) => {
+        this.error = true
+        const threeDaysError = 'Transaction silently rolled back because it has been marked as rollback-only'
+        this.errorMessage = _error.error.errors[0] === threeDaysError ? 'Broneeringut ei saa tühistada kuni 3 päeva enne ööbimise algust!' : _error.error.errors[0]
+
+        document.getElementById('error-msg-booking')?.scrollIntoView({ behavior: 'smooth' })
+      }
     })
   }
 }

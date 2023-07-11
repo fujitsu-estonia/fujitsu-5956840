@@ -45,7 +45,7 @@ describe('BookARoomComponent', () => {
   });
 
   it('should return true when booking has startDate, endDate, and roomDetails', () => {
-    const booking = { startDate: '2023-07-11', endDate: '2023-07-13', roomDetails: { title: "test", bedsCount: 1, pricePerNight: 79 } };
+    const booking = { startDate: '2023-07-11', endDate: '2023-07-13', roomDetails: { title: "test", bedsCount: 1, pricePerNight: 79, freeRooms: 5 } };
 
     const result = component.validateBooking(booking);
 
@@ -56,7 +56,7 @@ describe('BookARoomComponent', () => {
     const booking = {
       startDate: '2023-07-11',
       endDate: '2023-07-13',
-      roomDetails: { title: "test", bedsCount: 2, pricePerNight: 79 }
+      roomDetails: { title: "test", bedsCount: 2, pricePerNight: 79, freeRooms: 5 }
     };
 
     const firstNameControl = new FormControl('John');

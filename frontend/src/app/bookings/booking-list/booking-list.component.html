@@ -4,14 +4,18 @@
 
 <ng-template #results>
 	<div class="booking-list px-4" *ngIf="bookings && bookings.length > 0">
+		<div id="error-msg-booking" *ngIf="error">
+			<h4 class="mb-1 text-center color-error">Broneeringu tühistamine ebaõnnestus</h4>
+			<h4 class="my-0 text-center color-error">{{errorMessage}}</h4>
+		</div>
+
+
 		<h2 *ngIf="!adminMode" class="m-auto mt-5">Minu broneeringud:</h2>
 		<h2 *ngIf="adminMode" class="m-auto mt-5">Viimased broneeringud:</h2>
 		<div class="booking-card my-3 mx-auto row gx-0" *ngFor="let booking of bookings">
 			<div class="booking-room-image col-3">
 				<img [src]="booking.roomDetails?.previewPictureUrl" alt="Picture of the room">
 			</div>
-
-
 			<div class="booking-info col-12 col-xl-4 p-3 pe-0">
 				<h3 class="color-primary my-0">{{booking.startDate | date: 'dd.MM.yyyy' }} - {{booking.endDate | date:
 					'dd.MM.yyyy'}}</h3>
