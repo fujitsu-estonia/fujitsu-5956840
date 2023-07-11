@@ -26,7 +26,7 @@ export class BookingsComponent extends BaseComponent {
   ) {
     super()
 
-    if (this.router.url.includes('admin')) this.adminMode = true
+    if (this.router?.url?.includes('admin')) this.adminMode = true
 
     this.subscriptions.push(this.route.params.subscribe(params => {
       if (params["id"]) {
