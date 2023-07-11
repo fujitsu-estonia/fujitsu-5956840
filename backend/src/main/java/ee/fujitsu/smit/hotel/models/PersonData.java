@@ -35,6 +35,7 @@ public class PersonData {
       type = "boolean",
       description = "Flag to mark if the id code can be left undefined (for example for foreigners)"
   )
+  @Builder.Default
   private boolean ignoreIdCode = false;
 
   @Email

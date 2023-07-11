@@ -1,6 +1,6 @@
-package ee.fujitsu.smit.hotel.tools;
+package ee.fujitsu.smit.hotel.tools.booking;
 
-import ee.fujitsu.smit.hotel.entities.RoomType;
+import ee.fujitsu.smit.hotel.domain.entities.RoomType;
 import ee.fujitsu.smit.hotel.models.DateRange;
 import lombok.NonNull;
 import org.springframework.stereotype.Component;

@@ -1,6 +1,6 @@
 package ee.fujitsu.smit.hotel.tools.mappers;
 
-import ee.fujitsu.smit.hotel.entities.RoomType;
+import ee.fujitsu.smit.hotel.domain.entities.RoomType;
 import ee.fujitsu.smit.hotel.models.RoomDetailsDto;
 import ee.fujitsu.smit.hotel.models.SearchRoomDto;
 import org.mapstruct.Mapper;

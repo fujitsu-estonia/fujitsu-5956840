@@ -1,13 +1,13 @@
-package ee.fujitsu.smit.hotel.entities;
+package ee.fujitsu.smit.hotel.domain.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,27 +17,32 @@ import lombok.Setter;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "room")
+@Table(name = "room_type")
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Room implements Serializable {
+public class RoomType implements Serializable {
 
   @Id
   @Column(nullable = false)
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(name = "room_number")
-  private String roomNumber;
+  @Size(min = 1, max = 512)
+  private String title;
 
-  @ManyToOne
-  @JoinColumn(name = "room_type_id", nullable = false)
-  private RoomType roomType;
+  @Lob
+  private String description;
 
-  /** A note(s) specific to a certain room */
-  @Column(name = "room_notes", length = 2048)
-  private String roomNotes;
+  @Column(name = "beds_count")
+  private Integer bedsCount;
+
+  @Column(name = "price_per_night")
+  private Double pricePerNight;
+
+  @Column(name = "preview_picture_url", length = 2048)
+  private String previewPictureUrl;
+
 }

@@ -1,8 +1,8 @@
 package ee.fujitsu.smit.hotel.repositories;
 
-import ee.fujitsu.smit.hotel.entities.Booking;
-import ee.fujitsu.smit.hotel.entities.Room;
-import ee.fujitsu.smit.hotel.entities.RoomType;
+import ee.fujitsu.smit.hotel.domain.entities.Booking;
+import ee.fujitsu.smit.hotel.domain.entities.Room;
+import ee.fujitsu.smit.hotel.domain.entities.RoomType;
 import ee.fujitsu.smit.hotel.enums.BookingStatus;
 import ee.fujitsu.smit.hotel.models.booking.SearchBookingsDto;
 import org.junit.jupiter.api.BeforeAll;

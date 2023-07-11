@@ -1,7 +1,7 @@
 package ee.fujitsu.smit.hotel.repositories.specs;
 
-import ee.fujitsu.smit.hotel.entities.Booking;
-import ee.fujitsu.smit.hotel.entities.Booking_;
+import ee.fujitsu.smit.hotel.domain.entities.Booking;
+import ee.fujitsu.smit.hotel.domain.entities.Booking_;
 import ee.fujitsu.smit.hotel.enums.BookingStatus;
 import jakarta.annotation.Nullable;
 import org.springframework.data.jpa.domain.Specification;

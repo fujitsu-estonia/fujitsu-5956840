@@ -1,4 +1,4 @@
-package ee.fujitsu.smit.hotel.configs;
+package ee.fujitsu.smit.hotel.tools.properties.helpers;
 
 import lombok.NonNull;
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;

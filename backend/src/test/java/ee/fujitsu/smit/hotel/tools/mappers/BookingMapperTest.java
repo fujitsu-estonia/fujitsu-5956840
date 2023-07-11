@@ -2,8 +2,8 @@ package ee.fujitsu.smit.hotel.tools.mappers;
 
 import ee.fujitsu.smit.hotel.exceptions.NotFoundException;
 import ee.fujitsu.smit.hotel.repositories.RoomTypeRepository;
-import ee.fujitsu.smit.hotel.tools.BookingDatesConverter;
-import ee.fujitsu.smit.hotel.tools.BookingPriceCalculator;
+import ee.fujitsu.smit.hotel.tools.booking.BookingDatesConverter;
+import ee.fujitsu.smit.hotel.tools.booking.BookingPriceCalculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

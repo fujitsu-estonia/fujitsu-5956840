@@ -2,6 +2,7 @@ package ee.fujitsu.smit.hotel.services.impl;
 
 import ee.fujitsu.smit.hotel.enums.BookingStatus;
 import ee.fujitsu.smit.hotel.exceptions.booking.BookingAlreadyCancelledException;
+import ee.fujitsu.smit.hotel.exceptions.booking.BookingCancellationDeadlineExceeded;
 import ee.fujitsu.smit.hotel.exceptions.booking.BookingNotCancelledException;
 import ee.fujitsu.smit.hotel.exceptions.NoAvailableRoomsException;
 import ee.fujitsu.smit.hotel.exceptions.NotFoundException;
@@ -45,20 +46,22 @@ public class BookingServiceImpl implements BookingService {
 
   @Override
   @Transactional
-  public void cancelBooking(UUID bookingId, boolean cancelAsUser) {
+  public boolean cancelBooking(UUID bookingId, boolean cancelAsUser) {
     var entity = bookingRepository.findById(bookingId).orElseThrow(NotFoundException::new);
     if (entity.getStatus().isCancelled()) {
       throw new BookingAlreadyCancelledException();
     }
-
     try {
       entity.setStatus(
           cancelAsUser ? BookingStatus.CANCELLED_BY_USER : BookingStatus.CANCELLED_BY_ADMIN);
       bookingRepository.saveAndFlush(entity);
+    } catch (BookingCancellationDeadlineExceeded ignore) {
+      // ignore
     } catch (Exception ex) {
       log.debug("Couldn't cancel booking", ex);
       throw new BookingNotCancelledException();
     }
+    return true;
   }
 
   @Override

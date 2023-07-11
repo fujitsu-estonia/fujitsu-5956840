@@ -1,5 +1,6 @@
 package ee.fujitsu.smit.hotel.models.booking;
 
+import ee.fujitsu.smit.hotel.domain.entities.Booking;
 import ee.fujitsu.smit.hotel.models.DateRange;
 import ee.fujitsu.smit.hotel.models.PersonData;
 import ee.fujitsu.smit.hotel.tools.validation.ValidDateRange;
@@ -9,7 +10,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-/**  DTO for create {@link ee.fujitsu.smit.hotel.entities.Booking} request */
+/**  DTO for create {@link Booking} request */
 @Setter
 @Getter
 public class CreateBookingRequestDto {

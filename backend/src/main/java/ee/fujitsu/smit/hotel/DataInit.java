@@ -1,13 +1,13 @@
 package ee.fujitsu.smit.hotel;
 
-import ee.fujitsu.smit.hotel.entities.Booking;
-import ee.fujitsu.smit.hotel.entities.Room;
-import ee.fujitsu.smit.hotel.entities.RoomType;
+import ee.fujitsu.smit.hotel.domain.entities.Booking;
+import ee.fujitsu.smit.hotel.domain.entities.Room;
+import ee.fujitsu.smit.hotel.domain.entities.RoomType;
 import ee.fujitsu.smit.hotel.enums.BookingStatus;
 import ee.fujitsu.smit.hotel.repositories.BookingRepository;
 import ee.fujitsu.smit.hotel.repositories.RoomRepository;
 import ee.fujitsu.smit.hotel.repositories.RoomTypeRepository;
-import ee.fujitsu.smit.hotel.tools.BookingDatesConverter;
+import ee.fujitsu.smit.hotel.tools.booking.BookingDatesConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -82,6 +82,8 @@ public class DataInit implements CommandLineRunner {
     createBooking(r25, LocalDate.of(2023, 9, 5), LocalDate.of(2023, 9, 6));
 
     createBooking(r31, LocalDate.of(2023, 10, 5), LocalDate.of(2023, 10, 6));
+
+    createBooking(r14, LocalDate.of(2023, 7, 13), LocalDate.of(2023, 7, 19));
   }
 
   private void createBooking(Room room, LocalDate startDate, LocalDate endDate) {

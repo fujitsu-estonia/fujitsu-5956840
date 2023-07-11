@@ -15,6 +15,9 @@ public class Constants {
   public static final String ERROR_ID_NOT_NULL = "error.id.notNull";
   public static final String ERROR_BOOKING_NOT_CANCELLED = "error.cancelBooking.failed";
   public static final String ERROR_BOOKING_ALREADY_CANCELLED = "error.cancelBooking.alreadyCancelled";
+  public static final String ERROR_BOOKING_CANCELLATION_DEADLINE_EXCEEDED = "error.cancelBooking.overDeadline";
+
+  public static final String ERROR_NO_ROOMS_AVAILABLE_FOR_BOOKING = "error.booking.noRoomsAvailable";
 
   // validation
   public static final String ERROR_ID_CODE_INVALID = "error.invalid_IdCode";

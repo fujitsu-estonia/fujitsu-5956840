@@ -1,4 +1,4 @@
-package ee.fujitsu.smit.hotel.entities;
+package ee.fujitsu.smit.hotel.domain.entities;
 
 import ee.fujitsu.smit.hotel.enums.BookingStatus;
 import jakarta.persistence.Column;

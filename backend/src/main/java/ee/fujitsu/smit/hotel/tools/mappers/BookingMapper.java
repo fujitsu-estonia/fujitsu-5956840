@@ -1,15 +1,15 @@
 package ee.fujitsu.smit.hotel.tools.mappers;
 
-import ee.fujitsu.smit.hotel.entities.Booking;
-import ee.fujitsu.smit.hotel.entities.RoomType;
+import ee.fujitsu.smit.hotel.domain.entities.Booking;
+import ee.fujitsu.smit.hotel.domain.entities.RoomType;
 import ee.fujitsu.smit.hotel.exceptions.NotFoundException;
 import ee.fujitsu.smit.hotel.models.PersonData;
 import ee.fujitsu.smit.hotel.models.booking.BookedRoomDetailsDto;
 import ee.fujitsu.smit.hotel.models.booking.BookingDetailsDto;
 import ee.fujitsu.smit.hotel.models.booking.CreateBookingRequestDto;
 import ee.fujitsu.smit.hotel.repositories.RoomTypeRepository;
-import ee.fujitsu.smit.hotel.tools.BookingDatesConverter;
-import ee.fujitsu.smit.hotel.tools.BookingPriceCalculator;
+import ee.fujitsu.smit.hotel.tools.booking.BookingDatesConverter;
+import ee.fujitsu.smit.hotel.tools.booking.BookingPriceCalculator;
 import lombok.Setter;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Builder;

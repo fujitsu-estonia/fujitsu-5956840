@@ -1,4 +1,6 @@
 booking:
+  cancellation-deadline:
+    days-before-check-in: 3
   defaults:
     check-in:
       hour: 12

@@ -1,7 +1,7 @@
 package ee.fujitsu.smit.hotel.services;
 
-import ee.fujitsu.smit.hotel.entities.Booking;
-import ee.fujitsu.smit.hotel.entities.RoomType;
+import ee.fujitsu.smit.hotel.domain.entities.Booking;
+import ee.fujitsu.smit.hotel.domain.entities.RoomType;
 import ee.fujitsu.smit.hotel.enums.BookingStatus;
 import ee.fujitsu.smit.hotel.exceptions.booking.BookingAlreadyCancelledException;
 import ee.fujitsu.smit.hotel.exceptions.booking.BookingNotCancelledException;

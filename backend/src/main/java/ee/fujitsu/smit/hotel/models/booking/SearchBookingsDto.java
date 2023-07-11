@@ -1,6 +1,7 @@
 package ee.fujitsu.smit.hotel.models.booking;
 
 import ee.fujitsu.smit.hotel.enums.BookingStatus;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
@@ -24,10 +25,10 @@ public class SearchBookingsDto {
 
   @Nullable
   @Singular
-  @Schema(
-      implementation = BookingStatus.class,
-      description = "Search bookings with given statuses only",
-      nullable = true)
+  @ArraySchema(
+      arraySchema =
+          @Schema(description = "Search bookings with given statuses only", nullable = true),
+      schema = @Schema(implementation = BookingStatus.class))
   private List<BookingStatus> bookingStatuses;
 
   @Nullable

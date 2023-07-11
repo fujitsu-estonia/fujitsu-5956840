@@ -1,6 +1,6 @@
 package ee.fujitsu.smit.hotel.repositories;
 
-import ee.fujitsu.smit.hotel.entities.Booking;
+import ee.fujitsu.smit.hotel.domain.entities.Booking;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.assertj.core.api.Condition;

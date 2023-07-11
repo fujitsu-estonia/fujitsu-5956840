@@ -36,7 +36,7 @@ public interface BookingService {
    * @throws BookingNotCancelledException if any other (unexpected)
    *     problem happens on booking cancellation
    */
-  void cancelBooking(UUID bookingId, boolean cancelAsUser);
+  boolean cancelBooking(UUID bookingId, boolean cancelAsUser);
 
   /**
    * Get booking by id.
