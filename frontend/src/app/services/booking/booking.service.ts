@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Booking } from 'src/shared/interfaces/Booking';
 
-interface PostBookingSearchParams {
+export interface PostBookingSearchParams {
   bookingStatus?: "ACCEPTED",
   fromDate?: Date,
   toDate?: Date

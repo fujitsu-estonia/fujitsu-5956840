@@ -40,3 +40,5 @@ export class RoomService {
     }
   }
 }
+
+export { RoomSearchParams };

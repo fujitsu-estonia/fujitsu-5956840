@@ -1,10 +1,10 @@
 import { Booking } from "../interfaces/Booking"
 
-function validateBooking(booking: Booking) {
+export function validateBooking(booking: Booking) {
 	return booking.startDate && booking.endDate && booking.roomDetails
 }
 
-function calculateDiffInDays(startDate: any, endDate: any) {
+export function calculateDiffInDays(startDate: any, endDate: any) {
 	const diffInMs = Math.abs(new Date(endDate).getTime() - new Date(startDate).getTime());
 	return Math.round(diffInMs / (1000 * 60 * 60 * 24));
 }
