@@ -43,7 +43,18 @@ Please make sure that every component/service that you create has passing tests.
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `ng test` or `npm run test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+The report can be inspected by looking at the index.html file in the coverage folder.
+
+Current coverage (after running `npm run test`):
+```
+=============================== Coverage summary ===============================
+Statements   : 79.75% ( 256/321 )
+Branches     : 58.88% ( 53/90 )
+Functions    : 82.55% ( 71/86 )
+Lines        : 80.73% ( 243/301 )
+```
 
 ## Running end-to-end tests
 
