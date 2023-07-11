@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +25,7 @@ public class RoomController {
 
   private final RoomService roomService;
 
-  @GetMapping()
+  @PostMapping()
   @Operation(description = "Find rooms by parameters")
   public List<RoomDetailsDto> findRoomByParameters(final SearchRoomDto searchRoomDto) {
     return roomService.findRoomByParameters(searchRoomDto);
