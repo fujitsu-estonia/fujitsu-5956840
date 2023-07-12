@@ -21,6 +21,13 @@
 					<mat-icon class="me-1">ac_unit</mat-icon>
 					<p class="my-1">Konditsioneer</p>
 				</div>
+
+				<ng-container *ngIf="room.previewPictureUrl?.includes('deluxe')">
+					<div class="d-flex align-items-center">
+						<mat-icon class="me-1">waves</mat-icon>
+						<p class="my-1">Merevaatega rõdu</p>
+					</div>
+				</ng-container>
 			</div>
 
 			<div class="room-booking mx-3 mx-sm-0 mt-3 mt-md-4">

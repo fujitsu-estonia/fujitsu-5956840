@@ -50,7 +50,7 @@ describe('BookingListComponent', () => {
     const errorResponse = {
       error: {
         errors: [
-          'Transaction silently rolled back because it has been marked as rollback-only'
+          'error.cancelBooking.overDeadline'
         ]
       }
     };

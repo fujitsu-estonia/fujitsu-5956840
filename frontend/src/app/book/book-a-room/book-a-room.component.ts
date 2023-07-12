@@ -86,7 +86,7 @@ export class BookARoomComponent {
 
   createBookingPostData(booking: Booking): BookingPost {
     let postData: BookingPost = {
-      roomTypeId: booking.roomDetails?.bedsCount,
+      roomTypeId: booking.roomDetails?.roomTypeId,
       personData: this.formGroup.value,
       bookingPeriod: {
         startDate: this.datePipe.transform(booking.startDate, 'yyyy-MM-dd')!,

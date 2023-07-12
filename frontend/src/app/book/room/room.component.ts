@@ -7,7 +7,8 @@ export interface Room {
   pricePerNight: number;
   previewPictureUrl?: string;
   roomNumber?: any,
-  freeRooms: number
+  freeRooms: number,
+  roomTypeId?: number
 }
 
 @Component({

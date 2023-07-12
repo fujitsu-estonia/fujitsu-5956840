@@ -56,7 +56,7 @@ describe('BookARoomComponent', () => {
     const booking = {
       startDate: '2023-07-11',
       endDate: '2023-07-13',
-      roomDetails: { title: "test", bedsCount: 2, pricePerNight: 79, freeRooms: 5 }
+      roomDetails: { title: "test", bedsCount: 2, pricePerNight: 79, freeRooms: 5, roomTypeId: 2 }
     };
 
     const firstNameControl = new FormControl('John');
