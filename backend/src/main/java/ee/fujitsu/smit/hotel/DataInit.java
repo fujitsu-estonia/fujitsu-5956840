@@ -36,6 +36,15 @@ public class DataInit implements CommandLineRunner {
                 .pricePerNight(98.00)
                 .previewPictureUrl("../../../assets/imgs/single.png")
                 .build());
+    var rt11 =
+        roomTypeRepository.save(
+            RoomType.builder()
+                .title("Ühekohaline Deluxe tuba")
+                .description("Toas on 1 väike voodi, merevaade")
+                .bedsCount(1)
+                .pricePerNight(109.00)
+                .previewPictureUrl("../../../assets/imgs/deluxe-single.png")
+                .build());
     var rt2 =
         roomTypeRepository.save(
             RoomType.builder()
@@ -44,6 +53,15 @@ public class DataInit implements CommandLineRunner {
                 .bedsCount(2)
                 .pricePerNight(148.00)
                 .previewPictureUrl("../../../assets/imgs/double.png")
+                .build());
+    var rt22 =
+        roomTypeRepository.save(
+            RoomType.builder()
+                .title("Kahekohaline Deluxe tuba")
+                .description("Toas on 1 suur 2 kohaline voodi, merevaade")
+                .bedsCount(2)
+                .pricePerNight(162.00)
+                .previewPictureUrl("../../../assets/imgs/deluxe-double.png")
                 .build());
     var rt3 =
         roomTypeRepository.save(
@@ -54,22 +72,46 @@ public class DataInit implements CommandLineRunner {
                 .pricePerNight(197.00)
                 .previewPictureUrl("../../../assets/imgs/triple.png")
                 .build());
+    var rt33 =
+        roomTypeRepository.save(
+            RoomType.builder()
+                .title("Kolmekohaline Deluxe tuba")
+                .description("Toas on 2 voodit, 1 suur 2 kohaline ja 1 väike 1 kohaline, merevaade")
+                .bedsCount(3)
+                .pricePerNight(211.00)
+                .previewPictureUrl("../../../assets/imgs/deluxe-triple.png")
+                .build());
 
     var r11 = roomRepository.save(Room.builder().roomType(rt1).roomNumber("K1001").build());
     var r12 = roomRepository.save(Room.builder().roomType(rt1).roomNumber("K1002").build());
     var r13 = roomRepository.save(Room.builder().roomType(rt1).roomNumber("K1003").build());
     var r14 = roomRepository.save(Room.builder().roomType(rt1).roomNumber("K1004").build());
     var r15 = roomRepository.save(Room.builder().roomType(rt1).roomNumber("K1005").build());
+    var r16 = roomRepository.save(Room.builder().roomType(rt11).roomNumber("K1006").build());
+    var r17 = roomRepository.save(Room.builder().roomType(rt11).roomNumber("K1007").build());
+    var r18 = roomRepository.save(Room.builder().roomType(rt11).roomNumber("K1008").build());
+    var r19 = roomRepository.save(Room.builder().roomType(rt11).roomNumber("K1009").build());
+    var r20 = roomRepository.save(Room.builder().roomType(rt11).roomNumber("K1010").build());
     var r21 = roomRepository.save(Room.builder().roomType(rt2).roomNumber("K2001").build());
     var r22 = roomRepository.save(Room.builder().roomType(rt2).roomNumber("K2002").build());
     var r23 = roomRepository.save(Room.builder().roomType(rt2).roomNumber("K2003").build());
     var r24 = roomRepository.save(Room.builder().roomType(rt2).roomNumber("K2004").build());
     var r25 = roomRepository.save(Room.builder().roomType(rt2).roomNumber("K2005").build());
+    var r26 = roomRepository.save(Room.builder().roomType(rt22).roomNumber("K2006").build());
+    var r27 = roomRepository.save(Room.builder().roomType(rt22).roomNumber("K2007").build());
+    var r28 = roomRepository.save(Room.builder().roomType(rt22).roomNumber("K2008").build());
+    var r29 = roomRepository.save(Room.builder().roomType(rt22).roomNumber("K2009").build());
+    var r30 = roomRepository.save(Room.builder().roomType(rt22).roomNumber("K2010").build());
     var r31 = roomRepository.save(Room.builder().roomType(rt3).roomNumber("K3001").build());
     var r32 = roomRepository.save(Room.builder().roomType(rt3).roomNumber("K3002").build());
     var r33 = roomRepository.save(Room.builder().roomType(rt3).roomNumber("K3003").build());
     var r34 = roomRepository.save(Room.builder().roomType(rt3).roomNumber("K3004").build());
     var r35 = roomRepository.save(Room.builder().roomType(rt3).roomNumber("K3005").build());
+    var r36 = roomRepository.save(Room.builder().roomType(rt33).roomNumber("K3006").build());
+    var r37 = roomRepository.save(Room.builder().roomType(rt33).roomNumber("K3007").build());
+    var r38 = roomRepository.save(Room.builder().roomType(rt33).roomNumber("K3008").build());
+    var r39 = roomRepository.save(Room.builder().roomType(rt33).roomNumber("K3009").build());
+    var r40 = roomRepository.save(Room.builder().roomType(rt33).roomNumber("K3010").build());
 
     createBooking(r11, LocalDate.of(2023, 9, 7), LocalDate.of(2023, 9, 9));
     createBooking(r12, LocalDate.of(2023, 9, 8), LocalDate.of(2023, 9, 9));
@@ -84,6 +126,10 @@ public class DataInit implements CommandLineRunner {
     createBooking(r31, LocalDate.of(2023, 10, 5), LocalDate.of(2023, 10, 6));
 
     createBooking(r14, LocalDate.of(2023, 7, 13), LocalDate.of(2023, 7, 19));
+
+    createBooking(r16, LocalDate.of(2023, 8, 13), LocalDate.of(2023, 8, 15));
+    createBooking(r17, LocalDate.of(2023, 8, 13), LocalDate.of(2023, 8, 19));
+    createBooking(r16, LocalDate.of(2023, 8, 17), LocalDate.of(2023, 7, 19));
   }
 
   private void createBooking(Room room, LocalDate startDate, LocalDate endDate) {
