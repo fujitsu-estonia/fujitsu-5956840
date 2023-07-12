@@ -1,9 +1,11 @@
 package ee.fujitsu.smit.hotel.repositories;
 
 import ee.fujitsu.smit.hotel.domain.entities.Booking;
+import ee.fujitsu.smit.hotel.domain.entities.EntityMeta_;
 import ee.fujitsu.smit.hotel.enums.BookingStatus;
 import ee.fujitsu.smit.hotel.models.booking.SearchBookingsDto;
 import ee.fujitsu.smit.hotel.repositories.specs.BookingSpecification;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -29,7 +31,8 @@ public interface BookingRepository
         BookingSpecification.withOneOfStatusesIfProvided(searchBookings.getBookingStatuses())
             .and(
                 BookingSpecification.startsAfterIfProvided(searchBookings.getFromDate())
-                    .and(BookingSpecification.endsBeforeIfProvided(searchBookings.getToDate()))));
+                    .and(BookingSpecification.endsBeforeIfProvided(searchBookings.getToDate()))),
+        Sort.by(EntityMeta_.CREATED_AT).descending());
   }
 
   /**

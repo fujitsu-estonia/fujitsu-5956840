@@ -5,9 +5,8 @@ import ee.fujitsu.smit.hotel.domain.event_handlers.PreInsertEventHandler;
 import ee.fujitsu.smit.hotel.repositories.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.event.spi.PreInsertEvent;
-import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 @RequiredArgsConstructor
 public class BookingRoomAssigningHandler
     extends AbstractBookingPreDatabaseOperationEventHandler<PreInsertEvent>

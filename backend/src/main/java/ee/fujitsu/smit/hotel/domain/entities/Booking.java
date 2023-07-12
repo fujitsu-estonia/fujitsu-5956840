@@ -29,7 +29,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Booking implements Serializable {
+public class Booking extends EntityMeta implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
