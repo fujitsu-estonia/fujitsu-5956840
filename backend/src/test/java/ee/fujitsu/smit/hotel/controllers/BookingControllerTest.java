@@ -32,7 +32,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
@@ -102,12 +101,12 @@ class BookingControllerTest {
   @Test
   void cancelBooking_whenSuccessfullyCancelled_gives200OK() throws Exception {
     var bookingId = UUID.randomUUID();
-    doNothing().when(bookingService).cancelBooking(eq(bookingId), anyBoolean());
+    doReturn(true).when(bookingService).cancelBooking(eq(bookingId), anyBoolean());
 
     mockMvc
         .perform(MockMvcRequestBuilders.post("/api/booking/cancel/" + bookingId))
         .andExpect(status().isOk())
-        .andExpect(content().string(""));
+        .andExpect(content().string("true"));
   }
 
   @Test
