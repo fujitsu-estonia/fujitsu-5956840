@@ -9,10 +9,18 @@
 	}
 }
 
-
-
 .search {
 	margin-bottom: 23px !important;
+}
+
+::ng-deep .date-range-picker {
+	.mdc-text-field--outlined {
+		pointer-events: none !important;
+	}
+
+	.mat-mdc-floating-label {
+		pointer-events: none !important;
+	}
 }
 
 @media only screen and (max-width: $tablet) {

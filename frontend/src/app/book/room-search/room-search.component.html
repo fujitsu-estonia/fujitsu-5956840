@@ -4,7 +4,7 @@
 			<div class="date-range col-12 col-lg-5">
 				<h5 class="my-0 mb-3">Millal soovite külastada?</h5>
 				<div class="veera-input w-100">
-					<mat-form-field appearance="outline" class="w-100">
+					<mat-form-field appearance="outline" class="w-100 date-range-picker" (click)="picker.open()">
 						<mat-label>Sisesta ajavahemik</mat-label>
 						<mat-date-range-input [rangePicker]="picker" [min]="minDate">
 							<input matStartDate placeholder="Algus kuupäev" formControlName="dateStart">
