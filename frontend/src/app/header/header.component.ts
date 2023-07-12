@@ -13,4 +13,8 @@ export class HeaderComponent {
     this.sidenavToggle.emit();
   }
 
+  routeToHomePage() {
+    window.location.href = '/'
+  }
+
 }
