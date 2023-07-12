@@ -43,7 +43,7 @@ export class BookingListComponent {
       },
       error: (_error) => {
         this.error = true
-        const threeDaysError = 'Transaction silently rolled back because it has been marked as rollback-only'
+        const threeDaysError = 'error.cancelBooking.overDeadline'
         this.errorMessage = _error.error.errors[0] === threeDaysError ? 'Broneeringut ei saa tühistada kuni 3 päeva enne ööbimise algust!' : _error.error.errors[0]
 
         document.getElementById('error-msg-booking')?.scrollIntoView({ behavior: 'smooth' })
