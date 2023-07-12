@@ -3,7 +3,7 @@
 - Download Docker Desktop (https://www.docker.com/products/docker-desktop/)
 - Open Powershell (Windows) or Terminal (Mac/Linux)
 - Navigate to the project's distribution folder via command line (eg. `cd .../fujitsu-5956840/distribution`)
-- Run `docker compose up` (may take several for initial boot-up to complete)
+- Run `docker compose up` (may take several minutes for initial boot-up to complete)
 - open http://localhost:8081/ from your browser
 - CTRL + C in Terminal/Powershell to close the application (run `docker compose up` to start the app again)
 
