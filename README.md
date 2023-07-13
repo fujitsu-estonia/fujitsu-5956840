@@ -8,6 +8,7 @@
 - Navigate to the project's distribution folder via command line (eg. `cd .../fujitsu-5956840/distribution`)
 - Run `docker compose up` (may take several minutes for initial boot-up to complete)
 - Open http://localhost:8081/ from your browser
+  - API specifications (Swagger) are accessible from http://localhost:8080/swagger-ui/index.html
 - CTRL + C in Terminal/Powershell to close the application (run `docker compose up` to start the app again)
 
 ### Eesti
@@ -18,6 +19,7 @@
 - Navigeeri projekti "distribution" kausta käsurealt (eg. `cd .../fujitsu-5956840/distribution`)
 - Jooksuta käsku `docker compose up` (võib võtta mitu minutit esmasel käivitusel)
 - Ava http://localhost:8081/ oma brauseris
+    - API spetsifikatsioonid (Swagger) on kättesaadaval aadressilt http://localhost:8080/swagger-ui/index.html
 - CTRL + C Terminali või Powershell aknas katkestab rakenduse (rakenduse uuesti käivitamiseks jooksuta `docker compose up` käsureal)
 
 ## Live application
