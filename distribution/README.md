@@ -1,3 +1,5 @@
+## Hosting the application
+
 ### English
 - Download the projcet as a zip file and extract it to a fitting location
     - alternatively clone the repo to your computer via git
