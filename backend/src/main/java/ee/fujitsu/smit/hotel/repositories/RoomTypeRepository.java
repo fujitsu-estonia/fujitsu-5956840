@@ -15,13 +15,39 @@ public interface RoomTypeRepository extends JpaRepository<RoomType, Long> {
   @Query(
       nativeQuery = true,
       value =
-          "SELECT room_type.id as roomTypeId, room_type.title, room_type.description, room_type.beds_count as bedsCount, room_type.price_per_night as pricePerNight, room_type.preview_picture_url as previewPictureUrl, all_rooms as allRooms, booking.booked_rooms as bookedRooms\n"
-              + "FROM \n"
-              + "      (SELECT room.room_type_id as id, room_type.title, room_type.description, room_type.beds_count, room_type.price_per_night, room_type.preview_picture_url, COUNT(room.room_type_id)  as all_rooms, FROM room \n"
-              + "       INNER JOIN room_type ON room_type.id=room .room_type_id WHERE beds_count = :bedsCount OR :bedsCount IS NULL GROUP BY room_type_id) room_type \n"
-              + "LEFT JOIN \n"
-              + "(SELECT room_type_id, count(room_type_id) as booked_rooms FROM booking WHERE booking.status < 2 and start_date <= :endDate AND end_date >= :startDate GROUP BY room_type_id) as booking\n"
-              + "ON room_type .id=booking.room_type_id ")
+          """
+      SELECT
+        room_type.id as roomTypeId,
+        room_type.title,
+        room_type.description,
+        room_type.beds_count as bedsCount,
+        room_type.price_per_night as pricePerNight,
+        room_type.preview_picture_url as previewPictureUrl,
+        all_rooms as allRooms,
+        booking.booked_rooms as bookedRooms
+      FROM (
+        SELECT
+          room.room_type_id as id,
+          room_type.title,
+          room_type.description,
+          room_type.beds_count,
+          room_type.price_per_night,
+          room_type.preview_picture_url,
+          COUNT(room.room_type_id) as all_rooms
+        FROM room
+        INNER JOIN room_type ON room_type.id=room.room_type_id
+        WHERE beds_count = :bedsCount OR :bedsCount IS NULL
+        GROUP BY room_type_id
+      ) room_type
+      LEFT JOIN (
+        SELECT
+          room_type_id,
+          COUNT(room_type_id) as booked_rooms
+        FROM booking
+        WHERE booking.status < 2
+          AND start_date <= :endDate AND end_date >= :startDate
+        GROUP BY room_type_id
+      ) AS booking ON room_type.id=booking.room_type_id""")
   List<RoomTypeExtended> getAvailableRoomTypesByBedsCountForPeriod(
       Integer bedsCount, LocalDate startDate, LocalDate endDate);
 }

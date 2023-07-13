@@ -1,7 +1,15 @@
 package ee.fujitsu.smit.hotel.repositories.models;
 
-import java.sql.NClob;
+import ee.fujitsu.smit.hotel.repositories.RoomTypeRepository;
 
+import java.sql.NClob;
+import java.time.LocalDate;
+
+/**
+ * Interface describes return columns of {@link
+ * RoomTypeRepository#getAvailableRoomTypesByBedsCountForPeriod(Integer, LocalDate, LocalDate)}
+ * query.
+ */
 public interface RoomTypeExtended {
   Long getRoomTypeId();
 

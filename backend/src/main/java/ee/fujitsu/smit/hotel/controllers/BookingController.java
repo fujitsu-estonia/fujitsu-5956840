@@ -111,16 +111,6 @@ public class BookingController {
             content =
                 @Content(
                     mediaType = APPLICATION_JSON_VALUE,
-                    schema = @Schema(implementation = ErrorsDto.class))),
-        @ApiResponse(
-            description =
-                "Booking could not be cancelled for unknown reason. Error code: '"
-                    + Constants.ERROR_BOOKING_NOT_CANCELLED
-                    + "'",
-            responseCode = "500",
-            content =
-                @Content(
-                    mediaType = APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = ErrorsDto.class)))
       })
   public boolean cancelBooking(
@@ -190,7 +180,8 @@ public class BookingController {
                           @ArraySchema(
                               arraySchema = @Schema(description = "found bookings list"),
                               schema = @Schema(implementation = BookingDetailsDto.class)))))
-  public List<BookingDetailsDto> searchBookings(@RequestBody SearchBookingsDto searchBookingsDto) {
+  public List<BookingDetailsDto> searchBookings(
+      @RequestBody @Valid SearchBookingsDto searchBookingsDto) {
     return bookingService.findBookings(searchBookingsDto);
   }
 }

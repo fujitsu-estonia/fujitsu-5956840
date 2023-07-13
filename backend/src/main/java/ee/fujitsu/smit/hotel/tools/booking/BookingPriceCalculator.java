@@ -1,7 +1,7 @@
 package ee.fujitsu.smit.hotel.tools.booking;
 
 import ee.fujitsu.smit.hotel.domain.entities.RoomType;
-import ee.fujitsu.smit.hotel.models.DateRange;
+import ee.fujitsu.smit.hotel.models.booking.DateRange;
 import lombok.NonNull;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +17,11 @@ public class BookingPriceCalculator {
    */
   public Double calculateBookingPrice(
       @NonNull RoomType roomType, @NonNull DateRange bookingPeriod) {
-    return roomType.getPricePerNight() * bookingPeriod.durationInDays();
+    return calculateBookingPrice(roomType, bookingPeriod.durationInDays());
+  }
+
+  public Double calculateBookingPrice(
+      @NonNull RoomType roomType, long durationInDays) {
+    return roomType.getPricePerNight() * durationInDays;
   }
 }

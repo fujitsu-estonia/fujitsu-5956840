@@ -11,7 +11,9 @@ import org.springframework.stereotype.Component;
 
 /**
  * Sets up Hibernate Database Events listeners, which will perform additional checks/operations when
- * event is triggered.
+ * event is triggered. Note that from within Event Handlers the usage of {@link
+ * jakarta.persistence.EntityManager} and repositories may be causing various problems (i.e.
+ * StackOverflowException), thus should be done with utmost care.
  *
  * <p>Inspired by <a href="https://github.com/psinghal04/hibernate-events-example">this</a>
  */

@@ -1,11 +1,8 @@
 package ee.fujitsu.smit.hotel.services.impl;
 
 import ee.fujitsu.smit.hotel.enums.BookingStatus;
-import ee.fujitsu.smit.hotel.exceptions.booking.BookingAlreadyCancelledException;
-import ee.fujitsu.smit.hotel.exceptions.booking.BookingCancellationDeadlineExceeded;
-import ee.fujitsu.smit.hotel.exceptions.booking.BookingNotCancelledException;
-import ee.fujitsu.smit.hotel.exceptions.NoAvailableRoomsException;
 import ee.fujitsu.smit.hotel.exceptions.NotFoundException;
+import ee.fujitsu.smit.hotel.exceptions.booking.BookingAlreadyCancelledException;
 import ee.fujitsu.smit.hotel.models.booking.BookingDetailsDto;
 import ee.fujitsu.smit.hotel.models.booking.CreateBookingRequestDto;
 import ee.fujitsu.smit.hotel.models.booking.SearchBookingsDto;
@@ -28,16 +25,16 @@ public class BookingServiceImpl implements BookingService {
 
   private final BookingRepository bookingRepository;
   private final BookingMapper bookingMapper;
+  private final BookingRoomAssigner roomAssigner;
 
   @Override
   @Transactional
   public UUID createBooking(CreateBookingRequestDto createBookingRequestDto) {
     var entity = bookingMapper.mapToEntity(createBookingRequestDto);
-    if (bookingRepository.countAvailableRoomsOfTypeForPeriod(entity) < 1) {
-      throw new NoAvailableRoomsException(entity.getRoomType().getTitle());
-    }
-
     entity.setStatus(BookingStatus.ACCEPTED);
+
+    roomAssigner.assignAvailableRoom(entity);
+
     var saved = bookingRepository.saveAndFlush(entity);
     log.debug("Booking {} saved. Id: {}", createBookingRequestDto, saved.getId());
 
@@ -51,16 +48,8 @@ public class BookingServiceImpl implements BookingService {
     if (entity.getStatus().isCancelled()) {
       throw new BookingAlreadyCancelledException();
     }
-    try {
-      entity.setStatus(
-          cancelAsUser ? BookingStatus.CANCELLED_BY_USER : BookingStatus.CANCELLED_BY_ADMIN);
-      bookingRepository.saveAndFlush(entity);
-    } catch (BookingCancellationDeadlineExceeded cancellationDeadlineExceededEx) {
-      throw cancellationDeadlineExceededEx;
-    } catch (Exception ex) {
-      log.debug("Couldn't cancel booking", ex);
-      throw new BookingNotCancelledException();
-    }
+    entity.setStatusCancelled(cancelAsUser);
+    bookingRepository.saveAndFlush(entity);
     return true;
   }
 

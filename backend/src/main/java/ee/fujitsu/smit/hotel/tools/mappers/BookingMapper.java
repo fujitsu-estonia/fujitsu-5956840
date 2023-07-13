@@ -17,11 +17,13 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.ReportingPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Mapper(
     componentModel = MappingConstants.ComponentModel.SPRING,
-    builder = @Builder(disableBuilder = true))
+    builder = @Builder(disableBuilder = true),
+    unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public abstract class BookingMapper {
 
   @Autowired @Setter private RoomTypeRepository roomTypeRepository;
@@ -30,19 +32,17 @@ public abstract class BookingMapper {
 
   @Mapping(
       target = "startDate",
-      expression = "java( bookingDatesConverter.mapBookingStartTime(dto.getBookingPeriod().startDate()) )")
+      expression =
+          "java( bookingDatesConverter.mapBookingStartTime(dto.getBookingPeriod().startDate()) )")
   @Mapping(
       target = "endDate",
-      expression = "java( bookingDatesConverter.mapBookingEndTime(dto.getBookingPeriod().endDate()) )")
+      expression =
+          "java( bookingDatesConverter.mapBookingEndTime(dto.getBookingPeriod().endDate()) )")
   @Mapping(target = "roomType", expression = "java( findRoomTypeById(dto.getRoomTypeId()) )")
   @Mapping(target = "firstName", source = "personData.firstName")
   @Mapping(target = "lastName", source = "personData.lastName")
   @Mapping(target = "idCode", source = "personData.idCode")
   @Mapping(target = "email", source = "personData.email")
-  @Mapping(target = "id", ignore = true)
-  @Mapping(target = "status", ignore = true)
-  @Mapping(target = "priceTotal", ignore = true)
-  @Mapping(target = "assignedRoom", ignore = true)
   public abstract Booking mapToEntity(CreateBookingRequestDto dto);
 
   @AfterMapping

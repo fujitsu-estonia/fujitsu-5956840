@@ -3,6 +3,7 @@ package ee.fujitsu.smit.hotel.services;
 import ee.fujitsu.smit.hotel.enums.BookingStatus;
 import ee.fujitsu.smit.hotel.exceptions.booking.BookingAlreadyCancelledException;
 import ee.fujitsu.smit.hotel.exceptions.booking.BookingNotCancelledException;
+import ee.fujitsu.smit.hotel.exceptions.room.NoAvailableRoomsException;
 import ee.fujitsu.smit.hotel.models.booking.BookingDetailsDto;
 import ee.fujitsu.smit.hotel.models.booking.CreateBookingRequestDto;
 import ee.fujitsu.smit.hotel.models.booking.SearchBookingsDto;
@@ -19,7 +20,7 @@ public interface BookingService {
    *
    * @param createBookingRequestDto create booking request data
    * @return created booking id
-   * @throws ee.fujitsu.smit.hotel.exceptions.NoAvailableRoomsException if there is no room
+   * @throws NoAvailableRoomsException if there is no room
    *     available for requested booking period
    */
   UUID createBooking(CreateBookingRequestDto createBookingRequestDto);

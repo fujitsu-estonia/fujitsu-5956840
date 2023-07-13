@@ -6,7 +6,7 @@ import ee.fujitsu.smit.hotel.enums.BookingStatus;
 import ee.fujitsu.smit.hotel.exceptions.NotFoundException;
 import ee.fujitsu.smit.hotel.exceptions.booking.BookingAlreadyCancelledException;
 import ee.fujitsu.smit.hotel.exceptions.booking.BookingNotCancelledException;
-import ee.fujitsu.smit.hotel.models.DateRange;
+import ee.fujitsu.smit.hotel.models.booking.DateRange;
 import ee.fujitsu.smit.hotel.models.PersonData;
 import ee.fujitsu.smit.hotel.models.booking.BookedRoomDetailsDto;
 import ee.fujitsu.smit.hotel.models.booking.BookingDetailsDto;
@@ -191,7 +191,7 @@ class BookingControllerTest {
   @Test
   void searchBookings_willReturnResults() throws Exception {
     var bookingDetails = bookingDetailsDto(UUID.randomUUID());
-    var bookingsSearch = SearchBookingsDto.builder().bookingStatus(BookingStatus.ACCEPTED).build();
+    var bookingsSearch = new SearchBookingsDto();
     doReturn(List.of(bookingDetails)).when(bookingService).findBookings(bookingsSearch);
 
     var content = objectMapper.writeValueAsString(bookingsSearch);

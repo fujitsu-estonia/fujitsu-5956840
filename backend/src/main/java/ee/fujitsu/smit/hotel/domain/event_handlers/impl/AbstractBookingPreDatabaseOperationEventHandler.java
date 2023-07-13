@@ -4,8 +4,10 @@ import ee.fujitsu.smit.hotel.domain.entities.Booking;
 import org.hibernate.event.spi.AbstractPreDatabaseOperationEvent;
 
 /**
- * Database Operation {@link AbstractPreDatabaseOperationEvent pre-event} for {@link Booking} entities only.
- * @param <T>
+ * Database Operation {@link AbstractPreDatabaseOperationEvent pre-event} for {@link Booking}
+ * entities only.
+ *
+ * @param <T> event type
  */
 public abstract class AbstractBookingPreDatabaseOperationEventHandler<
     T extends AbstractPreDatabaseOperationEvent> {
@@ -22,5 +24,4 @@ public abstract class AbstractBookingPreDatabaseOperationEventHandler<
   }
 
   protected abstract boolean handleEvent(Booking entity, T event);
-
 }

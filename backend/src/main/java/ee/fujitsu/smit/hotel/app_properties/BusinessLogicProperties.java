@@ -1,6 +1,6 @@
-package ee.fujitsu.smit.hotel.tools.properties;
+package ee.fujitsu.smit.hotel.app_properties;
 
-import ee.fujitsu.smit.hotel.tools.properties.dto.BookingsProperties;
+import ee.fujitsu.smit.hotel.app_properties.dto.BookingsProperties;
 
 /**
  * Application business logic related properties defined in separate file. File should be of Yaml

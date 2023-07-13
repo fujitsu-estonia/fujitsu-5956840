@@ -2,8 +2,8 @@ package ee.fujitsu.smit.hotel.tools.booking;
 
 import ee.fujitsu.smit.hotel.configs.BusinessLogicPropertiesConfig;
 import ee.fujitsu.smit.hotel.domain.entities.Booking;
-import ee.fujitsu.smit.hotel.tools.properties.BusinessLogicProperties;
-import ee.fujitsu.smit.hotel.tools.properties.dto.Time;
+import ee.fujitsu.smit.hotel.app_properties.BusinessLogicProperties;
+import ee.fujitsu.smit.hotel.app_properties.dto.Time;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;

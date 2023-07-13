@@ -1,11 +1,11 @@
 package ee.fujitsu.smit.hotel.models.booking;
 
 import ee.fujitsu.smit.hotel.domain.entities.Booking;
-import ee.fujitsu.smit.hotel.models.DateRange;
 import ee.fujitsu.smit.hotel.models.PersonData;
 import ee.fujitsu.smit.hotel.tools.validation.ValidDateRange;
 import ee.fujitsu.smit.hotel.tools.validation.ValidIdentity;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +20,7 @@ public class CreateBookingRequestDto {
   private long roomTypeId;
 
   @NotNull
+  @Valid
   @ValidDateRange
   @Schema(
       type = "object",

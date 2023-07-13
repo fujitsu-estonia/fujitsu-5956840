@@ -6,8 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class ProovitooHankeNr265217ApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
-
+  @Test
+  @SuppressWarnings("java:S2699")
+  void contextLoads() {}
 }

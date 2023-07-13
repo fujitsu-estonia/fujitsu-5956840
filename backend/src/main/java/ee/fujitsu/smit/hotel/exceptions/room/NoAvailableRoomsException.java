@@ -1,5 +1,6 @@
-package ee.fujitsu.smit.hotel.exceptions;
+package ee.fujitsu.smit.hotel.exceptions.room;
 
+import ee.fujitsu.smit.hotel.exceptions.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 

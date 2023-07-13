@@ -68,4 +68,8 @@ public class Booking extends EntityMeta implements Serializable {
   @Email
   private String email;
 
+  public void setStatusCancelled(boolean cancelledByUser) {
+    status = cancelledByUser ? BookingStatus.CANCELLED_BY_USER : BookingStatus.CANCELLED_BY_ADMIN;
+  }
+
 }

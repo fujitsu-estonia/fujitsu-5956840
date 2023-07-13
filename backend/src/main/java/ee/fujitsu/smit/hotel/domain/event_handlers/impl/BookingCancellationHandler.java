@@ -3,9 +3,9 @@ package ee.fujitsu.smit.hotel.domain.event_handlers.impl;
 import ee.fujitsu.smit.hotel.domain.entities.Booking;
 import ee.fujitsu.smit.hotel.domain.event_handlers.PreUpdateEventHandler;
 import ee.fujitsu.smit.hotel.enums.BookingStatus;
-import ee.fujitsu.smit.hotel.exceptions.booking.BookingCancellationDeadlineExceeded;
-import ee.fujitsu.smit.hotel.tools.properties.BusinessLogicProperties;
-import ee.fujitsu.smit.hotel.tools.properties.dto.CancellationDeadline;
+import ee.fujitsu.smit.hotel.exceptions.booking.BookingCancellationDeadlineExceededException;
+import ee.fujitsu.smit.hotel.app_properties.BusinessLogicProperties;
+import ee.fujitsu.smit.hotel.app_properties.dto.CancellationDeadline;
 import org.hibernate.event.spi.PreUpdateEvent;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +15,7 @@ import java.util.Arrays;
 
 /**
  * If the captured {@link Booking} update is booking cancellation, handler perform check, whether
- * the booking can be cancelled according to business rules ({@link CancellationDeadline}).
+ * the booking can be cancelled according to business rules (see {@link CancellationDeadline}).
  */
 @Component
 public class BookingCancellationHandler
@@ -53,7 +53,7 @@ public class BookingCancellationHandler
     var timeUntilCheckIn = Duration.between(LocalDateTime.now(), entity.getStartDate());
 
     if (timeUntilCheckIn.toDays() < cancellationDeadline.daysBeforeCheckIn()) {
-      throw new BookingCancellationDeadlineExceeded();
+      throw new BookingCancellationDeadlineExceededException();
     }
   }
 }

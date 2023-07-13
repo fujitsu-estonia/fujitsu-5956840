@@ -1,17 +1,18 @@
 package ee.fujitsu.smit.hotel.services;
 
 import ee.fujitsu.smit.hotel.domain.entities.Booking;
+import ee.fujitsu.smit.hotel.domain.entities.Room;
 import ee.fujitsu.smit.hotel.domain.entities.RoomType;
 import ee.fujitsu.smit.hotel.enums.BookingStatus;
-import ee.fujitsu.smit.hotel.exceptions.booking.BookingAlreadyCancelledException;
-import ee.fujitsu.smit.hotel.exceptions.booking.BookingNotCancelledException;
-import ee.fujitsu.smit.hotel.exceptions.NoAvailableRoomsException;
 import ee.fujitsu.smit.hotel.exceptions.NotFoundException;
-import ee.fujitsu.smit.hotel.models.DateRange;
+import ee.fujitsu.smit.hotel.exceptions.booking.BookingAlreadyCancelledException;
+import ee.fujitsu.smit.hotel.exceptions.room.NoAvailableRoomsException;
+import ee.fujitsu.smit.hotel.models.booking.DateRange;
 import ee.fujitsu.smit.hotel.models.PersonData;
 import ee.fujitsu.smit.hotel.models.booking.CreateBookingRequestDto;
 import ee.fujitsu.smit.hotel.models.booking.SearchBookingsDto;
 import ee.fujitsu.smit.hotel.repositories.BookingRepository;
+import ee.fujitsu.smit.hotel.services.impl.BookingRoomAssigner;
 import ee.fujitsu.smit.hotel.services.impl.BookingServiceImpl;
 import ee.fujitsu.smit.hotel.tools.mappers.BookingMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,6 +42,7 @@ class BookingServiceTest {
 
   @MockBean private BookingRepository bookingRepository;
   @MockBean private BookingMapper bookingMapper;
+  @MockBean private BookingRoomAssigner roomAssigner;
 
   private final long roomTypeId = 1;
   private BookingService bookingService;
@@ -64,12 +66,12 @@ class BookingServiceTest {
               return booking;
             });
 
-    bookingService = new BookingServiceImpl(bookingRepository, bookingMapper);
+    bookingService = new BookingServiceImpl(bookingRepository, bookingMapper, roomAssigner);
   }
 
   @Test
   void createBooking_whenNoRoomsAvailable_throwsNoAvailableRoomsException() {
-    doReturn(0L).when(bookingRepository).countAvailableRoomsOfTypeForPeriod(any(Booking.class));
+    doThrow(NoAvailableRoomsException.class).when(roomAssigner).assignAvailableRoom(any(Booking.class));
 
     var createBookingRequest = createBookingReq();
 
@@ -79,8 +81,6 @@ class BookingServiceTest {
 
   @Test
   void createBooking_newBookingGetsStatusAccepted() {
-    doReturn(1L).when(bookingRepository).countAvailableRoomsOfTypeForPeriod(any(Booking.class));
-
     var testBookingId = UUID.randomUUID();
     var savedBookingRef = new AtomicReference<Booking>();
     when(bookingRepository.saveAndFlush(any(Booking.class)))
@@ -97,6 +97,34 @@ class BookingServiceTest {
 
     assertEquals(testBookingId, savedBookingId);
     assertEquals(BookingStatus.ACCEPTED, savedBookingRef.get().getStatus());
+  }
+
+  @Test
+  void createBooking_newBookingGetsRoomAssigned() {
+    var testBookingId = UUID.randomUUID();
+    var testRoom = Room.builder().id(1L).roomNumber("1").build();
+    var savedBookingRef = new AtomicReference<Booking>();
+
+    doAnswer(inv -> {
+      var arg = inv.getArgument(0, Booking.class);
+      arg.setAssignedRoom(testRoom);
+      return null;
+    }).when(roomAssigner).assignAvailableRoom(any(Booking.class));
+
+    when(bookingRepository.saveAndFlush(any(Booking.class)))
+        .then(
+            inv -> {
+              var arg = inv.getArgument(0, Booking.class);
+              savedBookingRef.set(arg);
+              arg.setId(testBookingId);
+              return arg;
+            });
+
+    var createBookingRequest = createBookingReq();
+    var savedBookingId = bookingService.createBooking(createBookingRequest);
+
+    assertEquals(testBookingId, savedBookingId);
+    assertEquals(testRoom.getId(), savedBookingRef.get().getAssignedRoom().getId());
   }
 
   @Test
@@ -126,18 +154,6 @@ class BookingServiceTest {
     assertThrows(
         BookingAlreadyCancelledException.class,
         () -> bookingService.cancelBooking(cancelledBookingId, true));
-  }
-
-  @Test
-  void cancelBooking_whenUnexpectedError_throwsBookingNotCancelledException() {
-    var bookingId = UUID.randomUUID();
-    var booking = Booking.builder().id(bookingId).status(BookingStatus.ACCEPTED).build();
-
-    doReturn(Optional.of(booking)).when(bookingRepository).findById(bookingId);
-    doThrow(RuntimeException.class).when(bookingRepository).saveAndFlush(any(Booking.class));
-
-    assertThrows(
-        BookingNotCancelledException.class, () -> bookingService.cancelBooking(bookingId, true));
   }
 
   @ParameterizedTest
@@ -179,9 +195,12 @@ class BookingServiceTest {
 
     var search =
         SearchBookingsDto.builder()
-            .bookingStatus(BookingStatus.ACCEPTED)
-            .fromDate(LocalDate.of(2023, 4, 4))
-            .toDate(LocalDate.of(2023, 5, 5))
+            .filterBy(
+                SearchBookingsDto.FilterParameters.builder()
+                    .bookingStatus(BookingStatus.ACCEPTED)
+                    .fromDate(LocalDate.of(2023, 4, 4))
+                    .toDate(LocalDate.of(2023, 5, 5))
+                    .build())
             .build();
 
     when(bookingRepository.findByStatusAndTimeBounds(search)).thenReturn(List.of(booking));

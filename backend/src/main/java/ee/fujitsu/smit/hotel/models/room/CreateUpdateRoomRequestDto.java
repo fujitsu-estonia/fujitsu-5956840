@@ -1,4 +1,4 @@
-package ee.fujitsu.smit.hotel.models;
+package ee.fujitsu.smit.hotel.models.room;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.validation.constraints.NotBlank;

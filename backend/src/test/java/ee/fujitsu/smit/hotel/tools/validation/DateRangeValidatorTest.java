@@ -1,6 +1,6 @@
 package ee.fujitsu.smit.hotel.tools.validation;
 
-import ee.fujitsu.smit.hotel.models.DateRange;
+import ee.fujitsu.smit.hotel.models.booking.DateRange;
 import ee.fujitsu.smit.hotel.tools.constants.Constants;
 import org.junit.jupiter.api.Test;
 

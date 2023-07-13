@@ -8,6 +8,7 @@ import ee.fujitsu.smit.hotel.repositories.BookingRepository;
 import ee.fujitsu.smit.hotel.repositories.RoomRepository;
 import ee.fujitsu.smit.hotel.repositories.RoomTypeRepository;
 import ee.fujitsu.smit.hotel.tools.booking.BookingDatesConverter;
+import ee.fujitsu.smit.hotel.tools.booking.BookingPriceCalculator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,7 @@ import java.time.temporal.ChronoUnit;
 public class DataInit implements CommandLineRunner {
 
   private final BookingDatesConverter bookingDatesConverter;
+  private final BookingPriceCalculator bookingPriceCalculator;
   private final RoomTypeRepository roomTypeRepository;
   private final RoomRepository roomRepository;
   private final BookingRepository bookingRepository;
@@ -86,32 +88,32 @@ public class DataInit implements CommandLineRunner {
     var r12 = roomRepository.save(Room.builder().roomType(rt1).roomNumber("K1002").build());
     var r13 = roomRepository.save(Room.builder().roomType(rt1).roomNumber("K1003").build());
     var r14 = roomRepository.save(Room.builder().roomType(rt1).roomNumber("K1004").build());
-    var r15 = roomRepository.save(Room.builder().roomType(rt1).roomNumber("K1005").build());
+    roomRepository.save(Room.builder().roomType(rt1).roomNumber("K1005").build());
     var r16 = roomRepository.save(Room.builder().roomType(rt11).roomNumber("K1006").build());
     var r17 = roomRepository.save(Room.builder().roomType(rt11).roomNumber("K1007").build());
-    var r18 = roomRepository.save(Room.builder().roomType(rt11).roomNumber("K1008").build());
-    var r19 = roomRepository.save(Room.builder().roomType(rt11).roomNumber("K1009").build());
-    var r20 = roomRepository.save(Room.builder().roomType(rt11).roomNumber("K1010").build());
+    roomRepository.save(Room.builder().roomType(rt11).roomNumber("K1008").build());
+    roomRepository.save(Room.builder().roomType(rt11).roomNumber("K1009").build());
+    roomRepository.save(Room.builder().roomType(rt11).roomNumber("K1010").build());
     var r21 = roomRepository.save(Room.builder().roomType(rt2).roomNumber("K2001").build());
     var r22 = roomRepository.save(Room.builder().roomType(rt2).roomNumber("K2002").build());
     var r23 = roomRepository.save(Room.builder().roomType(rt2).roomNumber("K2003").build());
     var r24 = roomRepository.save(Room.builder().roomType(rt2).roomNumber("K2004").build());
     var r25 = roomRepository.save(Room.builder().roomType(rt2).roomNumber("K2005").build());
-    var r26 = roomRepository.save(Room.builder().roomType(rt22).roomNumber("K2006").build());
-    var r27 = roomRepository.save(Room.builder().roomType(rt22).roomNumber("K2007").build());
-    var r28 = roomRepository.save(Room.builder().roomType(rt22).roomNumber("K2008").build());
-    var r29 = roomRepository.save(Room.builder().roomType(rt22).roomNumber("K2009").build());
-    var r30 = roomRepository.save(Room.builder().roomType(rt22).roomNumber("K2010").build());
+    roomRepository.save(Room.builder().roomType(rt22).roomNumber("K2006").build());
+    roomRepository.save(Room.builder().roomType(rt22).roomNumber("K2007").build());
+    roomRepository.save(Room.builder().roomType(rt22).roomNumber("K2008").build());
+    roomRepository.save(Room.builder().roomType(rt22).roomNumber("K2009").build());
+    roomRepository.save(Room.builder().roomType(rt22).roomNumber("K2010").build());
     var r31 = roomRepository.save(Room.builder().roomType(rt3).roomNumber("K3001").build());
-    var r32 = roomRepository.save(Room.builder().roomType(rt3).roomNumber("K3002").build());
-    var r33 = roomRepository.save(Room.builder().roomType(rt3).roomNumber("K3003").build());
-    var r34 = roomRepository.save(Room.builder().roomType(rt3).roomNumber("K3004").build());
-    var r35 = roomRepository.save(Room.builder().roomType(rt3).roomNumber("K3005").build());
-    var r36 = roomRepository.save(Room.builder().roomType(rt33).roomNumber("K3006").build());
-    var r37 = roomRepository.save(Room.builder().roomType(rt33).roomNumber("K3007").build());
-    var r38 = roomRepository.save(Room.builder().roomType(rt33).roomNumber("K3008").build());
-    var r39 = roomRepository.save(Room.builder().roomType(rt33).roomNumber("K3009").build());
-    var r40 = roomRepository.save(Room.builder().roomType(rt33).roomNumber("K3010").build());
+    roomRepository.save(Room.builder().roomType(rt3).roomNumber("K3002").build());
+    roomRepository.save(Room.builder().roomType(rt3).roomNumber("K3003").build());
+    roomRepository.save(Room.builder().roomType(rt3).roomNumber("K3004").build());
+    roomRepository.save(Room.builder().roomType(rt3).roomNumber("K3005").build());
+    roomRepository.save(Room.builder().roomType(rt33).roomNumber("K3006").build());
+    roomRepository.save(Room.builder().roomType(rt33).roomNumber("K3007").build());
+    roomRepository.save(Room.builder().roomType(rt33).roomNumber("K3008").build());
+    roomRepository.save(Room.builder().roomType(rt33).roomNumber("K3009").build());
+    roomRepository.save(Room.builder().roomType(rt33).roomNumber("K3010").build());
 
     createBooking(r11, LocalDate.of(2023, 9, 7), LocalDate.of(2023, 9, 9));
     createBooking(r12, LocalDate.of(2023, 9, 8), LocalDate.of(2023, 9, 9));
@@ -129,10 +131,11 @@ public class DataInit implements CommandLineRunner {
 
     createBooking(r16, LocalDate.of(2023, 8, 13), LocalDate.of(2023, 8, 15));
     createBooking(r17, LocalDate.of(2023, 8, 13), LocalDate.of(2023, 8, 19));
-    createBooking(r16, LocalDate.of(2023, 8, 17), LocalDate.of(2023, 7, 19));
+    createBooking(r16, LocalDate.of(2023, 8, 17), LocalDate.of(2023, 8, 19));
   }
 
   private void createBooking(Room room, LocalDate startDate, LocalDate endDate) {
+    var bookingDuration = ChronoUnit.DAYS.between(startDate, endDate);
     bookingRepository.save(
         Booking.builder()
             .startDate(bookingDatesConverter.mapBookingStartTime(startDate))
@@ -141,7 +144,7 @@ public class DataInit implements CommandLineRunner {
             .roomType(room.getRoomType())
             .assignedRoom(room)
             .priceTotal(
-                room.getRoomType().getPricePerNight() * ChronoUnit.DAYS.between(startDate, endDate))
+                bookingPriceCalculator.calculateBookingPrice(room.getRoomType(), bookingDuration))
             .firstName("John")
             .lastName("Smith")
             .idCode("50001010017")

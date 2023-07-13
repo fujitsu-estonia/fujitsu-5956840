@@ -3,8 +3,8 @@ booking:
     days-before-check-in: 3
   defaults:
     check-in:
-      hour: 12
+      hour: 15
       minute: 0
     check-out:
-      hour: 10
+      hour: 12
       minute: 0

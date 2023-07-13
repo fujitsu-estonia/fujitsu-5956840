@@ -1,10 +1,10 @@
 package ee.fujitsu.smit.hotel.configs;
 
-import ee.fujitsu.smit.hotel.tools.properties.BusinessLogicProperties;
-import ee.fujitsu.smit.hotel.tools.properties.dto.BookingsProperties;
-import ee.fujitsu.smit.hotel.tools.properties.dto.CancellationDeadline;
-import ee.fujitsu.smit.hotel.tools.properties.dto.Time;
-import ee.fujitsu.smit.hotel.tools.properties.helpers.YamlPropertySourceFactory;
+import ee.fujitsu.smit.hotel.app_properties.BusinessLogicProperties;
+import ee.fujitsu.smit.hotel.app_properties.dto.BookingsProperties;
+import ee.fujitsu.smit.hotel.app_properties.dto.CancellationDeadline;
+import ee.fujitsu.smit.hotel.app_properties.dto.Time;
+import ee.fujitsu.smit.hotel.configs.helpers.YamlPropertySourceFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

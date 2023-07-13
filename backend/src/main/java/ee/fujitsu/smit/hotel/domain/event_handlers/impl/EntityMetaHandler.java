@@ -13,7 +13,10 @@ import org.springframework.stereotype.Component;
 import java.time.Instant;
 
 /**
- * <a
+ * Interceptor for database pre-insert and pre-update events, that will add insert/update data to
+ * entities of {@link EntityMeta} supertype.
+ *
+ * <p><a
  * href="http://anshuiitk.blogspot.com/2010/11/hibernate-pre-database-opertaion-event.html">reference</a>
  */
 @Slf4j

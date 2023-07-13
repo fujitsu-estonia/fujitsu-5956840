@@ -1,7 +1,7 @@
 package ee.fujitsu.smit.hotel.controllers;
 
-import ee.fujitsu.smit.hotel.models.RoomDetailsDto;
-import ee.fujitsu.smit.hotel.models.SearchRoomDto;
+import ee.fujitsu.smit.hotel.models.room.RoomDetailsDto;
+import ee.fujitsu.smit.hotel.models.room.SearchRoomDto;
 import ee.fujitsu.smit.hotel.services.RoomService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
