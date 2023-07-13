@@ -13,8 +13,8 @@
 			</div>
 
 			<ng-template #results>
-				<app-room *ngFor="let room of roomResults" (bookRoomPressed)="bookRoom($event)"
-					[room]="room"></app-room>
+				<app-room *ngFor="let room of roomResults" (bookRoomPressed)="bookRoom($event)" [room]="room"
+					[booking]="booking"></app-room>
 			</ng-template>
 
 		</div>
