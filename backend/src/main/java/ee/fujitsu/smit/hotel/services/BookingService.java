@@ -48,7 +48,7 @@ public interface BookingService {
   BookingDetailsDto getBooking(UUID bookingId);
 
   /**
-   * Find bookings that match given {@link SearchBookingsDto searhc parameters}
+   * Find bookings that match given {@link SearchBookingsDto search parameters}
    *
    * @param searchBookings bookings search parameters
    * @return found bookings list

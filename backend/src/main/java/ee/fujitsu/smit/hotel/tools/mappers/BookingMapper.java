@@ -33,11 +33,11 @@ public abstract class BookingMapper {
   @Mapping(
       target = "startDate",
       expression =
-          "java( bookingDatesConverter.mapBookingStartTime(dto.getBookingPeriod().startDate()) )")
+          "java( bookingDatesConverter.getDefaultCheckInTime(dto.getBookingPeriod().startDate()) )")
   @Mapping(
       target = "endDate",
       expression =
-          "java( bookingDatesConverter.mapBookingEndTime(dto.getBookingPeriod().endDate()) )")
+          "java( bookingDatesConverter.getDefaultCheckOutTime(dto.getBookingPeriod().endDate()) )")
   @Mapping(target = "roomType", expression = "java( findRoomTypeById(dto.getRoomTypeId()) )")
   @Mapping(target = "firstName", source = "personData.firstName")
   @Mapping(target = "lastName", source = "personData.lastName")
@@ -46,9 +46,8 @@ public abstract class BookingMapper {
   public abstract Booking mapToEntity(CreateBookingRequestDto dto);
 
   @AfterMapping
-  protected void calculatePriceTotal(CreateBookingRequestDto dto, @MappingTarget Booking entity) {
-    entity.setPriceTotal(
-        bookingPriceCalculator.calculateBookingPrice(entity.getRoomType(), dto.getBookingPeriod()));
+  protected void calculatePriceTotal(@MappingTarget Booking entity) {
+    entity.setPriceTotal(bookingPriceCalculator.calculateBookingPrice(entity));
   }
 
   @Mapping(target = "roomDetails", expression = "java( createBookedRoomDetails(entity) )")

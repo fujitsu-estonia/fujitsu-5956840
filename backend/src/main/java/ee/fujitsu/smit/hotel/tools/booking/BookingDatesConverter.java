@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 /**
  * Converts booking {@link LocalDate dates} from API DTOs to {@link LocalDateTime date&times} for
@@ -25,17 +26,19 @@ public class BookingDatesConverter {
     checkOutTime = appProperties.booking().defaultCheckOutTime();
   }
 
-  public LocalDateTime mapBookingStartTime(LocalDate requestedStartTime) {
-    if (requestedStartTime == null) {
-      return null;
-    }
-    return requestedStartTime.atTime(checkInTime.hour(), checkInTime.minute(), 0);
+  public LocalDateTime getDefaultCheckInTime(LocalDate requestedStartTime) {
+    return Optional.ofNullable(requestedStartTime)
+        .map(date -> dateTime(date, checkInTime))
+        .orElse(null);
   }
 
-  public LocalDateTime mapBookingEndTime(LocalDate requestedEndTime) {
-    if (requestedEndTime == null) {
-      return null;
-    }
-    return requestedEndTime.atTime(checkOutTime.hour(), checkOutTime.minute(), 0);
+  public LocalDateTime getDefaultCheckOutTime(LocalDate requestedEndTime) {
+    return Optional.ofNullable(requestedEndTime)
+        .map(date -> dateTime(date, checkOutTime))
+        .orElse(null);
+  }
+
+  private LocalDateTime dateTime(LocalDate date, Time time) {
+    return date.atTime(time.hour(), time.minute(), 0);
   }
 }

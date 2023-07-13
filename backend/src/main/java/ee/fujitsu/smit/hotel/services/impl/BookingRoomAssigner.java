@@ -45,6 +45,7 @@ public class BookingRoomAssigner {
   private final RoomRepository roomRepository;
 
   private final Map<Long, Lock> roomTypeLocks = new ConcurrentHashMap<>();
+
   private final Cache<Long, List<RoomReservationPeriod>> roomsPeriodicLocksWithExpiration =
       CacheBuilder.newBuilder().expireAfterWrite(60, TimeUnit.SECONDS).build();
 

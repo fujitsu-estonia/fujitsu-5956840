@@ -22,16 +22,16 @@ public class BusinessLogicPropertiesConfig {
   @Value("${booking.cancellation-deadline.days-before-check-in:3}")
   private int cancellationDeadlineDaysBeforeCheckIn;
 
-  @Value("${booking.defaults.check-in.hour:12}")
+  @Value("${booking.check-in.hour:12}")
   private int defaultCheckInHour;
 
-  @Value("${booking.defaults.check-in.minute:0}")
+  @Value("${booking.check-in.minute:0}")
   private int defaultCheckInMinute;
 
-  @Value("${booking.defaults.check-out.hour:10}")
+  @Value("${booking.check-out.hour:10}")
   private int defaultCheckOutHour;
 
-  @Value("${booking.defaults.check-out.minute:0}")
+  @Value("${booking.check-out.minute:0}")
   private int defaultCheckOutMinute;
 
   @Bean

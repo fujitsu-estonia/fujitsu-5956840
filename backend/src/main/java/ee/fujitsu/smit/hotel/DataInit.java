@@ -14,7 +14,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 
 /** */
 @Component
@@ -135,16 +134,15 @@ public class DataInit implements CommandLineRunner {
   }
 
   private void createBooking(Room room, LocalDate startDate, LocalDate endDate) {
-    var bookingDuration = ChronoUnit.DAYS.between(startDate, endDate);
     bookingRepository.save(
         Booking.builder()
-            .startDate(bookingDatesConverter.mapBookingStartTime(startDate))
-            .endDate(bookingDatesConverter.mapBookingEndTime(endDate))
+            .startDate(bookingDatesConverter.getDefaultCheckInTime(startDate))
+            .endDate(bookingDatesConverter.getDefaultCheckOutTime(endDate))
             .status(BookingStatus.ACCEPTED)
             .roomType(room.getRoomType())
             .assignedRoom(room)
             .priceTotal(
-                bookingPriceCalculator.calculateBookingPrice(room.getRoomType(), bookingDuration))
+                bookingPriceCalculator.calculateBookingPrice(room.getRoomType(), startDate, endDate))
             .firstName("John")
             .lastName("Smith")
             .idCode("50001010017")
