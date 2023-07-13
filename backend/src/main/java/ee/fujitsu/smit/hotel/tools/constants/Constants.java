@@ -6,8 +6,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Constants {
 
-  public static final String GLOBAL_ERRORS_KEY = "errors";
-
   // error codes
   public static final String NOT_FOUND_CODE = "error.notFound";
   public static final String ERROR_REQUIRED = "error.required";
@@ -24,6 +22,9 @@ public class Constants {
   public static final String ERROR_DATE_RANGE_INVALID = "error.invalid_dateRange";
   public static final String ERROR_DATE_RANGE_ENDING_DATE_BEFORE = ERROR_DATE_RANGE_INVALID + ".ending_date_first";
   public static final String ERROR_DATE_RANGE_TOO_SHORT = ERROR_DATE_RANGE_INVALID + ".too_small_range";
+
+  public static final String ERROR_DATE_NOT_IN_FUTURE = "error.dateRange.notInFuture";
+  public static final String ERROR_DATE_NOT_IN_FUTURE_NOR_PRESENT = ERROR_DATE_NOT_IN_FUTURE + "NorPresent";
 
 }
 

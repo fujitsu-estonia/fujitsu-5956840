@@ -56,7 +56,7 @@ class BookingControllerTest {
 
     var createReq = new CreateBookingRequestDto();
     createReq.setRoomTypeId(1);
-    createReq.setBookingPeriod(new DateRange(LocalDate.MIN, LocalDate.MAX));
+    createReq.setBookingPeriod(new DateRange(LocalDate.now(), LocalDate.now().plusDays(3)));
     createReq.setPersonData(personData("33706284279"));
     var content = objectMapper.writeValueAsString(createReq);
 
@@ -95,7 +95,8 @@ class BookingControllerTest {
                 .value(
                     containsInAnyOrder(
                         Constants.ERROR_ID_CODE_INVALID,
-                        Constants.ERROR_DATE_RANGE_ENDING_DATE_BEFORE)));
+                        Constants.ERROR_DATE_RANGE_ENDING_DATE_BEFORE,
+                        Constants.ERROR_DATE_NOT_IN_FUTURE_NOR_PRESENT)));
   }
 
   @Test
