@@ -47,13 +47,13 @@ Run `ng test` or `npm run test` to execute the unit tests via [Karma](https://ka
 
 The report can be inspected by looking at the index.html file in the coverage folder.
 
-Current coverage (after running `npm run test`) - last ran 12.07.23:
+Current coverage (after running `npm run test`) - last ran 13.07.23:
 ```
-=============================== Coverage summary ===============================
-Statements   : 80.61% ( 262/325 )
+=============================== Coverage summary ===============================       
+Statements   : 80.85% ( 266/329 )
 Branches     : 58.69% ( 54/92 )
-Functions    : 85.05% ( 74/87 )
-Lines        : 81.63% ( 249/305 )
+Functions    : 85.39% ( 76/89 )
+Lines        : 81.87% ( 253/309 )
 ```
 
 ## Running end-to-end tests
