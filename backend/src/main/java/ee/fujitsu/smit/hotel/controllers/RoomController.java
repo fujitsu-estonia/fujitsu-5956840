@@ -1,11 +1,9 @@
 package ee.fujitsu.smit.hotel.controllers;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-
 import ee.fujitsu.smit.hotel.models.ErrorsDto;
 import ee.fujitsu.smit.hotel.models.room.RoomDetailsDto;
 import ee.fujitsu.smit.hotel.models.room.SearchRoomDto;
-import ee.fujitsu.smit.hotel.services.impl.RoomServiceImpl;
+import ee.fujitsu.smit.hotel.services.RoomService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -13,7 +11,6 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,6 +21,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 @Slf4j
 @RequiredArgsConstructor
 @RestController
@@ -31,9 +32,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/api/rooms")
 public class RoomController {
 
-  private final RoomServiceImpl roomService;
+  private final RoomService roomService;
 
-  @PostMapping()
+  @PostMapping
   @Operation(
       description = "Find rooms types by parameters",
       requestBody =

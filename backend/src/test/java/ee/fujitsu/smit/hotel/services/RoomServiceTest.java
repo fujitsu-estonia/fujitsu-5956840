@@ -1,25 +1,26 @@
 package ee.fujitsu.smit.hotel.services;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.when;
-
 import ee.fujitsu.smit.hotel.exceptions.NotFoundException;
 import ee.fujitsu.smit.hotel.models.room.SearchRoomDto;
 import ee.fujitsu.smit.hotel.repositories.RoomTypeRepository;
 import ee.fujitsu.smit.hotel.repositories.models.RoomTypeExtended;
 import ee.fujitsu.smit.hotel.services.impl.RoomServiceImpl;
 import ee.fujitsu.smit.hotel.tools.mappers.RoomMapper;
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 class RoomServiceTest {
@@ -50,8 +51,8 @@ class RoomServiceTest {
             .endDate(LocalDate.of(2023, 5, 5))
             .build();
 
-    var roomTypeExtended = Mockito.mock(RoomTypeExtended.class);
-    when(roomTypeExtended.getRoomTypeId()).thenReturn(1L);
+    var roomTypeExtended = mock(RoomTypeExtended.class);
+
     when(roomTypeRepository.getAvailableRoomTypesByBedsCountForPeriod(
             search.getBeds(), search.getStartDate(), search.getEndDate()))
         .thenReturn(List.of(roomTypeExtended));

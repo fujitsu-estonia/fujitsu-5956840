@@ -2,8 +2,11 @@ package ee.fujitsu.smit.hotel.repositories.models;
 
 import ee.fujitsu.smit.hotel.repositories.RoomTypeRepository;
 import lombok.SneakyThrows;
+import org.apache.commons.io.IOUtils;
 
-import java.sql.NClob;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.sql.Clob;
 import java.time.LocalDate;
 
 /**
@@ -16,7 +19,7 @@ public interface RoomTypeExtended {
 
   String getTitle();
 
-  NClob getDescription();
+  Clob getDescription();
 
   Integer getBedsCount();
 
@@ -28,15 +31,26 @@ public interface RoomTypeExtended {
 
   Integer getBookedRooms();
 
-  default Integer getFreeRooms() {
+  default int getFreeRooms() {
     if (getAllRooms() == null) {
       return 0;
     }
-    return getAllRooms() - (getBookedRooms() == null ? 0 : getBookedRooms());
+    if (getBookedRooms() == null) {
+      return getAllRooms();
+    }
+    return getAllRooms() - getBookedRooms();
   }
 
   @SneakyThrows
   default String getDescriptionStr() {
-    return getDescription().getSubString(1, (int) getDescription().length());
+    var clob = getDescription();
+    if (clob == null) {
+      return "";
+    }
+
+    Reader reader = clob.getCharacterStream();
+    StringWriter writer = new StringWriter();
+    IOUtils.copy(reader, writer);
+    return writer.toString();
   }
 }
