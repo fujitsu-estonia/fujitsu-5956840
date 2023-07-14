@@ -9,7 +9,7 @@ import lombok.Setter;
 public class RoomDetailsDto {
 
   @Schema(type = "integer", format = "int64", description = "Room type id", example = "1")
-  private Long roomTypeId;
+  private long roomTypeId;
 
   @Schema(type = "string", description = "Room title", example = "Nice big room")
   private String title;
