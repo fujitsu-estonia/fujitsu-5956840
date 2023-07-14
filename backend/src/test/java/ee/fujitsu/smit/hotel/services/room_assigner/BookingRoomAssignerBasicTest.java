@@ -1,4 +1,4 @@
-package ee.fujitsu.smit.hotel.services.roomAssigner;
+package ee.fujitsu.smit.hotel.services.room_assigner;
 
 import ee.fujitsu.smit.hotel.domain.entities.Booking;
 import ee.fujitsu.smit.hotel.domain.entities.Room;
