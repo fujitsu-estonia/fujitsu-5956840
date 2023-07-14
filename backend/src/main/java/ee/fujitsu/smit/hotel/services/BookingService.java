@@ -7,10 +7,9 @@ import ee.fujitsu.smit.hotel.exceptions.room.NoAvailableRoomsException;
 import ee.fujitsu.smit.hotel.models.booking.BookingDetailsDto;
 import ee.fujitsu.smit.hotel.models.booking.CreateBookingRequestDto;
 import ee.fujitsu.smit.hotel.models.booking.SearchBookingsDto;
-import lombok.NonNull;
-
 import java.util.List;
 import java.util.UUID;
+import lombok.NonNull;
 
 public interface BookingService {
 
@@ -20,8 +19,7 @@ public interface BookingService {
    *
    * @param createBookingRequestDto create booking request data
    * @return created booking id
-   * @throws NoAvailableRoomsException if there is no room
-   *     available for requested booking period
+   * @throws NoAvailableRoomsException if there is no room available for requested booking period
    */
   UUID createBooking(CreateBookingRequestDto createBookingRequestDto);
 
@@ -32,10 +30,9 @@ public interface BookingService {
    * @param cancelAsUser identifies, who cancels the booking (user or admin)
    * @throws ee.fujitsu.smit.hotel.exceptions.NotFoundException if no booking can be found by given
    *     {@code bookingId}
-   * @throws BookingAlreadyCancelledException if given booking was
-   *     already cancelled
-   * @throws BookingNotCancelledException if any other (unexpected)
-   *     problem happens on booking cancellation
+   * @throws BookingAlreadyCancelledException if given booking was already cancelled
+   * @throws BookingNotCancelledException if any other (unexpected) problem happens on booking
+   *     cancellation
    */
   boolean cancelBooking(UUID bookingId, boolean cancelAsUser);
 
@@ -48,10 +45,11 @@ public interface BookingService {
   BookingDetailsDto getBooking(UUID bookingId);
 
   /**
-   * Find bookings that match given {@link SearchBookingsDto searhc parameters}
+   * Find bookings that match given {@link SearchBookingsDto search parameters}
    *
    * @param searchBookings bookings search parameters
    * @return found bookings list
    */
-  @NonNull List<BookingDetailsDto> findBookings(@NonNull SearchBookingsDto searchBookings);
+  @NonNull
+  List<BookingDetailsDto> findBookings(@NonNull SearchBookingsDto searchBookings);
 }

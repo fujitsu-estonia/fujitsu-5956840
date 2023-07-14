@@ -1,6 +1,7 @@
 package ee.fujitsu.smit.hotel.repositories.models;
 
 import ee.fujitsu.smit.hotel.repositories.RoomTypeRepository;
+import lombok.SneakyThrows;
 
 import java.sql.NClob;
 import java.time.LocalDate;
@@ -34,7 +35,8 @@ public interface RoomTypeExtended {
     return getAllRooms() - (getBookedRooms() == null ? 0 : getBookedRooms());
   }
 
+  @SneakyThrows
   default String getDescriptionStr() {
-    return getDescription().toString();
+    return getDescription().getSubString(1, (int) getDescription().length());
   }
 }

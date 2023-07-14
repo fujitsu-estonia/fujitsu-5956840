@@ -1,6 +1,7 @@
 package ee.fujitsu.smit.hotel.repositories;
 
 import ee.fujitsu.smit.hotel.domain.entities.RoomType;
+import ee.fujitsu.smit.hotel.enums.BookingStatus;
 import ee.fujitsu.smit.hotel.repositories.models.RoomTypeExtended;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,6 +13,19 @@ import java.util.List;
 @Repository
 public interface RoomTypeRepository extends JpaRepository<RoomType, Long> {
 
+  /**
+   * Query will select all room types in hotel by given beds count and adds information about the amount of all
+   * such rooms and how many of them are booked<sup>1</sup> on given period (fully or partially overlapping).
+   *
+   * <p><sup>1</sup> - booked room means that on the given period there exists a booking for
+   * provided room type with one of the following booking statuses [{@link BookingStatus#ACCEPTED},
+   * {@link BookingStatus#STARTED}] (those bookings are counted)
+   *
+   * @param bedsCount beds count
+   * @param startDate booking period start date
+   * @param endDate booking period end date
+   * @return list of room types (extended with all rooms count and booked rooms count) of given beds count on given period
+   */
   @Query(
       nativeQuery = true,
       value =
